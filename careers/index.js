@@ -48,3 +48,20 @@ const careerData = [
     candidateTraits: "Adaptable, maintains professional demeanor, strategic thinker."
   }
 ];
+
+const container = document.getElementById('career-container');
+
+careerData.forEach(career => {
+    const details = document.createElement('details');
+    details.innerHTML = `
+        <summary>${career.role}</summary>
+        <ul>
+            <li><strong>Day-to-day:</strong> ${career.dayToDay}</li>
+            <li><strong>Technical skills:</strong> ${career.skills}</li>
+            <li><strong>Entry-level expectations:</strong> ${career.expectations}</li>
+            <li><strong>Salary & growth:</strong> ${career.salary}</li>
+            <li><strong>Strong candidate traits:</strong> ${career.candidateTraits}</li>
+        </ul>
+    `;
+    container.appendChild(details);
+});
