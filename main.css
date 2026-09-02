@@ -1,0 +1,151 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #EBE7DD; 
+    color: #333;
+    margin: 0; 
+    padding: 0;
+    line-height: 1.6;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #002255; 
+    padding: 15px 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 1rem;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+}
+
+.nav-links a.active {
+    opacity: 1;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 4px;
+}
+
+.main-content {
+    max-width: 800px;
+    margin: 40px 40px;
+}
+
+h1 {
+    text-align: left; 
+    color: #002255; 
+    margin-bottom: 30px;
+}
+
+details {
+    background-color: #ffffff;
+    border: 1px solid #e1e4e8;
+    margin-bottom: -1px; 
+    transition: box-shadow 0.2s ease;
+    display: block;
+}
+
+details:first-of-type {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+details:last-of-type {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+details:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative; 
+    z-index: 1;
+}
+
+summary {
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 15px 20px;
+    cursor: pointer;
+    background-color: #FDFBF7; 
+    list-style: none;
+    position: relative;
+}
+
+details:first-of-type summary {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+details:last-of-type:not([open]) summary {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    content: "▼";
+    position: absolute;
+    right: 20px;
+    color: #64748b;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
+
+details[open] summary::after {
+    transform: rotate(180deg);
+}
+
+details[open] summary {
+    border-bottom: 1px solid #e1e4e8;
+    background-color: #F7F5EE; 
+}
+
+details ul {
+    padding: 20px 20px 20px 40px;
+    margin: 0;
+    background-color: #ffffff;
+    animation: slideDown 0.25s ease-out forwards;
+    transform-origin: top;
+}
+
+details:last-of-type ul {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+details li {
+    margin-bottom: 10px;
+}
+
+details li strong {
+    color: #002255;
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
