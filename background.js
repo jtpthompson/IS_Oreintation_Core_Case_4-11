@@ -11,6 +11,16 @@ const ctx = canvas.getContext("2d");
 // Store all of our bubbles
 const bubbles = [];
 
+// bubble colors
+const bubbleColors = [
+    "#00AE6B",
+    "#F2283C",
+    "#277DFF",
+    "#FFC200",
+    "#D72E82",
+    "#875AFB",
+    "#FF7A00"
+];
 
 // Mouse / touch position
 const pointer = {
@@ -53,14 +63,16 @@ function createBubbles() {
             y: Math.random() * canvas.height,
 
             // Size
-            radius: Math.random() * 15 + 8,
+            radius: Math.random() * 70 + 30,
 
             // Movement
             dx: (Math.random() - 0.5) * 0.6,
             dy: (Math.random() - 0.5) * 0.6,
 
             // Color
-            hue: Math.random() * 360,
+            color: bubbleColors[
+                Math.floor(Math.random() * bubbleColors.length)
+            ],
 
             // How strongly the bubble reacts to touch
             pushX: 0,
@@ -82,28 +94,27 @@ createBubbles();
 function drawBubble(bubble) {
 
     const gradient = ctx.createRadialGradient(
-        bubble.x - bubble.radius * 0.3,
-        bubble.y - bubble.radius * 0.3,
-        1,
-        bubble.x,
-        bubble.y,
-        bubble.radius
+    bubble.x - bubble.radius * 0.3,
+    bubble.y - bubble.radius * 0.3,
+    1,
+    bubble.x,
+    bubble.y,
+    bubble.radius
     );
-
 
     gradient.addColorStop(
         0,
-        `hsla(${bubble.hue}, 90%, 75%, 0.9)`
+        "rgba(255, 255, 255, 0.8)"
     );
 
     gradient.addColorStop(
-        0.5,
-        `hsla(${bubble.hue}, 80%, 60%, 0.6)`
+        0.25,
+        bubble.color
     );
 
     gradient.addColorStop(
         1,
-        `hsla(${bubble.hue}, 80%, 50%, 0.1)`
+        "rgba(255, 255, 255, 0.05)"
     );
 
 
