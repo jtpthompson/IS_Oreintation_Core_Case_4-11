@@ -2,7 +2,6 @@
     --green: #00AE6B;
     --red: #F2283C;
     --blue: #277DFF;
-    --yellow: #FFC200;
     --pink: #D72E82;
     --purple: #875AFB;
     --orange: #FF7A00;
@@ -101,55 +100,78 @@ body {
    BUTTONS
 -------------------------------- */
 
-.button-container {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 25px;
-
-    flex-wrap: wrap;
-}
-
-
 .launch-button {
+    width: 340px;
+    min-height: 180px;
+
     border: none;
+    border-radius: 30px;
 
-    padding: 18px 35px;
+    padding: 30px;
 
-    min-width: 220px;
-
-    border-radius: 12px;
-
-    background: rgba(220, 235, 230, 0.9);
-
-    color: #263b36;
-
-    font-size: 1.05rem;
-    font-weight: 600;
+    color: white;
+    text-align: left;
 
     cursor: pointer;
 
     transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease;
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
 }
 
 
-/* Button hover */
+/* Career Exploration */
+
+.career-button {
+    background: linear-gradient(
+        135deg,
+        var(--blue),
+        var(--purple)
+    );
+}
+
+
+/* Interview Practice */
+
+.interview-button {
+    background: linear-gradient(
+        135deg,
+        var(--green),
+        var(--blue)
+    );
+}
+
+
+/* Hover */
+
 .launch-button:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px) scale(1.02);
 
-    background: white;
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.3);
 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
 }
 
 
-/* Button click */
+/* Click */
+
 .launch-button:active {
-    transform: translateY(-1px);
+    transform: translateY(-3px) scale(1.01);
+}
+
+
+/* Button text */
+
+.launch-button h2 {
+    margin-bottom: 12px;
+}
+
+.launch-button p {
+    margin: 0;
+
+    opacity: 0.9;
 }
 
 
@@ -254,4 +276,16 @@ h6 {
 .launch-button p {
     margin: 0;
     opacity: 0.9;
+}
+
+
+.career-button {
+    background: linear-gradient(
+        135deg,
+        var(--blue),
+        var(--purple)
+    );
+
+    position: relative;
+    top: 20px;
 }
