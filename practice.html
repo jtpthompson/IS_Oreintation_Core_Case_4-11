@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technical Mock Interview</title>
+
+    <title>IS Mock Interview</title>
 
     <style>
+
         body {
             font-family: Arial, sans-serif;
             max-width: 900px;
@@ -14,8 +17,34 @@
             line-height: 1.6;
         }
 
-        .scenario {
-            margin-top: 30px;
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            margin-top: 45px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .interview-question,
+        .question {
+            margin-top: 25px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
         }
 
         pre {
@@ -25,13 +54,6 @@
             overflow-x: auto;
         }
 
-        .question {
-            margin-top: 30px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-
         label {
             display: block;
             margin: 10px 0;
@@ -39,49 +61,281 @@
         }
 
         button {
-            margin-top: 30px;
-            padding: 12px 24px;
-            font-size: 16px;
+            margin-top: 35px;
+            padding: 14px 28px;
+            font-size: 17px;
             cursor: pointer;
         }
 
-        #quizResult {
-            margin-top: 30px;
+        #interviewResult {
+            margin-top: 40px;
+        }
+
+        .results-section {
+            margin-top: 35px;
+            padding: 25px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
         }
 
         .feedback-item {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #f5f5f5;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f7f7f7;
             border-radius: 8px;
         }
+
+        .user-response {
+            padding: 15px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+
+        .correct-answer {
+            color: green;
+            font-weight: bold;
+        }
+
+        .wrong-answer {
+            color: red;
+            font-weight: bold;
+        }
+
+        .normal-answer {
+            color: black;
+        }
+
+        .feedback-placeholder {
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px dashed #999;
+            border-radius: 8px;
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <h1>Technical Mock Interview</h1>
+
+<!-- ========================================= -->
+<!-- INTRO -->
+<!-- ========================================= -->
+
+<h1>IS Mock Interview</h1>
+
+<div class="intro">
 
     <p>
-        Read the coding scenario below and answer the three questions.
+        Practice both behavioral and technical interview questions.
     </p>
 
-    <div id="quizContainer"></div>
+    <p>
+        You will answer three behavioral questions and three technical
+        questions based on a randomly selected coding scenario.
+    </p>
 
-    <button onclick="gradeQuiz()">Submit Technical Interview</button>
+</div>
 
-    <div id="quizResult"></div>
+
+
+<!-- ========================================= -->
+<!-- PART 1: BEHAVIORAL -->
+<!-- ========================================= -->
+
+<h2 class="section-title">
+    Part 1 — Behavioral Interview
+</h2>
+
+<p>
+    Answer each question as if you were in a real interview.
+    Try to use the STAR method: Situation, Task, Action, and Result.
+</p>
+
+
+<div class="interview-question">
+
+    <h3>Question 1 — Basic Interview</h3>
+
+    <p id="basicQuestion"></p>
+
+    <textarea
+        id="basicAnswer"
+        rows="7"
+        placeholder="Type your answer here..."
+    ></textarea>
+
+</div>
+
+
+<div class="interview-question">
+
+    <h3>Question 2 — Working With Others</h3>
+
+    <p id="teamQuestion"></p>
+
+    <textarea
+        id="teamAnswer"
+        rows="7"
+        placeholder="Type your answer here..."
+    ></textarea>
+
+</div>
+
+
+<div class="interview-question">
+
+    <h3>Question 3 — Situational</h3>
+
+    <p id="situationalQuestion"></p>
+
+    <textarea
+        id="situationalAnswer"
+        rows="7"
+        placeholder="Type your answer here..."
+    ></textarea>
+
+</div>
+
+
+
+<!-- ========================================= -->
+<!-- PART 2: TECHNICAL -->
+<!-- ========================================= -->
+
+<h2 class="section-title">
+    Part 2 — Technical Interview
+</h2>
+
+<p>
+    Read the coding scenario and answer the three questions.
+</p>
+
+<div id="quizContainer"></div>
+
+
+
+<!-- ========================================= -->
+<!-- SUBMIT -->
+<!-- ========================================= -->
+
+<button onclick="submitFullInterview()">
+    Submit Interview
+</button>
+
+
+
+<!-- ========================================= -->
+<!-- RESULTS -->
+<!-- ========================================= -->
+
+<div id="interviewResult"></div>
+
 
 
 <script>
 
+
+// =====================================================
+// BEHAVIORAL QUESTIONS
+// =====================================================
+
+const basicQuestions = [
+
+    "Tell me about yourself.",
+    "Why do you want to work for our company?",
+    "What do you know about our company?",
+    "Why are you interested in this position?",
+    "What are your strengths?",
+    "What is one weakness you are working on?",
+    "Where do you see yourself in 5 years?",
+    "Why should we hire you?",
+    "What makes you different from other candidates?",
+    "What are your career goals?"
+
+];
+
+
+const teamQuestions = [
+
+    "Tell me about a time you worked on a team.",
+    "How do you handle disagreements with coworkers?",
+    "Tell me about a time you had to work with someone difficult.",
+    "What role do you usually take on a team?",
+    "How do you handle criticism or feedback?"
+
+];
+
+
+const situationalQuestions = [
+
+    "Tell me about a time you made a mistake. What did you learn?",
+    "Tell me about a time you solved a difficult problem.",
+    "Tell me about a time you showed leadership.",
+    "Tell me about a time you had to meet a tight deadline.",
+    "How do you prioritize when you have multiple tasks?"
+
+];
+
+
+
+// =====================================================
+// RANDOM QUESTION FUNCTION
+// =====================================================
+
+function getRandomQuestion(questionList) {
+
+    const randomIndex =
+        Math.floor(Math.random() * questionList.length);
+
+    return questionList[randomIndex];
+
+}
+
+
+
+// Pick behavioral questions
+
+const selectedBasicQuestion =
+    getRandomQuestion(basicQuestions);
+
+const selectedTeamQuestion =
+    getRandomQuestion(teamQuestions);
+
+const selectedSituationalQuestion =
+    getRandomQuestion(situationalQuestions);
+
+
+
+// Display behavioral questions
+
+document.getElementById("basicQuestion").textContent =
+    selectedBasicQuestion;
+
+document.getElementById("teamQuestion").textContent =
+    selectedTeamQuestion;
+
+document.getElementById("situationalQuestion").textContent =
+    selectedSituationalQuestion;
+
+
+
+// =====================================================
+// TECHNICAL SCENARIOS
+// =====================================================
+
 const technicalScenarios = [
 
-    // ==========================================
+
+    // =================================================
     // SCENARIO 1
-    // ==========================================
+    // =================================================
 
     {
+
         title: "Bird Food Simulation",
 
         code: `
@@ -92,12 +346,14 @@ def simulateOneDay(self, numBirds):
 
     if condition < 0.05:
         self.currentFood = 0
+
     else:
         eachBirdEats = int(random.random() * 41) + 10
         totalEaten = numBirds * eachBirdEats
 
         if totalEaten > self.currentFood:
             self.currentFood = 0
+
         else:
             self.currentFood -= totalEaten
         `,
@@ -118,7 +374,7 @@ def simulateOneDay(self, numBirds):
                 correct: 2,
 
                 explanation:
-                    "random.random() produces a value from 0 up to, but not including, 1. Multiplying by 41, converting to an integer, and adding 10 produces possible values from 10 through 50."
+                    "random.random() produces a number from 0 up to, but not including, 1. After multiplying by 41, converting to an integer, and adding 10, the possible values are 10 through 50."
             },
 
             {
@@ -156,14 +412,17 @@ def simulateOneDay(self, numBirds):
             }
 
         ]
+
     },
 
 
-    // ==========================================
+
+    // =================================================
     // SCENARIO 2
-    // ==========================================
+    // =================================================
 
     {
+
         title: "Student Grades",
 
         code: `
@@ -177,12 +436,16 @@ def calculateGrade(scores):
 
     if average >= 90:
         return "A"
+
     elif average >= 80:
         return "B"
+
     elif average >= 70:
         return "C"
+
     elif average >= 60:
         return "D"
+
     else:
         return "F"
         `,
@@ -220,12 +483,12 @@ def calculateGrade(scores):
                 correct: 1,
 
                 explanation:
-                    "The += operator adds the current score to the existing value stored in total."
+                    "The += operator adds the current score to the value already stored in total."
             },
 
             {
                 question:
-                    'If scores are [70, 75, 80], what will the function return?',
+                    "If scores are [70, 75, 80], what will the function return?",
 
                 options: [
                     '"A"',
@@ -241,14 +504,17 @@ def calculateGrade(scores):
             }
 
         ]
+
     },
 
 
-    // ==========================================
+
+    // =================================================
     // SCENARIO 3
-    // ==========================================
+    // =================================================
 
     {
+
         title: "Shopping Cart",
 
         code: `
@@ -280,7 +546,7 @@ def calculateTotal(prices):
                 correct: 2,
 
                 explanation:
-                    "The loop goes through every price and adds it to the running total."
+                    "The loop goes through every price and adds each one to the running total."
             },
 
             {
@@ -314,213 +580,543 @@ def calculateTotal(prices):
                 correct: 2,
 
                 explanation:
-                    "The original total is 110. Since it is at least 100, the code multiplies it by 0.90. That gives 99."
+                    "The total is 110. Since it is at least 100, the 10% discount is applied. 110 × 0.90 = 99."
             }
 
         ]
+
     }
 
 ];
 
 
-// ==========================================
-// RANDOMLY CHOOSE ONE SCENARIO
-// ==========================================
 
-const randomIndex =
+// =====================================================
+// RANDOMLY SELECT TECHNICAL SCENARIO
+// =====================================================
+
+const technicalRandomIndex =
     Math.floor(Math.random() * technicalScenarios.length);
 
 const selectedScenario =
-    technicalScenarios[randomIndex];
+    technicalScenarios[technicalRandomIndex];
 
 
-// ==========================================
-// DISPLAY THE SCENARIO
-// ==========================================
 
-function displayQuiz() {
+// =====================================================
+// DISPLAY TECHNICAL QUESTIONS
+// =====================================================
+
+function displayTechnicalQuiz() {
 
     const container =
         document.getElementById("quizContainer");
 
     let html = `
-        <div class="scenario">
 
-            <h2>${selectedScenario.title}</h2>
+        <div class="question">
+
+            <h3>${selectedScenario.title}</h3>
 
             <pre><code>${selectedScenario.code}</code></pre>
+
+        </div>
+
     `;
 
 
-    selectedScenario.questions.forEach((question, questionIndex) => {
+    selectedScenario.questions.forEach(
+        (question, questionIndex) => {
 
-        html += `
-            <div class="question">
-
-                <h3>Question ${questionIndex + 1}</h3>
-
-                <p>${question.question}</p>
-        `;
-
-
-        question.options.forEach((option, optionIndex) => {
 
             html += `
-                <label>
-                    <input
-                        type="radio"
-                        name="q${questionIndex}"
-                        value="${optionIndex}"
-                    >
-                    ${String.fromCharCode(65 + optionIndex)}. ${option}
-                </label>
+
+                <div class="question">
+
+                    <h3>
+                        Question ${questionIndex + 4}
+                    </h3>
+
+                    <p>
+                        ${question.question}
+                    </p>
+
             `;
 
-        });
+
+            question.options.forEach(
+                (option, optionIndex) => {
 
 
-        html += `
-            </div>
-        `;
+                    html += `
 
-    });
+                        <label>
 
+                            <input
+                                type="radio"
+                                name="technicalQ${questionIndex}"
+                                value="${optionIndex}"
+                            >
 
-    html += `
-        </div>
-    `;
+                            ${String.fromCharCode(65 + optionIndex)}.
+                            ${option}
 
+                        </label>
 
-    container.innerHTML = html;
-}
+                    `;
 
+                }
 
-// ==========================================
-// GRADE THE QUIZ
-// ==========================================
-
-function gradeQuiz() {
-
-    let score = 0;
-
-    let feedbackHTML = "";
-
-
-    selectedScenario.questions.forEach((question, questionIndex) => {
-
-        const selectedAnswer =
-            document.querySelector(
-                'input[name="q' + questionIndex + '"]:checked'
             );
 
 
-        if (!selectedAnswer) {
-
-            feedbackHTML += `
-                <div class="feedback-item">
-
-                    <strong>
-                        Question ${questionIndex + 1}:
-                        Not answered
-                    </strong>
-
-                    <p>
-                        Correct answer:
-                        ${String.fromCharCode(65 + question.correct)}.
-                        ${question.options[question.correct]}
-                    </p>
-
-                    <p>${question.explanation}</p>
-
-                </div>
-            `;
-
-            return;
-        }
-
-
-        const selectedValue =
-            Number(selectedAnswer.value);
-
-
-        if (selectedValue === question.correct) {
-
-            score++;
-
-            feedbackHTML += `
-                <div class="feedback-item">
-
-                    <strong>
-                        Question ${questionIndex + 1}: Correct
-                    </strong>
-
-                    <p>${question.explanation}</p>
-
+            html += `
                 </div>
             `;
 
         }
 
-        else {
-
-            feedbackHTML += `
-                <div class="feedback-item">
-
-                    <strong>
-                        Question ${questionIndex + 1}: Incorrect
-                    </strong>
-
-                    <p>
-                        You selected:
-                        ${String.fromCharCode(65 + selectedValue)}.
-                        ${question.options[selectedValue]}
-                    </p>
-
-                    <p>
-                        Correct answer:
-                        ${String.fromCharCode(65 + question.correct)}.
-                        ${question.options[question.correct]}
-                    </p>
-
-                    <p>${question.explanation}</p>
-
-                </div>
-            `;
-
-        }
-
-    });
+    );
 
 
-    const percentage =
-        Math.round(
-            (score / selectedScenario.questions.length) * 100
-        );
-
-
-    document.getElementById("quizResult").innerHTML = `
-
-        <h2>Technical Interview Results</h2>
-
-        <h3>
-            Score:
-            ${score}/${selectedScenario.questions.length}
-            (${percentage}%)
-        </h3>
-
-        <h3>Question Feedback</h3>
-
-        ${feedbackHTML}
-
-    `;
+    container.innerHTML = html;
 
 }
 
 
-// Show the quiz when the page loads
-displayQuiz();
+
+// =====================================================
+// SUBMIT FULL INTERVIEW
+// =====================================================
+
+function submitFullInterview() {
+
+
+    const basicAnswer =
+        document.getElementById("basicAnswer").value;
+
+    const teamAnswer =
+        document.getElementById("teamAnswer").value;
+
+    const situationalAnswer =
+        document.getElementById("situationalAnswer").value;
+
+
+
+    // Check behavioral questions
+
+    if (
+        basicAnswer.trim() === "" ||
+        teamAnswer.trim() === "" ||
+        situationalAnswer.trim() === ""
+    ) {
+
+        document.getElementById("interviewResult").innerHTML = `
+
+            <div class="results-section">
+
+                <h2>Please Complete Your Interview</h2>
+
+                <p>
+                    Please answer all three behavioral questions
+                    before submitting.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    // Check technical questions
+
+    for (
+        let i = 0;
+        i < selectedScenario.questions.length;
+        i++
+    ) {
+
+        const selected =
+            document.querySelector(
+                'input[name="technicalQ' + i + '"]:checked'
+            );
+
+        if (!selected) {
+
+            document.getElementById("interviewResult").innerHTML = `
+
+                <div class="results-section">
+
+                    <h2>Please Complete Your Interview</h2>
+
+                    <p>
+                        Please answer all three technical questions
+                        before submitting.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+    }
+
+
+
+    // =================================================
+    // BUILD TECHNICAL REVIEW
+    // =================================================
+
+    let technicalScore = 0;
+
+    let technicalReviewHTML = "";
+
+
+    selectedScenario.questions.forEach(
+        (question, questionIndex) => {
+
+
+            const selectedAnswer =
+                document.querySelector(
+                    'input[name="technicalQ' +
+                    questionIndex +
+                    '"]:checked'
+                );
+
+
+            const selectedValue =
+                Number(selectedAnswer.value);
+
+
+            if (selectedValue === question.correct) {
+                technicalScore++;
+            }
+
+
+
+            let answerChoicesHTML = "";
+
+
+            question.options.forEach(
+                (option, optionIndex) => {
+
+
+                    let answerClass = "normal-answer";
+                    let labelText = "";
+
+
+                    // Correct answer is always green
+
+                    if (optionIndex === question.correct) {
+
+                        answerClass = "correct-answer";
+
+                        labelText = " ✓ Correct Answer";
+
+                    }
+
+
+                    // Wrong answer selected by user becomes red
+
+                    if (
+                        optionIndex === selectedValue &&
+                        selectedValue !== question.correct
+                    ) {
+                    
+                        answerClass = "wrong-answer";
+                    
+                        labelText = "";
+                    
+                    }
+
+
+                    // Correct answer selected by user
+
+                    if (
+                        optionIndex === selectedValue &&
+                        selectedValue === question.correct
+                    ) {
+
+                        labelText =
+                            " ✓ Your Answer\ — Correct";
+
+                    }
+
+
+                    answerChoicesHTML += `
+
+                        <p class="${answerClass}">
+
+                            ${String.fromCharCode(65 + optionIndex)}.
+                            ${option}
+
+                            ${labelText}
+
+                        </p>
+
+                    `;
+
+                }
+
+            );
+
+
+
+            technicalReviewHTML += `
+
+                <div class="feedback-item">
+
+                    <h3>
+                        Question ${questionIndex + 4}
+                    </h3>
+
+                    <p>
+                        <strong>
+                            ${question.question}
+                        </strong>
+                    </p>
+
+
+                    ${answerChoicesHTML}
+
+
+                    <p>
+                        <strong>Explanation:</strong>
+                        ${question.explanation}
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    );
+
+
+
+    const technicalPercentage =
+        Math.round(
+            (technicalScore /
+            selectedScenario.questions.length) * 100
+        );
+
+
+
+    // =================================================
+    // DISPLAY FULL RESULTS
+    // =================================================
+
+    document.getElementById("interviewResult").innerHTML = `
+
+
+        <h1 class="section-title">
+            Your Interview Review
+        </h1>
+
+
+        <p>
+            Review your full interview below.
+        </p>
+
+
+
+        <!-- ====================================== -->
+        <!-- BEHAVIORAL REVIEW -->
+        <!-- ====================================== -->
+
+
+        <div class="results-section">
+
+            <h2>
+                Part 1 — Behavioral Interview Review
+            </h2>
+
+
+
+            <div class="feedback-item">
+
+                <h3>
+                    Question 1 — Basic Interview
+                </h3>
+
+                <p>
+                    <strong>
+                        ${selectedBasicQuestion}
+                    </strong>
+                </p>
+
+                <p>
+                    <strong>Your Response:</strong>
+                </p>
+
+                <div class="user-response">
+                    ${basicAnswer}
+                </div>
+
+                <div class="feedback-placeholder">
+
+                    <strong>
+                        Behavioral Feedback:
+                    </strong>
+
+                    <p>
+                        Feedback will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feedback-item">
+
+                <h3>
+                    Question 2 — Working With Others
+                </h3>
+
+                <p>
+                    <strong>
+                        ${selectedTeamQuestion}
+                    </strong>
+                </p>
+
+                <p>
+                    <strong>Your Response:</strong>
+                </p>
+
+                <div class="user-response">
+                    ${teamAnswer}
+                </div>
+
+                <div class="feedback-placeholder">
+
+                    <strong>
+                        Behavioral Feedback:
+                    </strong>
+
+                    <p>
+                        Feedback will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="feedback-item">
+
+                <h3>
+                    Question 3 — Situational
+                </h3>
+
+                <p>
+                    <strong>
+                        ${selectedSituationalQuestion}
+                    </strong>
+                </p>
+
+                <p>
+                    <strong>Your Response:</strong>
+                </p>
+
+                <div class="user-response">
+                    ${situationalAnswer}
+                </div>
+
+                <div class="feedback-placeholder">
+
+                    <strong>
+                        Behavioral Feedback:
+                    </strong>
+
+                    <p>
+                        Feedback will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ====================================== -->
+        <!-- TECHNICAL REVIEW -->
+        <!-- ====================================== -->
+
+
+        <div class="results-section">
+
+            <h2>
+                Part 2 — Technical Interview Review
+            </h2>
+
+
+            <h3>
+                Technical Score:
+                ${technicalScore}/3
+                (${technicalPercentage}%)
+            </h3>
+
+
+            <h3>
+                Scenario:
+                ${selectedScenario.title}
+            </h3>
+
+
+            <p>
+                <strong>
+                    Original Code:
+                </strong>
+            </p>
+
+
+            <pre><code>${selectedScenario.code}</code></pre>
+
+
+            ${technicalReviewHTML}
+
+
+        </div>
+
+    `;
+
+
+
+    // Scroll to results
+
+    document
+        .getElementById("interviewResult")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+
+// =====================================================
+// LOAD TECHNICAL QUIZ
+// =====================================================
+
+displayTechnicalQuiz();
+
 
 </script>
 
+
 </body>
+
 </html>
