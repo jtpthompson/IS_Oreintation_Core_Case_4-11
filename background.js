@@ -51,7 +51,7 @@ window.addEventListener("resize", resizeCanvas);
 
 function createBubbles() {
 
-    const numberOfBubbles = 50;
+    const numberOfBubbles = 100;
 
     for (let i = 0; i < numberOfBubbles; i++) {
 
@@ -101,11 +101,11 @@ function drawBubble(bubble) {
         bubble.radius
     );
 
-    // Soft highlight
-    gradient.addColorStop(
-        0,
-        "rgba(255, 255, 255, 0.45)"
-    );
+    // // Soft highlight
+    // gradient.addColorStop(
+    //     0,
+    //     "rgba(255, 255, 255, 0.45)"
+    // );
 
     // Main bubble color
     gradient.addColorStop(
