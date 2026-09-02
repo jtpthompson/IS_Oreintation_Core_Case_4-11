@@ -100,6 +100,14 @@ body {
    BUTTONS
 -------------------------------- */
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+
 .launch-button {
     width: 340px;
     min-height: 180px;
@@ -279,13 +287,3 @@ h6 {
 }
 
 
-.career-button {
-    background: linear-gradient(
-        135deg,
-        var(--blue),
-        var(--purple)
-    );
-
-    position: relative;
-    top: 20px;
-}
