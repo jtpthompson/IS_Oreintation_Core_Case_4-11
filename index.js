@@ -5,7 +5,7 @@ const interviewButton = document.getElementById("interviewButton");
 
 // Career Exploration button
 careerButton.addEventListener("click", function() {
-    window.location.href = "practice.html";
+    window.location.href = "discovery.html";
 });
 
 // Interview Practice button
