@@ -1,7 +1,7 @@
 const careerData = [
   {
     role: "Data Analyst",
-    summary: "Data Analysts act as the critical link between raw information and strategic business decisions. They take vast amounts of complex data and translate it into clear, actionable insights that help organizations optimize operations, target new markets, and solve complex problems.",
+    summary: "Data Analysts act as the critical link between raw information and strategic business decisions. Rather than just running calculations, they uncover the 'why' behind the numbers. Modern organizations generate massive amounts of data daily, ranging from customer interactions to supply chain metrics. A Data Analyst's core function is to extract this siloed data, clean it to ensure accuracy, and apply statistical analysis to identify historical trends. By transforming these complex datasets into intuitive visual dashboards and clear narratives, they empower non-technical executives to make evidence-based choices about product launches, budget allocations, and operational efficiencies. Ultimately, they turn raw information into a company's most valuable strategic asset.",
     dayToDay: "A typical day involves meeting with stakeholders to understand their core business questions, followed by writing SQL queries to extract the necessary information from relational databases. You will spend significant time cleaning messy data, running statistical analyses using Python or Excel, and building interactive dashboards in Tableau to present your findings to non-technical leadership.",
     skills: "SQL, Python, Tableau, Excel.",
     expectations: "Ability to write complex SQL queries (joins, subqueries), clean inconsistent data, and confidently present findings to business leaders.",
