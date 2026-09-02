@@ -1,11 +1,12 @@
 const careerData = [
   {
     role: "Data Analyst",
-    dayToDay: "Extracting, cleaning, and analyzing datasets to answer business questions.",
+    summary: "Data Analysts act as the critical link between raw information and strategic business decisions. They take vast amounts of complex data and translate it into clear, actionable insights that help organizations optimize operations, target new markets, and solve complex problems.",
+    dayToDay: "A typical day involves meeting with stakeholders to understand their core business questions, followed by writing SQL queries to extract the necessary information from relational databases. You will spend significant time cleaning messy data, running statistical analyses using Python or Excel, and building interactive dashboards in Tableau to present your findings to non-technical leadership.",
     skills: "SQL, Python, Tableau, Excel.",
-    expectations: "Ability to write SQL queries, clean data, and present findings.",
+    expectations: "Ability to write complex SQL queries (joins, subqueries), clean inconsistent data, and confidently present findings to business leaders.",
     salary: "$65,000 - $85,000",
-    candidateTraits: "Detail-oriented, curious, and business-focused."
+    candidateTraits: "Detail-oriented, naturally curious, and strongly focused on business outcomes."
   },
   {
     role: "Business Analyst",
@@ -55,8 +56,9 @@ careerData.forEach(career => {
     const details = document.createElement('details');
     details.innerHTML = `
         <summary>${career.role}</summary>
+        <p><strong>Overview:</strong> ${career.summary}</p>
+        <p><strong>Day-to-day:</strong> ${career.dayToDay}</p>
         <ul>
-            <li><strong>Day-to-day:</strong> ${career.dayToDay}</li>
             <li><strong>Technical skills:</strong> ${career.skills}</li>
             <li><strong>Entry-level expectations:</strong> ${career.expectations}</li>
             <li><strong>Salary & growth:</strong> ${career.salary}</li>
