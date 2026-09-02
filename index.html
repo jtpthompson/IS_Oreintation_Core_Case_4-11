@@ -4,25 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IS Career Launchpad</title>
+
+    <!-- Bootstrap -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+    >
+
+    <!-- Our CSS-->
     <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
 
-    <h1>IS Career Launchpad</h1>
+    <!-- Background -->
+    <canvas id="bubbleCanvas"></canvas>
 
+    <!-- Dark overlay to keep text readable -->
+    <div class="overlay"></div>
 
-    <button id="careerButton">
-        <h1>Career Exploration</h1>
-        <p>Learn about different career paths in Information Systems</p>
-    </button>
+    <!-- Main content -->
+    <main class="landing-page">
 
-    <button id="interviewButton">
-        <h1>Interview Practice</h1>
-        <p>Prepare for your next interview with practice questions</p>
-    </button>
+        <div class="container text-center">
 
+            <h1 class="title">
+                IS Career Launchpad
+            </h1>
+
+            <div class="button-container">
+                <button id="careerButton">
+                    <h1>Career Exploration</h1>
+                    <p>Learn about different career paths in Information Systems</p>
+                </button>
+
+                <button id="interviewButton">
+                    <h1>Interview Practice</h1>
+                    <p>Prepare for your next interview with practice questions</p>
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- JavaScript -->
     <script src="index.js"></script>
+    <script src="background.js"></script>
 
 </body>
 </html>
