@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Mock Interview</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .scenario {
+            margin-top: 30px;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        .question {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #quizResult {
+            margin-top: 30px;
+        }
+
+        .feedback-item {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Technical Mock Interview</h1>
+
+    <p>
+        Read the coding scenario below and answer the three questions.
+    </p>
+
+    <div id="quizContainer"></div>
+
+    <button onclick="gradeQuiz()">Submit Technical Interview</button>
+
+    <div id="quizResult"></div>
+
+
+<script>
+
+const technicalScenarios = [
+
+    // ==========================================
+    // SCENARIO 1
+    // ==========================================
+
+    {
+        title: "Bird Food Simulation",
+
+        code: `
+import random
+
+def simulateOneDay(self, numBirds):
+    condition = random.random()
+
+    if condition < 0.05:
+        self.currentFood = 0
+    else:
+        eachBirdEats = int(random.random() * 41) + 10
+        totalEaten = numBirds * eachBirdEats
+
+        if totalEaten > self.currentFood:
+            self.currentFood = 0
+        else:
+            self.currentFood -= totalEaten
+        `,
+
+        questions: [
+
+            {
+                question:
+                    "What is the possible range of values for eachBirdEats?",
+
+                options: [
+                    "0–40",
+                    "1–41",
+                    "10–50",
+                    "10–41"
+                ],
+
+                correct: 2,
+
+                explanation:
+                    "random.random() produces a value from 0 up to, but not including, 1. Multiplying by 41, converting to an integer, and adding 10 produces possible values from 10 through 50."
+            },
+
+            {
+                question:
+                    "If condition is 0.03, what happens?",
+
+                options: [
+                    "Each bird eats 5 units",
+                    "currentFood becomes 0",
+                    "currentFood decreases by 5%",
+                    "The method stops running"
+                ],
+
+                correct: 1,
+
+                explanation:
+                    "Because 0.03 is less than 0.05, the first if statement runs and currentFood is set to 0."
+            },
+
+            {
+                question:
+                    "Suppose there are 5 birds, each bird eats 20 units, and currentFood is 150. What will currentFood become?",
+
+                options: [
+                    "50",
+                    "100",
+                    "130",
+                    "150"
+                ],
+
+                correct: 0,
+
+                explanation:
+                    "Five birds eating 20 units each consume 100 units. Starting with 150 leaves 50 units."
+            }
+
+        ]
+    },
+
+
+    // ==========================================
+    // SCENARIO 2
+    // ==========================================
+
+    {
+        title: "Student Grades",
+
+        code: `
+def calculateGrade(scores):
+    total = 0
+
+    for score in scores:
+        total += score
+
+    average = total / len(scores)
+
+    if average >= 90:
+        return "A"
+    elif average >= 80:
+        return "B"
+    elif average >= 70:
+        return "C"
+    elif average >= 60:
+        return "D"
+    else:
+        return "F"
+        `,
+
+        questions: [
+
+            {
+                question:
+                    "If scores = [80, 90, 100], what will average be?",
+
+                options: [
+                    "80",
+                    "85",
+                    "90",
+                    "100"
+                ],
+
+                correct: 2,
+
+                explanation:
+                    "80 + 90 + 100 = 270. Dividing 270 by 3 gives an average of 90."
+            },
+
+            {
+                question:
+                    "What does total += score do?",
+
+                options: [
+                    "Subtracts each score from total",
+                    "Adds each score to total",
+                    "Divides total by the score",
+                    "Replaces total with the score"
+                ],
+
+                correct: 1,
+
+                explanation:
+                    "The += operator adds the current score to the existing value stored in total."
+            },
+
+            {
+                question:
+                    'If scores are [70, 75, 80], what will the function return?',
+
+                options: [
+                    '"A"',
+                    '"B"',
+                    '"C"',
+                    '"D"'
+                ],
+
+                correct: 2,
+
+                explanation:
+                    "The average is 75. Since 75 is at least 70 but less than 80, the function returns C."
+            }
+
+        ]
+    },
+
+
+    // ==========================================
+    // SCENARIO 3
+    // ==========================================
+
+    {
+        title: "Shopping Cart",
+
+        code: `
+def calculateTotal(prices):
+    total = 0
+
+    for price in prices:
+        total += price
+
+    if total >= 100:
+        total *= 0.90
+
+    return total
+        `,
+
+        questions: [
+
+            {
+                question:
+                    "What is the purpose of the for loop?",
+
+                options: [
+                    "It removes prices from the list",
+                    "It finds the cheapest price",
+                    "It adds all the prices together",
+                    "It multiplies every price by 2"
+                ],
+
+                correct: 2,
+
+                explanation:
+                    "The loop goes through every price and adds it to the running total."
+            },
+
+            {
+                question:
+                    "If prices = [20, 30, 40], what will the function return?",
+
+                options: [
+                    "80",
+                    "90",
+                    "100",
+                    "110"
+                ],
+
+                correct: 1,
+
+                explanation:
+                    "The prices add up to 90. Because 90 is less than 100, the discount is not applied."
+            },
+
+            {
+                question:
+                    "If prices = [50, 60], what will the function return?",
+
+                options: [
+                    "110",
+                    "100",
+                    "99",
+                    "90"
+                ],
+
+                correct: 2,
+
+                explanation:
+                    "The original total is 110. Since it is at least 100, the code multiplies it by 0.90. That gives 99."
+            }
+
+        ]
+    }
+
+];
+
+
+// ==========================================
+// RANDOMLY CHOOSE ONE SCENARIO
+// ==========================================
+
+const randomIndex =
+    Math.floor(Math.random() * technicalScenarios.length);
+
+const selectedScenario =
+    technicalScenarios[randomIndex];
+
+
+// ==========================================
+// DISPLAY THE SCENARIO
+// ==========================================
+
+function displayQuiz() {
+
+    const container =
+        document.getElementById("quizContainer");
+
+    let html = `
+        <div class="scenario">
+
+            <h2>${selectedScenario.title}</h2>
+
+            <pre><code>${selectedScenario.code}</code></pre>
+    `;
+
+
+    selectedScenario.questions.forEach((question, questionIndex) => {
+
+        html += `
+            <div class="question">
+
+                <h3>Question ${questionIndex + 1}</h3>
+
+                <p>${question.question}</p>
+        `;
+
+
+        question.options.forEach((option, optionIndex) => {
+
+            html += `
+                <label>
+                    <input
+                        type="radio"
+                        name="q${questionIndex}"
+                        value="${optionIndex}"
+                    >
+                    ${String.fromCharCode(65 + optionIndex)}. ${option}
+                </label>
+            `;
+
+        });
+
+
+        html += `
+            </div>
+        `;
+
+    });
+
+
+    html += `
+        </div>
+    `;
+
+
+    container.innerHTML = html;
+}
+
+
+// ==========================================
+// GRADE THE QUIZ
+// ==========================================
+
+function gradeQuiz() {
+
+    let score = 0;
+
+    let feedbackHTML = "";
+
+
+    selectedScenario.questions.forEach((question, questionIndex) => {
+
+        const selectedAnswer =
+            document.querySelector(
+                'input[name="q' + questionIndex + '"]:checked'
+            );
+
+
+        if (!selectedAnswer) {
+
+            feedbackHTML += `
+                <div class="feedback-item">
+
+                    <strong>
+                        Question ${questionIndex + 1}:
+                        Not answered
+                    </strong>
+
+                    <p>
+                        Correct answer:
+                        ${String.fromCharCode(65 + question.correct)}.
+                        ${question.options[question.correct]}
+                    </p>
+
+                    <p>${question.explanation}</p>
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        const selectedValue =
+            Number(selectedAnswer.value);
+
+
+        if (selectedValue === question.correct) {
+
+            score++;
+
+            feedbackHTML += `
+                <div class="feedback-item">
+
+                    <strong>
+                        Question ${questionIndex + 1}: Correct
+                    </strong>
+
+                    <p>${question.explanation}</p>
+
+                </div>
+            `;
+
+        }
+
+        else {
+
+            feedbackHTML += `
+                <div class="feedback-item">
+
+                    <strong>
+                        Question ${questionIndex + 1}: Incorrect
+                    </strong>
+
+                    <p>
+                        You selected:
+                        ${String.fromCharCode(65 + selectedValue)}.
+                        ${question.options[selectedValue]}
+                    </p>
+
+                    <p>
+                        Correct answer:
+                        ${String.fromCharCode(65 + question.correct)}.
+                        ${question.options[question.correct]}
+                    </p>
+
+                    <p>${question.explanation}</p>
+
+                </div>
+            `;
+
+        }
+
+    });
+
+
+    const percentage =
+        Math.round(
+            (score / selectedScenario.questions.length) * 100
+        );
+
+
+    document.getElementById("quizResult").innerHTML = `
+
+        <h2>Technical Interview Results</h2>
+
+        <h3>
+            Score:
+            ${score}/${selectedScenario.questions.length}
+            (${percentage}%)
+        </h3>
+
+        <h3>Question Feedback</h3>
+
+        ${feedbackHTML}
+
+    `;
+
+}
+
+
+// Show the quiz when the page loads
+displayQuiz();
+
+</script>
+
+</body>
+</html>
