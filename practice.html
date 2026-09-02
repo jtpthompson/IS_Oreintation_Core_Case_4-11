@@ -4,90 +4,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>IS Mock Interview</title>
+    <title>IS Career Interview Practice</title>
 
     <style>
-
         body {
             font-family: Arial, sans-serif;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 40px auto;
             padding: 20px;
             line-height: 1.6;
+            background-color: #19324F;
+            color: #17212B;
         }
 
-        h1 {
-            margin-bottom: 10px;
+        .page-box {
+            background-color: #F7F3EA;
+            padding: 35px;
+            border-radius: 16px;
         }
 
         .intro {
-            margin-bottom: 40px;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .role-button {
+            background-color: white;
+            border: 2px solid #19324F;
+            border-radius: 12px;
+            padding: 25px 15px;
+            font-size: 19px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .role-button:hover {
+            background-color: #E7B84B;
         }
 
         .section-title {
             margin-top: 45px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 2px solid #ccc;
         }
 
-        .interview-question,
-        .question {
-            margin-top: 25px;
+        .question-box {
+            background-color: white;
+            margin-top: 20px;
             padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         textarea {
             width: 100%;
             box-sizing: border-box;
             padding: 12px;
-            font-family: Arial, sans-serif;
+            min-height: 140px;
             font-size: 15px;
         }
 
         pre {
-            background-color: #f4f4f4;
+            background-color: #20252B;
+            color: white;
             padding: 20px;
             border-radius: 8px;
             overflow-x: auto;
+            white-space: pre-wrap;
         }
 
         label {
             display: block;
-            margin: 10px 0;
+            margin: 12px 0;
             cursor: pointer;
         }
 
-        button {
-            margin-top: 35px;
+        .submit-button,
+        .restart-button {
+            margin-top: 30px;
             padding: 14px 28px;
+            background-color: #E7B84B;
+            border: none;
+            border-radius: 8px;
             font-size: 17px;
+            font-weight: bold;
             cursor: pointer;
-        }
-
-        #interviewResult {
-            margin-top: 40px;
         }
 
         .results-section {
             margin-top: 35px;
             padding: 25px;
-            border: 2px solid #ddd;
+            background-color: white;
             border-radius: 10px;
         }
 
         .feedback-item {
-            margin-top: 25px;
+            margin-top: 20px;
             padding: 20px;
-            background-color: #f7f7f7;
+            background-color: #f5f5f5;
             border-radius: 8px;
         }
 
         .user-response {
             padding: 15px;
-            background-color: #f4f4f4;
+            background-color: white;
+            border: 1px solid #ddd;
             border-radius: 8px;
             white-space: pre-wrap;
         }
@@ -102,10 +129,6 @@
             font-weight: bold;
         }
 
-        .normal-answer {
-            color: black;
-        }
-
         .feedback-placeholder {
             margin-top: 15px;
             padding: 15px;
@@ -113,675 +136,1732 @@
             border-radius: 8px;
         }
 
+        #interviewArea,
+        #resultsArea {
+            display: none;
+        }
+
+        @media (max-width: 700px) {
+            .role-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
-
 </head>
-
 
 <body>
 
+<div class="page-box">
 
-<!-- ========================================= -->
-<!-- INTRO -->
-<!-- ========================================= -->
+    <div id="roleSelection">
+        <div class="intro">
+            <h1>IS Mock Interview Practice</h1>
+            <p>Choose a career path to begin a role-specific mock interview.</p>
+        </div>
 
-<h1>IS Mock Interview</h1>
+        <div class="role-grid">
+            <button class="role-button" onclick="startInterview('dataAnalyst')">
+                Data Analyst
+            </button>
 
-<div class="intro">
+            <button class="role-button" onclick="startInterview('businessAnalyst')">
+                Business Analyst
+            </button>
 
-    <p>
-        Practice both behavioral and technical interview questions.
-    </p>
+            <button class="role-button" onclick="startInterview('softwareDeveloper')">
+                Software Developer
+            </button>
 
-    <p>
-        You will answer three behavioral questions and three technical
-        questions based on a randomly selected coding scenario.
-    </p>
+            <button class="role-button" onclick="startInterview('cybersecurityAnalyst')">
+                Cybersecurity Analyst
+            </button>
 
-</div>
+            <button class="role-button" onclick="startInterview('productManager')">
+                Product Manager
+            </button>
 
-
-
-<!-- ========================================= -->
-<!-- PART 1: BEHAVIORAL -->
-<!-- ========================================= -->
-
-<h2 class="section-title">
-    Part 1 — Behavioral Interview
-</h2>
-
-<p>
-    Answer each question as if you were in a real interview.
-    Try to use the STAR method: Situation, Task, Action, and Result.
-</p>
-
-
-<div class="interview-question">
-
-    <h3>Question 1 — Basic Interview</h3>
-
-    <p id="basicQuestion"></p>
-
-    <textarea
-        id="basicAnswer"
-        rows="7"
-        placeholder="Type your answer here..."
-    ></textarea>
-
-</div>
+            <button class="role-button" onclick="startInterview('technologyConsultant')">
+                Technology Consultant
+            </button>
+        </div>
+    </div>
 
 
-<div class="interview-question">
+    <div id="interviewArea">
 
-    <h3>Question 2 — Working With Others</h3>
+        <h1 id="roleTitle"></h1>
 
-    <p id="teamQuestion"></p>
+        <p>
+            Complete all six questions. The first three are behavioral interview
+            questions and the final three are based on a role-specific scenario.
+        </p>
 
-    <textarea
-        id="teamAnswer"
-        rows="7"
-        placeholder="Type your answer here..."
-    ></textarea>
+        <h2 class="section-title">Part 1 — Behavioral Interview</h2>
 
-</div>
+        <div id="behavioralContainer"></div>
+
+        <h2 class="section-title">Part 2 — Role-Specific Interview</h2>
+
+        <div id="technicalContainer"></div>
+
+        <button class="submit-button" onclick="submitInterview()">
+            Submit Interview
+        </button>
+
+        <div id="errorMessage"></div>
+    </div>
 
 
-<div class="interview-question">
-
-    <h3>Question 3 — Situational</h3>
-
-    <p id="situationalQuestion"></p>
-
-    <textarea
-        id="situationalAnswer"
-        rows="7"
-        placeholder="Type your answer here..."
-    ></textarea>
+    <div id="resultsArea"></div>
 
 </div>
-
-
-
-<!-- ========================================= -->
-<!-- PART 2: TECHNICAL -->
-<!-- ========================================= -->
-
-<h2 class="section-title">
-    Part 2 — Technical Interview
-</h2>
-
-<p>
-    Read the coding scenario and answer the three questions.
-</p>
-
-<div id="quizContainer"></div>
-
-
-
-<!-- ========================================= -->
-<!-- SUBMIT -->
-<!-- ========================================= -->
-
-<button onclick="submitFullInterview()">
-    Submit Interview
-</button>
-
-
-
-<!-- ========================================= -->
-<!-- RESULTS -->
-<!-- ========================================= -->
-
-<div id="interviewResult"></div>
-
 
 
 <script>
+
+const interviewBanks = {
+
+    // =====================================================
+    // DATA ANALYST
+    // =====================================================
+
+    dataAnalyst: {
+
+        title: "Data Analyst",
+
+        behavioral: [
+            "Tell me about a project where you used data to answer a business question.",
+            "Tell me about a time you found an error or inconsistency in data. What did you do?",
+            "Describe a time you had to explain a data finding to someone without a technical background.",
+            "Tell me about a time you worked with incomplete or messy data.",
+            "Describe a time your analysis led you to a conclusion you did not originally expect.",
+            "Tell me about a time you had to balance accuracy with a tight deadline."
+        ],
+
+        scenarios: [
+
+            {
+                title: "SQL Sales Analysis",
+
+                prompt:
+                    "A retailer stores each order in an orders table. Review the query below.",
+
+                code: `
+SELECT customer_id, SUM(amount) AS total_spent
+FROM orders
+GROUP BY customer_id
+HAVING SUM(amount) > 1000;
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "What does this query return?",
+
+                        options: [
+                            "Every customer and every individual order",
+                            "Customers whose total spending is greater than $1,000",
+                            "Customers who placed exactly 1,000 orders",
+                            "Only the single highest-spending customer"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "GROUP BY creates one result per customer, SUM totals each customer's spending, and HAVING keeps only customers whose total exceeds 1,000."
+                    },
+
+                    {
+                        question:
+                            "Why is HAVING used instead of WHERE for the final condition?",
+
+                        options: [
+                            "HAVING filters results after aggregation",
+                            "WHERE cannot be used with numbers",
+                            "HAVING sorts the results",
+                            "WHERE only works with customer names"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "HAVING is commonly used to filter groups after aggregate calculations such as SUM."
+                    },
+
+                    {
+                        question:
+                            "Which SQL concept allows rows to be combined by customer_id?",
+
+                        options: [
+                            "ORDER BY",
+                            "GROUP BY",
+                            "DELETE",
+                            "INSERT"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "GROUP BY groups rows that share the same customer_id so aggregate functions can be applied to each group."
+                    }
+                ]
+            },
+
+            {
+                title: "Joining Customer Data",
+
+                prompt:
+                    "You need a report containing customer names and their orders.",
+
+                code: `
+SELECT customers.name, orders.amount
+FROM customers
+INNER JOIN orders
+ON customers.customer_id = orders.customer_id;
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "What does the INNER JOIN do?",
+
+                        options: [
+                            "Combines matching rows from customers and orders",
+                            "Deletes duplicate customers",
+                            "Adds a new customer",
+                            "Calculates the average order"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "An INNER JOIN combines rows from two tables when their join keys match."
+                    },
+
+                    {
+                        question:
+                            "What column connects the two tables?",
+
+                        options: [
+                            "name",
+                            "amount",
+                            "customer_id",
+                            "orders"
+                        ],
+
+                        correct: 2,
+
+                        explanation:
+                            "The ON clause matches customers.customer_id with orders.customer_id."
+                    },
+
+                    {
+                        question:
+                            "What happens to a customer who has no matching order in an INNER JOIN?",
+
+                        options: [
+                            "The customer still appears",
+                            "The customer does not appear",
+                            "Their amount automatically becomes zero",
+                            "The database creates an order"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "INNER JOIN returns only rows that have matching values in both tables."
+                    }
+                ]
+            },
+
+            {
+                title: "Cleaning a Dataset",
+
+                prompt:
+                    "You receive a customer dataset before creating a dashboard.",
+
+                code: `
+Customer_ID | Age | State | Revenue
+
+101 | 24 | UT | 500
+102 |     | CA | 700
+102 |     | CA | 700
+103 | 31 | TX | 900
+104 | 250 | NY | 400
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "Which problem should you investigate first for customer 104?",
+
+                        options: [
+                            "Missing state",
+                            "Duplicate ID",
+                            "Potentially invalid age",
+                            "Missing revenue"
+                        ],
+
+                        correct: 2,
+
+                        explanation:
+                            "An age of 250 is likely outside the valid range and should be investigated as a potential data-quality problem."
+                    },
+
+                    {
+                        question:
+                            "What issue appears with customer 102?",
+
+                        options: [
+                            "Duplicate record and missing age",
+                            "Invalid state",
+                            "Negative revenue",
+                            "Missing customer ID"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Customer 102 appears twice and has a missing age value."
+                    },
+
+                    {
+                        question:
+                            "Before deleting the duplicate, what is the best next step?",
+
+                        options: [
+                            "Delete it immediately",
+                            "Verify whether it truly represents the same transaction or record",
+                            "Delete the entire dataset",
+                            "Change the customer's state"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "Analysts should understand why duplication occurred before removing records to avoid deleting legitimate information."
+                    }
+                ]
+            }
+        ]
+    },
+
+
+    // =====================================================
+    // BUSINESS ANALYST
+    // =====================================================
+
+    businessAnalyst: {
+
+        title: "Business Analyst",
+
+        behavioral: [
+            "Tell me about a time you had to gather requirements from someone.",
+            "Tell me about a time you worked with a difficult or resistant stakeholder.",
+            "Describe a time requirements changed during a project. How did you respond?",
+            "Tell me about a time you identified an inefficient business process.",
+            "Describe a project where different stakeholders wanted different things.",
+            "Tell me about a time you had to ask questions to uncover the real problem."
+        ],
+
+        scenarios: [
+
+            {
+                title: "Requirements Gathering",
+
+                prompt:
+                    "A sales manager tells you, 'We need a better sales system because the current one is terrible.'",
+
+                code: `
+Current complaint:
+"We need a better sales system."
+
+Known information:
+- Sales representatives use spreadsheets.
+- Managers want better reporting.
+- Some employees say the current process takes too long.
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "What should the business analyst do first?",
+
+                        options: [
+                            "Buy a new CRM immediately",
+                            "Ask stakeholders questions to understand the current problems and desired outcomes",
+                            "Tell employees to work faster",
+                            "Replace the sales team"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "The initial request is vague. The analyst should clarify the business need, pain points, users, and desired outcomes before defining a solution."
+                    },
+
+                    {
+                        question:
+                            "Which question would be most useful during requirements gathering?",
+
+                        options: [
+                            "What specific tasks are difficult or time-consuming today?",
+                            "What color should the application be?",
+                            "What is your favorite website?",
+                            "Should every employee receive a new computer?"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Understanding the specific pain points in the current workflow helps reveal the real business requirements."
+                    },
+
+                    {
+                        question:
+                            "Which statement is a requirement rather than a solution?",
+
+                        options: [
+                            "Buy Salesforce",
+                            "The system must allow managers to view sales activity by representative",
+                            "Use Microsoft software",
+                            "Build a mobile app"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "A requirement defines what the business or user needs. The technology used to satisfy it is a solution decision."
+                    }
+                ]
+            },
+
+            {
+                title: "Process Improvement",
+
+                prompt:
+                    "Review the company's current employee expense reimbursement process.",
+
+                code: `
+1. Employee fills out a paper form.
+2. Manager signs the paper form.
+3. Employee emails a photo of the form to Finance.
+4. Finance types the information into a spreadsheet.
+5. Finance emails the employee if information is missing.
+6. Finance manually enters the approved amount into the accounting system.
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "Which problem is most obvious in this process?",
+
+                        options: [
+                            "Too much automated data transfer",
+                            "Multiple manual handoffs and duplicate data entry",
+                            "Too few employees",
+                            "Too much customer feedback"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "The process contains several manual handoffs and repeated entry of the same information, creating delay and error risk."
+                    },
+
+                    {
+                        question:
+                            "What would be a reasonable improvement?",
+
+                        options: [
+                            "Add another spreadsheet",
+                            "Use a digital workflow that captures and routes expense information",
+                            "Require three paper copies",
+                            "Stop approving expenses"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "A digital workflow could capture data once and automate routing and approvals."
+                    },
+
+                    {
+                        question:
+                            "What metric would best help evaluate whether the change worked?",
+
+                        options: [
+                            "Average reimbursement processing time",
+                            "Office temperature",
+                            "Number of employee parking spaces",
+                            "Website font size"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Processing time directly measures whether the redesigned process improved efficiency."
+                    }
+                ]
+            },
+
+            {
+                title: "Conflicting Stakeholders",
+
+                prompt:
+                    "Two departments disagree about a new customer portal.",
+
+                code: `
+Sales:
+Wants customers to create accounts as quickly as possible.
+
+Security:
+Wants additional identity verification before account creation.
+
+Project deadline:
+6 weeks.
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "What should the business analyst do?",
+
+                        options: [
+                            "Automatically choose Sales",
+                            "Automatically choose Security",
+                            "Clarify requirements, constraints, risks, and business priorities with both groups",
+                            "Cancel the project"
+                        ],
+
+                        correct: 2,
+
+                        explanation:
+                            "A business analyst helps stakeholders understand needs and constraints and works toward requirements that support the overall business objective."
+                    },
+
+                    {
+                        question:
+                            "What type of issue is this primarily?",
+
+                        options: [
+                            "Conflicting stakeholder requirements",
+                            "Database corruption",
+                            "Employee payroll",
+                            "Hardware failure"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Two stakeholder groups have competing requirements for the same process."
+                    },
+
+                    {
+                        question:
+                            "What should be documented after agreement is reached?",
+
+                        options: [
+                            "The final requirements and acceptance criteria",
+                            "Only the meeting date",
+                            "Employee vacation schedules",
+                            "Nothing"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Clear requirements and acceptance criteria help ensure the project team understands what must be delivered."
+                    }
+                ]
+            }
+        ]
+    },
+
+
+    // =====================================================
+    // SOFTWARE DEVELOPER
+    // =====================================================
+
+    softwareDeveloper: {
+
+        title: "Software Developer",
+
+        behavioral: [
+            "Tell me about a software or coding project you are proud of.",
+            "Tell me about a time you had to debug a difficult problem.",
+            "Describe a time your code did not work as expected. How did you approach it?",
+            "Tell me about a time you received feedback during a technical project.",
+            "Describe a time you had to learn a new programming language, framework, or tool quickly.",
+            "Tell me about a time you worked with another person on the same codebase."
+        ],
+
+        scenarios: [
+
+            {
+                title: "Python Debugging",
+
+                prompt:
+                    "A developer wants this function to return the largest number in a list.",
+
+                code: `
+def find_largest(numbers):
+    largest = 0
+
+    for number in numbers:
+        if number > largest:
+            largest = number
+
+    return largest
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "For which input might this function return an incorrect answer?",
+
+                        options: [
+                            "[1, 2, 3]",
+                            "[5, 8, 2]",
+                            "[-10, -3, -7]",
+                            "[0, 1, 2]"
+                        ],
+
+                        correct: 2,
+
+                        explanation:
+                            "If every number is negative, largest starts at 0 even though 0 is not in the list."
+                    },
+
+                    {
+                        question:
+                            "What is a better way to initialize largest when the list is known to contain at least one value?",
+
+                        options: [
+                            "largest = numbers[0]",
+                            "largest = 100",
+                            "largest = -1",
+                            "largest = len(numbers)"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Starting with the first list value allows the function to correctly handle positive and negative numbers."
+                    },
+
+                    {
+                        question:
+                            "What is the purpose of the loop?",
+
+                        options: [
+                            "Compare each number with the current largest value",
+                            "Sort the list",
+                            "Delete negative numbers",
+                            "Count the number of items"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "The loop examines each value and updates largest when it finds a greater one."
+                    }
+                ]
+            },
+
+            {
+                title: "List and Dictionary Logic",
+
+                prompt:
+                    "Review the code below.",
+
+                code: `
+students = {
+    "Ana": 92,
+    "Ben": 78,
+    "Cara": 85
+}
+
+for name, score in students.items():
+    if score >= 80:
+        print(name)
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "Which names will be printed?",
+
+                        options: [
+                            "Ana only",
+                            "Ana and Cara",
+                            "Ben and Cara",
+                            "All three students"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "Ana has 92 and Cara has 85, so both satisfy score >= 80."
+                    },
+
+                    {
+                        question:
+                            "What does students.items() provide to the loop?",
+
+                        options: [
+                            "Only the scores",
+                            "Only the names",
+                            "Each key-value pair",
+                            "The number of students"
+                        ],
+
+                        correct: 2,
+
+                        explanation:
+                            "items() returns the dictionary's key-value pairs, allowing name and score to be accessed together."
+                    },
+
+                    {
+                        question:
+                            "What change would print students with a score of exactly 80 or lower?",
+
+                        options: [
+                            "score <= 80",
+                            "score == 100",
+                            "score > 80",
+                            "score != 80"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "<= means less than or equal to."
+                    }
+                ]
+            },
+
+            {
+                title: "Function Behavior",
+
+                prompt:
+                    "Review this function.",
+
+                code: `
+def remove_duplicates(items):
+    result = []
+
+    for item in items:
+        if item not in result:
+            result.append(item)
+
+    return result
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "What will remove_duplicates([1, 2, 2, 3, 1]) return?",
+
+                        options: [
+                            "[1, 2, 3]",
+                            "[1, 2, 2, 3, 1]",
+                            "[2, 3]",
+                            "[1]"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Items are only appended when they are not already in result."
+                    },
+
+                    {
+                        question:
+                            "What does 'item not in result' check?",
+
+                        options: [
+                            "Whether the value has already been added",
+                            "Whether the value is numeric",
+                            "Whether the list is empty",
+                            "Whether the program has an error"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "It tests whether the current value already exists in result."
+                    },
+
+                    {
+                        question:
+                            "Why does the function use a separate result list?",
+
+                        options: [
+                            "To build a collection containing only unique values",
+                            "To alphabetize the input",
+                            "To delete the original list",
+                            "To convert numbers to strings"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "The function builds a new list while only adding values that have not been seen."
+                    }
+                ]
+            }
+        ]
+    },
+
+
+    // =====================================================
+    // CYBERSECURITY ANALYST
+    // =====================================================
+
+    cybersecurityAnalyst: {
+
+        title: "Cybersecurity Analyst",
+
+        behavioral: [
+            "Tell me about a time you noticed a risk or problem that others had overlooked.",
+            "Describe a time you had to investigate a problem before knowing its cause.",
+            "Tell me about a time you had to follow a detailed process carefully.",
+            "Describe a time you made a decision with incomplete information.",
+            "Tell me about a time you had to explain a technical risk to someone else.",
+            "Tell me about a time you responded to an unexpected technical problem."
+        ],
+
+        scenarios: [
+
+            {
+                title: "Suspicious Email",
+
+                prompt:
+                    "An employee forwards this email to the security team.",
+
+                code: `
+From: payroll-company-support@gmail.com
+
+Subject: URGENT - Payroll Account Suspended
+
+Your payroll account will be deleted today.
+
+Click here immediately:
+http://payroll-company-login.example
+
+Enter your username and password to restore access.
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "Which detail is a strong phishing warning sign?",
+
+                        options: [
+                            "The urgent threat and request to enter credentials",
+                            "The email contains words",
+                            "The employee has a payroll account",
+                            "The email has a subject line"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Urgency, threats, suspicious senders, and requests for credentials are common phishing indicators."
+                    },
+
+                    {
+                        question:
+                            "What should the employee do?",
+
+                        options: [
+                            "Click the link to investigate",
+                            "Reply with their password",
+                            "Report the message and verify through a trusted channel",
+                            "Forward it to everyone"
+                        ],
+
+                        correct: 2,
+
+                        explanation:
+                            "The employee should avoid interacting with the suspicious link and verify the request through a known legitimate channel."
+                    },
+
+                    {
+                        question:
+                            "Which control can reduce damage if a password is stolen?",
+
+                        options: [
+                            "Multi-factor authentication",
+                            "A larger monitor",
+                            "Faster Wi-Fi",
+                            "More storage"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "MFA requires an additional authentication factor, making a stolen password alone less useful."
+                    }
+                ]
+            },
+
+            {
+                title: "Suspicious Login Activity",
+
+                prompt:
+                    "A monitoring system reports these login events.",
+
+                code: `
+08:05 - Successful login - Salt Lake City, Utah
+08:08 - Successful login - Salt Lake City, Utah
+08:15 - Successful login - Moscow, Russia
+08:17 - Multiple failed login attempts - Moscow, Russia
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "What makes the Moscow login suspicious?",
+
+                        options: [
+                            "It happened in the morning",
+                            "The geographic change occurred within only a few minutes",
+                            "The account successfully logged in",
+                            "There were two Utah logins"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "The account appears to move between very distant locations too quickly, which may indicate compromised credentials."
+                    },
+
+                    {
+                        question:
+                            "What is a reasonable first response?",
+
+                        options: [
+                            "Ignore the event",
+                            "Investigate and verify whether the activity was legitimate",
+                            "Delete every employee account",
+                            "Turn off the entire internet"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "Analysts should investigate the alert, gather context, and verify whether the user recognizes the activity."
+                    },
+
+                    {
+                        question:
+                            "If the login is confirmed malicious, what action may be appropriate?",
+
+                        options: [
+                            "Secure the account and follow the organization's incident-response process",
+                            "Do nothing",
+                            "Publish the user's password",
+                            "Disable every company computer permanently"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Compromised accounts should be contained and handled according to the organization's incident-response procedures."
+                    }
+                ]
+            },
+
+            {
+                title: "Security Fundamentals",
+
+                prompt:
+                    "A hospital stores patient records in an information system.",
+
+                code: `
+Security goals:
+
+1. Only authorized employees should view patient records.
+2. Records should not be changed without authorization.
+3. Doctors should be able to access records when needed.
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "Goal 1 primarily represents which security principle?",
+
+                        options: [
+                            "Confidentiality",
+                            "Integrity",
+                            "Availability",
+                            "Performance"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Confidentiality means preventing unauthorized access to information."
+                    },
+
+                    {
+                        question:
+                            "Goal 2 primarily represents which principle?",
+
+                        options: [
+                            "Availability",
+                            "Integrity",
+                            "Confidentiality",
+                            "Speed"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "Integrity means protecting information from unauthorized or improper modification."
+                    },
+
+                    {
+                        question:
+                            "Goal 3 primarily represents which principle?",
+
+                        options: [
+                            "Confidentiality",
+                            "Encryption",
+                            "Availability",
+                            "Authentication"
+                        ],
+
+                        correct: 2,
+
+                        explanation:
+                            "Availability means ensuring systems and information are accessible when authorized users need them."
+                    }
+                ]
+            }
+        ]
+    },
+
+
+    // =====================================================
+    // PRODUCT MANAGER
+    // =====================================================
+
+    productManager: {
+
+        title: "Product Manager",
+
+        behavioral: [
+            "Tell me about a time you had to prioritize competing needs.",
+            "Tell me about a time you used data to make a decision.",
+            "Describe a time you had to manage conflicting stakeholder priorities.",
+            "Tell me about a time you influenced someone without having formal authority.",
+            "Describe a time you changed your approach because of user or customer feedback.",
+            "Tell me about a time you had to make a trade-off because time or resources were limited."
+        ],
+
+        scenarios: [
+
+            {
+                title: "Feature Prioritization",
+
+                prompt:
+                    "Your team has one month of engineering capacity and is considering three features.",
+
+                code: `
+Feature A
+Customer requests: 15
+Expected impact: Low
+Engineering effort: 1 week
+
+Feature B
+Customer requests: 80
+Expected impact: High
+Engineering effort: 3 weeks
+
+Feature C
+Customer requests: 35
+Expected impact: Medium
+Engineering effort: 6 weeks
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "Based only on the information given, which feature appears strongest?",
+
+                        options: [
+                            "Feature A",
+                            "Feature B",
+                            "Feature C",
+                            "There is no meaningful difference"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "Feature B combines the highest stated customer demand and impact while fitting within the available month."
+                    },
+
+                    {
+                        question:
+                            "What additional information would be useful before making the final decision?",
+
+                        options: [
+                            "User needs, strategic goals, technical risks, and expected business value",
+                            "The office lunch menu",
+                            "The CEO's favorite color",
+                            "The number of desks in the office"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Product prioritization should consider customer impact, business strategy, technical feasibility, effort, and risk."
+                    },
+
+                    {
+                        question:
+                            "If Feature B has a serious security issue, what should the product manager do?",
+
+                        options: [
+                            "Ignore engineering",
+                            "Understand the risk and reconsider the prioritization",
+                            "Launch without testing",
+                            "Cancel the entire product"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "Product managers need to weigh customer and business value against technical constraints and risk."
+                    }
+                ]
+            },
+
+            {
+                title: "Measuring Feature Success",
+
+                prompt:
+                    "A team launches a redesigned signup process intended to help more new users successfully create accounts.",
+
+                code: `
+Before redesign:
+10,000 users started signup
+6,000 completed signup
+
+After redesign:
+12,000 users started signup
+9,000 completed signup
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "What metric is most directly related to the goal?",
+
+                        options: [
+                            "Signup completion rate",
+                            "Number of employees",
+                            "Website background color",
+                            "Office expenses"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Signup completion rate directly measures how successfully users complete the signup flow."
+                    },
+
+                    {
+                        question:
+                            "What was the completion rate before the redesign?",
+
+                        options: [
+                            "40%",
+                            "60%",
+                            "75%",
+                            "90%"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "6,000 completed signups divided by 10,000 starts equals 60%."
+                    },
+
+                    {
+                        question:
+                            "What was the completion rate after the redesign?",
+
+                        options: [
+                            "50%",
+                            "60%",
+                            "75%",
+                            "90%"
+                        ],
+
+                        correct: 2,
+
+                        explanation:
+                            "9,000 completed signups divided by 12,000 starts equals 75%."
+                    }
+                ]
+            },
+
+            {
+                title: "Customer Feedback",
+
+                prompt:
+                    "Users of a student scheduling app give the following feedback.",
+
+                code: `
+40%: "It takes too many steps to add a class."
+
+25%: "I want dark mode."
+
+20%: "The app sometimes deletes saved classes."
+
+15%: "I want more color themes."
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "Which issue likely deserves immediate investigation even though it is not the most common request?",
+
+                        options: [
+                            "Dark mode",
+                            "More color themes",
+                            "Saved classes being deleted",
+                            "More fonts"
+                        ],
+
+                        correct: 2,
+
+                        explanation:
+                            "A bug that causes users to lose saved data may be high severity even if fewer users report it."
+                    },
+
+                    {
+                        question:
+                            "Why should a PM avoid prioritizing only by number of requests?",
+
+                        options: [
+                            "Severity, strategic impact, effort, and user value also matter",
+                            "Customer requests never matter",
+                            "Only engineers make product decisions",
+                            "All features should be built"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Frequency is useful, but product decisions also need to consider impact, severity, feasibility, and strategic value."
+                    },
+
+                    {
+                        question:
+                            "What is the best next step before redesigning the add-class flow?",
+
+                        options: [
+                            "Understand where users struggle and why",
+                            "Immediately rebuild the entire app",
+                            "Ignore users",
+                            "Remove class scheduling"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Understanding the actual user problem should come before choosing a specific solution."
+                    }
+                ]
+            }
+        ]
+    },
+
+
+    // =====================================================
+    // TECHNOLOGY CONSULTANT
+    // =====================================================
+
+    technologyConsultant: {
+
+        title: "Technology Consultant",
+
+        behavioral: [
+            "Tell me about a time you had to solve an ambiguous problem.",
+            "Describe a time you changed how you communicated to work effectively with someone.",
+            "Tell me about a time you presented a recommendation to another person or group.",
+            "Describe a time you worked with a cross-functional team.",
+            "Tell me about a time you had to learn about an unfamiliar business or technical problem quickly.",
+            "Describe a time you had to balance multiple priorities for a project or client."
+        ],
+
+        scenarios: [
+
+            {
+                title: "CRM Recommendation",
+
+                prompt:
+                    "A growing company asks you to help improve its sales technology.",
+
+                code: `
+Company:
+100 employees
+Expected to double in size within 2 years
+
+Current process:
+- Customer information stored in spreadsheets
+- Salespeople maintain separate customer lists
+- Duplicate records are common
+- Managers cannot easily see sales activity
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "What appears to be the core business problem?",
+
+                        options: [
+                            "Customer data is fragmented and difficult to manage",
+                            "The company has too many computers",
+                            "Employees work too quickly",
+                            "The company needs a new logo"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Separate data sources create duplication, inconsistent information, and poor visibility."
+                    },
+
+                    {
+                        question:
+                            "Which technology is most directly relevant?",
+
+                        options: [
+                            "CRM system",
+                            "Video editing system",
+                            "Gaming software",
+                            "Graphic design application"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "CRM systems are designed to centralize and manage customer and sales information."
+                    },
+
+                    {
+                        question:
+                            "What should you do before recommending a specific vendor?",
+
+                        options: [
+                            "Understand business requirements, users, budget, integrations, and growth needs",
+                            "Choose the cheapest vendor immediately",
+                            "Choose the most expensive vendor",
+                            "Recommend the software you personally prefer"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Consulting recommendations should be based on the client's needs, constraints, objectives, and implementation considerations."
+                    }
+                ]
+            },
+
+            {
+                title: "Technology Investment Case",
+
+                prompt:
+                    "A client is considering automating a manual process.",
+
+                code: `
+Current process:
+5 employees
+20 hours per employee per week
+Employee cost: $30 per hour
+
+New system:
+Annual cost: $80,000
+
+Expected automation:
+Reduce manual work by 60%
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "Approximately how much does the current manual work cost per week?",
+
+                        options: [
+                            "$600",
+                            "$1,500",
+                            "$3,000",
+                            "$6,000"
+                        ],
+
+                        correct: 2,
+
+                        explanation:
+                            "5 employees × 20 hours × $30 = $3,000 per week."
+                    },
+
+                    {
+                        question:
+                            "If labor requirements drop by 60%, approximately how much weekly labor cost could be avoided?",
+
+                        options: [
+                            "$300",
+                            "$1,800",
+                            "$2,500",
+                            "$3,000"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "60% of the current $3,000 weekly labor cost is $1,800."
+                    },
+
+                    {
+                        question:
+                            "Besides cost savings, what should the consultant consider?",
+
+                        options: [
+                            "Implementation risk, user adoption, process quality, integrations, and business benefits",
+                            "Only the software logo",
+                            "Only employee age",
+                            "Nothing else"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "A strong recommendation considers qualitative factors and implementation risks in addition to financial impact."
+                    }
+                ]
+            },
+
+            {
+                title: "Client Problem Diagnosis",
+
+                prompt:
+                    "An online retailer reports that customers are abandoning checkout at a much higher rate than last month.",
+
+                code: `
+Recent changes:
+- New payment provider launched
+- Shipping prices increased
+- Mobile checkout page redesigned
+- Marketing traffic increased 30%
+                `,
+
+                questions: [
+
+                    {
+                        question:
+                            "What should you do first?",
+
+                        options: [
+                            "Immediately blame the payment provider",
+                            "Structure the problem and analyze data across the major possible causes",
+                            "Undo every recent change",
+                            "Recommend a completely new website"
+                        ],
+
+                        correct: 1,
+
+                        explanation:
+                            "A consultant should diagnose the problem systematically rather than jumping to a solution."
+                    },
+
+                    {
+                        question:
+                            "Which data would be especially useful?",
+
+                        options: [
+                            "Checkout abandonment by device, payment method, step, and time period",
+                            "Employee birthdays",
+                            "Office parking data",
+                            "Company logo preferences"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Breaking the problem down by relevant dimensions can reveal where the change occurred."
+                    },
+
+                    {
+                        question:
+                            "After identifying the likely cause, what should a strong consulting recommendation include?",
+
+                        options: [
+                            "A clear recommendation supported by evidence, risks, and next steps",
+                            "Only a long list of facts",
+                            "No recommendation",
+                            "A recommendation without evidence"
+                        ],
+
+                        correct: 0,
+
+                        explanation:
+                            "Consulting case interviews commonly expect a clear conclusion backed by analysis, along with risks and next steps."
+                    }
+                ]
+            }
+        ]
+    }
+};
+
+
+// =====================================================
+// VARIABLES
+// =====================================================
+
+let selectedRole;
+let selectedBehavioralQuestions = [];
+let selectedScenario;
+
+
+// =====================================================
+// RANDOM HELPER
+// =====================================================
+
+function randomItems(array, number) {
+
+    const copy = [...array];
+
+    copy.sort(() => Math.random() - 0.5);
+
+    return copy.slice(0, number);
+}
+
+
+// =====================================================
+// START INTERVIEW
+// =====================================================
+
+function startInterview(roleKey) {
+
+    selectedRole = interviewBanks[roleKey];
+
+    selectedBehavioralQuestions =
+        randomItems(selectedRole.behavioral, 3);
+
+    selectedScenario =
+        selectedRole.scenarios[
+            Math.floor(Math.random() * selectedRole.scenarios.length)
+        ];
+
+    document.getElementById("roleSelection").style.display = "none";
+    document.getElementById("resultsArea").style.display = "none";
+    document.getElementById("interviewArea").style.display = "block";
+
+    document.getElementById("roleTitle").textContent =
+        selectedRole.title + " Mock Interview";
+
+    displayBehavioralQuestions();
+    displayTechnicalQuestions();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
 
 
 // =====================================================
 // BEHAVIORAL QUESTIONS
 // =====================================================
 
-const basicQuestions = [
+function displayBehavioralQuestions() {
 
-    "Tell me about yourself.",
-    "Why do you want to work for our company?",
-    "What do you know about our company?",
-    "Why are you interested in this position?",
-    "What are your strengths?",
-    "What is one weakness you are working on?",
-    "Where do you see yourself in 5 years?",
-    "Why should we hire you?",
-    "What makes you different from other candidates?",
-    "What are your career goals?"
+    const container =
+        document.getElementById("behavioralContainer");
 
-];
+    let html = "";
 
+    selectedBehavioralQuestions.forEach((question, index) => {
 
-const teamQuestions = [
+        html += `
+            <div class="question-box">
 
-    "Tell me about a time you worked on a team.",
-    "How do you handle disagreements with coworkers?",
-    "Tell me about a time you had to work with someone difficult.",
-    "What role do you usually take on a team?",
-    "How do you handle criticism or feedback?"
+                <h3>Question ${index + 1}</h3>
 
-];
+                <p>
+                    <strong>${question}</strong>
+                </p>
 
+                <textarea
+                    id="behavioralAnswer${index}"
+                    placeholder="Type your answer here..."
+                ></textarea>
 
-const situationalQuestions = [
+            </div>
+        `;
+    });
 
-    "Tell me about a time you made a mistake. What did you learn?",
-    "Tell me about a time you solved a difficult problem.",
-    "Tell me about a time you showed leadership.",
-    "Tell me about a time you had to meet a tight deadline.",
-    "How do you prioritize when you have multiple tasks?"
-
-];
-
-
-
-// =====================================================
-// RANDOM QUESTION FUNCTION
-// =====================================================
-
-function getRandomQuestion(questionList) {
-
-    const randomIndex =
-        Math.floor(Math.random() * questionList.length);
-
-    return questionList[randomIndex];
-
+    container.innerHTML = html;
 }
 
 
-
-// Pick behavioral questions
-
-const selectedBasicQuestion =
-    getRandomQuestion(basicQuestions);
-
-const selectedTeamQuestion =
-    getRandomQuestion(teamQuestions);
-
-const selectedSituationalQuestion =
-    getRandomQuestion(situationalQuestions);
-
-
-
-// Display behavioral questions
-
-document.getElementById("basicQuestion").textContent =
-    selectedBasicQuestion;
-
-document.getElementById("teamQuestion").textContent =
-    selectedTeamQuestion;
-
-document.getElementById("situationalQuestion").textContent =
-    selectedSituationalQuestion;
-
-
-
 // =====================================================
-// TECHNICAL SCENARIOS
+// TECHNICAL / ROLE-SPECIFIC QUESTIONS
 // =====================================================
 
-const technicalScenarios = [
-
-
-    // =================================================
-    // SCENARIO 1
-    // =================================================
-
-    {
-
-        title: "Bird Food Simulation",
-
-        code: `
-import random
-
-def simulateOneDay(self, numBirds):
-    condition = random.random()
-
-    if condition < 0.05:
-        self.currentFood = 0
-
-    else:
-        eachBirdEats = int(random.random() * 41) + 10
-        totalEaten = numBirds * eachBirdEats
-
-        if totalEaten > self.currentFood:
-            self.currentFood = 0
-
-        else:
-            self.currentFood -= totalEaten
-        `,
-
-        questions: [
-
-            {
-                question:
-                    "What is the possible range of values for eachBirdEats?",
-
-                options: [
-                    "0–40",
-                    "1–41",
-                    "10–50",
-                    "10–41"
-                ],
-
-                correct: 2,
-
-                explanation:
-                    "random.random() produces a number from 0 up to, but not including, 1. After multiplying by 41, converting to an integer, and adding 10, the possible values are 10 through 50."
-            },
-
-            {
-                question:
-                    "If condition is 0.03, what happens?",
-
-                options: [
-                    "Each bird eats 5 units",
-                    "currentFood becomes 0",
-                    "currentFood decreases by 5%",
-                    "The method stops running"
-                ],
-
-                correct: 1,
-
-                explanation:
-                    "Because 0.03 is less than 0.05, the first if statement runs and currentFood is set to 0."
-            },
-
-            {
-                question:
-                    "Suppose there are 5 birds, each bird eats 20 units, and currentFood is 150. What will currentFood become?",
-
-                options: [
-                    "50",
-                    "100",
-                    "130",
-                    "150"
-                ],
-
-                correct: 0,
-
-                explanation:
-                    "Five birds eating 20 units each consume 100 units. Starting with 150 leaves 50 units."
-            }
-
-        ]
-
-    },
-
-
-
-    // =================================================
-    // SCENARIO 2
-    // =================================================
-
-    {
-
-        title: "Student Grades",
-
-        code: `
-def calculateGrade(scores):
-    total = 0
-
-    for score in scores:
-        total += score
-
-    average = total / len(scores)
-
-    if average >= 90:
-        return "A"
-
-    elif average >= 80:
-        return "B"
-
-    elif average >= 70:
-        return "C"
-
-    elif average >= 60:
-        return "D"
-
-    else:
-        return "F"
-        `,
-
-        questions: [
-
-            {
-                question:
-                    "If scores = [80, 90, 100], what will average be?",
-
-                options: [
-                    "80",
-                    "85",
-                    "90",
-                    "100"
-                ],
-
-                correct: 2,
-
-                explanation:
-                    "80 + 90 + 100 = 270. Dividing 270 by 3 gives an average of 90."
-            },
-
-            {
-                question:
-                    "What does total += score do?",
-
-                options: [
-                    "Subtracts each score from total",
-                    "Adds each score to total",
-                    "Divides total by the score",
-                    "Replaces total with the score"
-                ],
-
-                correct: 1,
-
-                explanation:
-                    "The += operator adds the current score to the value already stored in total."
-            },
-
-            {
-                question:
-                    "If scores are [70, 75, 80], what will the function return?",
-
-                options: [
-                    '"A"',
-                    '"B"',
-                    '"C"',
-                    '"D"'
-                ],
-
-                correct: 2,
-
-                explanation:
-                    "The average is 75. Since 75 is at least 70 but less than 80, the function returns C."
-            }
-
-        ]
-
-    },
-
-
-
-    // =================================================
-    // SCENARIO 3
-    // =================================================
-
-    {
-
-        title: "Shopping Cart",
-
-        code: `
-def calculateTotal(prices):
-    total = 0
-
-    for price in prices:
-        total += price
-
-    if total >= 100:
-        total *= 0.90
-
-    return total
-        `,
-
-        questions: [
-
-            {
-                question:
-                    "What is the purpose of the for loop?",
-
-                options: [
-                    "It removes prices from the list",
-                    "It finds the cheapest price",
-                    "It adds all the prices together",
-                    "It multiplies every price by 2"
-                ],
-
-                correct: 2,
-
-                explanation:
-                    "The loop goes through every price and adds each one to the running total."
-            },
-
-            {
-                question:
-                    "If prices = [20, 30, 40], what will the function return?",
-
-                options: [
-                    "80",
-                    "90",
-                    "100",
-                    "110"
-                ],
-
-                correct: 1,
-
-                explanation:
-                    "The prices add up to 90. Because 90 is less than 100, the discount is not applied."
-            },
-
-            {
-                question:
-                    "If prices = [50, 60], what will the function return?",
-
-                options: [
-                    "110",
-                    "100",
-                    "99",
-                    "90"
-                ],
-
-                correct: 2,
-
-                explanation:
-                    "The total is 110. Since it is at least 100, the 10% discount is applied. 110 × 0.90 = 99."
-            }
-
-        ]
-
-    }
-
-];
-
-
-
-// =====================================================
-// RANDOMLY SELECT TECHNICAL SCENARIO
-// =====================================================
-
-const technicalRandomIndex =
-    Math.floor(Math.random() * technicalScenarios.length);
-
-const selectedScenario =
-    technicalScenarios[technicalRandomIndex];
-
-
-
-// =====================================================
-// DISPLAY TECHNICAL QUESTIONS
-// =====================================================
-
-function displayTechnicalQuiz() {
+function displayTechnicalQuestions() {
 
     const container =
-        document.getElementById("quizContainer");
+        document.getElementById("technicalContainer");
 
     let html = `
-
-        <div class="question">
+        <div class="question-box">
 
             <h3>${selectedScenario.title}</h3>
+
+            <p>${selectedScenario.prompt}</p>
 
             <pre><code>${selectedScenario.code}</code></pre>
 
         </div>
-
     `;
 
+    selectedScenario.questions.forEach((question, questionIndex) => {
 
-    selectedScenario.questions.forEach(
-        (question, questionIndex) => {
+        html += `
+            <div class="question-box">
 
+                <h3>Question ${questionIndex + 4}</h3>
 
-            html += `
+                <p>
+                    <strong>${question.question}</strong>
+                </p>
+        `;
 
-                <div class="question">
-
-                    <h3>
-                        Question ${questionIndex + 4}
-                    </h3>
-
-                    <p>
-                        ${question.question}
-                    </p>
-
-            `;
-
-
-            question.options.forEach(
-                (option, optionIndex) => {
-
-
-                    html += `
-
-                        <label>
-
-                            <input
-                                type="radio"
-                                name="technicalQ${questionIndex}"
-                                value="${optionIndex}"
-                            >
-
-                            ${String.fromCharCode(65 + optionIndex)}.
-                            ${option}
-
-                        </label>
-
-                    `;
-
-                }
-
-            );
-
+        question.options.forEach((option, optionIndex) => {
 
             html += `
-                </div>
+                <label>
+
+                    <input
+                        type="radio"
+                        name="technicalQ${questionIndex}"
+                        value="${optionIndex}"
+                    >
+
+                    ${String.fromCharCode(65 + optionIndex)}.
+                    ${option}
+
+                </label>
             `;
+        });
 
-        }
-
-    );
-
+        html += `</div>`;
+    });
 
     container.innerHTML = html;
-
 }
 
 
-
 // =====================================================
-// SUBMIT FULL INTERVIEW
+// SUBMIT
 // =====================================================
 
-function submitFullInterview() {
+function submitInterview() {
 
+    const behavioralAnswers = [];
 
-    const basicAnswer =
-        document.getElementById("basicAnswer").value;
+    for (let i = 0; i < 3; i++) {
 
-    const teamAnswer =
-        document.getElementById("teamAnswer").value;
+        const answer =
+            document.getElementById(
+                "behavioralAnswer" + i
+            ).value;
 
-    const situationalAnswer =
-        document.getElementById("situationalAnswer").value;
+        if (answer.trim() === "") {
 
+            showError(
+                "Please answer all three behavioral questions."
+            );
 
+            return;
+        }
 
-    // Check behavioral questions
-
-    if (
-        basicAnswer.trim() === "" ||
-        teamAnswer.trim() === "" ||
-        situationalAnswer.trim() === ""
-    ) {
-
-        document.getElementById("interviewResult").innerHTML = `
-
-            <div class="results-section">
-
-                <h2>Please Complete Your Interview</h2>
-
-                <p>
-                    Please answer all three behavioral questions
-                    before submitting.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
+        behavioralAnswers.push(answer);
     }
 
 
+    for (let i = 0; i < 3; i++) {
 
-    // Check technical questions
-
-    for (
-        let i = 0;
-        i < selectedScenario.questions.length;
-        i++
-    ) {
-
-        const selected =
+        const answer =
             document.querySelector(
                 'input[name="technicalQ' + i + '"]:checked'
             );
 
-        if (!selected) {
+        if (!answer) {
 
-            document.getElementById("interviewResult").innerHTML = `
-
-                <div class="results-section">
-
-                    <h2>Please Complete Your Interview</h2>
-
-                    <p>
-                        Please answer all three technical questions
-                        before submitting.
-                    </p>
-
-                </div>
-
-            `;
+            showError(
+                "Please answer all three role-specific questions."
+            );
 
             return;
-
         }
-
     }
 
+    buildResults(behavioralAnswers);
+}
 
 
-    // =================================================
-    // BUILD TECHNICAL REVIEW
-    // =================================================
+// =====================================================
+// ERROR
+// =====================================================
 
-    let technicalScore = 0;
+function showError(message) {
 
+    document.getElementById("errorMessage").innerHTML = `
+        <div class="question-box">
+            <strong>${message}</strong>
+        </div>
+    `;
+}
+
+
+// =====================================================
+// RESULTS
+// =====================================================
+
+function buildResults(behavioralAnswers) {
+
+    let score = 0;
     let technicalReviewHTML = "";
 
 
     selectedScenario.questions.forEach(
         (question, questionIndex) => {
-
 
             const selectedAnswer =
                 document.querySelector(
@@ -790,87 +1870,59 @@ function submitFullInterview() {
                     '"]:checked'
                 );
 
-
             const selectedValue =
                 Number(selectedAnswer.value);
 
 
             if (selectedValue === question.correct) {
-                technicalScore++;
+                score++;
             }
 
 
-
-            let answerChoicesHTML = "";
+            let choicesHTML = "";
 
 
             question.options.forEach(
                 (option, optionIndex) => {
 
-
-                    let answerClass = "normal-answer";
-                    let labelText = "";
-
-
-                    // Correct answer is always green
+                    let answerClass = "";
+                    let answerLabel = "";
 
                     if (optionIndex === question.correct) {
 
                         answerClass = "correct-answer";
-
-                        labelText = " ✓ Correct Answer";
-
+                        answerLabel = " ✓ Correct Answer";
                     }
-
-
-                    // Wrong answer selected by user becomes red
 
                     if (
                         optionIndex === selectedValue &&
                         selectedValue !== question.correct
                     ) {
-                    
+
                         answerClass = "wrong-answer";
-                    
-                        labelText = "";
-                    
                     }
-
-
-                    // Correct answer selected by user
 
                     if (
                         optionIndex === selectedValue &&
                         selectedValue === question.correct
                     ) {
 
-                        labelText =
-                            " ✓ Your Answer\ — Correct";
-
+                        answerLabel =
+                            " ✓ Your Answer — Correct";
                     }
 
 
-                    answerChoicesHTML += `
-
+                    choicesHTML += `
                         <p class="${answerClass}">
-
                             ${String.fromCharCode(65 + optionIndex)}.
                             ${option}
-
-                            ${labelText}
-
+                            ${answerLabel}
                         </p>
-
                     `;
-
-                }
-
-            );
-
+                });
 
 
             technicalReviewHTML += `
-
                 <div class="feedback-item">
 
                     <h3>
@@ -883,9 +1935,7 @@ function submitFullInterview() {
                         </strong>
                     </p>
 
-
-                    ${answerChoicesHTML}
-
+                    ${choicesHTML}
 
                     <p>
                         <strong>Explanation:</strong>
@@ -893,230 +1943,147 @@ function submitFullInterview() {
                     </p>
 
                 </div>
-
             `;
-
-        }
-
-    );
+        });
 
 
-
-    const technicalPercentage =
-        Math.round(
-            (technicalScore /
-            selectedScenario.questions.length) * 100
-        );
+    let behavioralReviewHTML = "";
 
 
+    selectedBehavioralQuestions.forEach(
+        (question, index) => {
 
-    // =================================================
-    // DISPLAY FULL RESULTS
-    // =================================================
+            behavioralReviewHTML += `
+                <div class="feedback-item">
 
-    document.getElementById("interviewResult").innerHTML = `
+                    <h3>
+                        Question ${index + 1}
+                    </h3>
+
+                    <p>
+                        <strong>${question}</strong>
+                    </p>
+
+                    <p>
+                        <strong>Your Response:</strong>
+                    </p>
+
+                    <div class="user-response">
+                        ${behavioralAnswers[index]}
+                    </div>
+
+                    <div class="feedback-placeholder">
+
+                        <strong>
+                            Behavioral Feedback:
+                        </strong>
+
+                        <p>
+                            Feedback will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+            `;
+        });
 
 
-        <h1 class="section-title">
-            Your Interview Review
+    const percentage =
+        Math.round(score / 3 * 100);
+
+
+    document.getElementById("interviewArea").style.display =
+        "none";
+
+    document.getElementById("resultsArea").style.display =
+        "block";
+
+
+    document.getElementById("resultsArea").innerHTML = `
+
+        <h1>
+            ${selectedRole.title} Interview Review
         </h1>
 
 
-        <p>
-            Review your full interview below.
-        </p>
-
-
-
-        <!-- ====================================== -->
-        <!-- BEHAVIORAL REVIEW -->
-        <!-- ====================================== -->
-
-
         <div class="results-section">
 
             <h2>
-                Part 1 — Behavioral Interview Review
+                Part 1 — Behavioral Review
             </h2>
 
-
-
-            <div class="feedback-item">
-
-                <h3>
-                    Question 1 — Basic Interview
-                </h3>
-
-                <p>
-                    <strong>
-                        ${selectedBasicQuestion}
-                    </strong>
-                </p>
-
-                <p>
-                    <strong>Your Response:</strong>
-                </p>
-
-                <div class="user-response">
-                    ${basicAnswer}
-                </div>
-
-                <div class="feedback-placeholder">
-
-                    <strong>
-                        Behavioral Feedback:
-                    </strong>
-
-                    <p>
-                        Feedback will appear here.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="feedback-item">
-
-                <h3>
-                    Question 2 — Working With Others
-                </h3>
-
-                <p>
-                    <strong>
-                        ${selectedTeamQuestion}
-                    </strong>
-                </p>
-
-                <p>
-                    <strong>Your Response:</strong>
-                </p>
-
-                <div class="user-response">
-                    ${teamAnswer}
-                </div>
-
-                <div class="feedback-placeholder">
-
-                    <strong>
-                        Behavioral Feedback:
-                    </strong>
-
-                    <p>
-                        Feedback will appear here.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="feedback-item">
-
-                <h3>
-                    Question 3 — Situational
-                </h3>
-
-                <p>
-                    <strong>
-                        ${selectedSituationalQuestion}
-                    </strong>
-                </p>
-
-                <p>
-                    <strong>Your Response:</strong>
-                </p>
-
-                <div class="user-response">
-                    ${situationalAnswer}
-                </div>
-
-                <div class="feedback-placeholder">
-
-                    <strong>
-                        Behavioral Feedback:
-                    </strong>
-
-                    <p>
-                        Feedback will appear here.
-                    </p>
-
-                </div>
-
-            </div>
+            ${behavioralReviewHTML}
 
         </div>
 
 
-
-        <!-- ====================================== -->
-        <!-- TECHNICAL REVIEW -->
-        <!-- ====================================== -->
-
-
         <div class="results-section">
 
             <h2>
-                Part 2 — Technical Interview Review
+                Part 2 — Role-Specific Review
             </h2>
 
-
             <h3>
-                Technical Score:
-                ${technicalScore}/3
-                (${technicalPercentage}%)
+                Score: ${score}/3 (${percentage}%)
             </h3>
 
-
             <h3>
-                Scenario:
                 ${selectedScenario.title}
             </h3>
 
-
             <p>
-                <strong>
-                    Original Code:
-                </strong>
+                ${selectedScenario.prompt}
             </p>
-
 
             <pre><code>${selectedScenario.code}</code></pre>
 
-
             ${technicalReviewHTML}
-
 
         </div>
 
+
+        <button
+            class="restart-button"
+            onclick="chooseAnotherRole()">
+
+            Choose Another Role
+
+        </button>
     `;
 
 
-
-    // Scroll to results
-
-    document
-        .getElementById("interviewResult")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-
 // =====================================================
-// LOAD TECHNICAL QUIZ
+// RESTART
 // =====================================================
 
-displayTechnicalQuiz();
+function chooseAnotherRole() {
 
+    document.getElementById("resultsArea").style.display =
+        "none";
+
+    document.getElementById("interviewArea").style.display =
+        "none";
+
+    document.getElementById("roleSelection").style.display =
+        "block";
+
+    document.getElementById("errorMessage").innerHTML = "";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
 
 </script>
 
-
 </body>
-
 </html>
