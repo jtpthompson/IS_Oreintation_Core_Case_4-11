@@ -7,126 +7,170 @@
 
     <title>IS Mock Interview</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Quicksand:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Our global stylesheet -->
+    <link rel="stylesheet" href="main.css">
 
 </head>
 
 
 <body>
 
+<canvas id="bubbleCanvas"></canvas>
 
-<!-- ========================================= -->
-<!-- INTRO -->
-<!-- ========================================= -->
+<nav class="navbar">
+    <div class="container">
+        <a href="index.html" class="navbar-brand">
+            IS Career Launchpad
+        </a>
 
-<h1>IS Mock Interview</h1>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="discovery.html">
+                Career Exploration
+            </a>
 
-<div class="intro">
+            <a href="practice.html" class="active">
+                Interview Practice
+            </a>
+        </div>
+    </div>
+</nav>
 
-    <p>
-        Practice both behavioral and technical interview questions.
-    </p>
+<main class="interview-page">
+    <div class="interview-content">
 
-    <p>
-        You will answer three behavioral questions and three technical
-        questions based on a randomly selected coding scenario.
-    </p>
+        
+            
 
-</div>
+        <!-- ========================================= -->
+        <!-- INTRO -->
+        <!-- ========================================= -->
+        <div class="interview-intro"></div>
+            <h1>IS Mock Interview</h1>
 
+        
 
+            <p>
+                Practice both behavioral and technical interview questions.
+            </p>
 
-<!-- ========================================= -->
-<!-- PART 1: BEHAVIORAL -->
-<!-- ========================================= -->
+            <p>
+                You will answer three behavioral questions and three technical
+                questions based on a randomly selected coding scenario.
+            </p>
 
-<h2 class="section-title">
-    Part 1 — Behavioral Interview
-</h2>
-
-<p>
-    Answer each question as if you were in a real interview.
-    Try to use the STAR method: Situation, Task, Action, and Result.
-</p>
-
-
-<div class="interview-question">
-
-    <h3>Question 1 — Basic Interview</h3>
-
-    <p id="basicQuestion"></p>
-
-    <textarea
-        id="basicAnswer"
-        rows="7"
-        placeholder="Type your answer here..."
-    ></textarea>
-
-</div>
-
-
-<div class="interview-question">
-
-    <h3>Question 2 — Working With Others</h3>
-
-    <p id="teamQuestion"></p>
-
-    <textarea
-        id="teamAnswer"
-        rows="7"
-        placeholder="Type your answer here..."
-    ></textarea>
-
-</div>
-
-
-<div class="interview-question">
-
-    <h3>Question 3 — Situational</h3>
-
-    <p id="situationalQuestion"></p>
-
-    <textarea
-        id="situationalAnswer"
-        rows="7"
-        placeholder="Type your answer here..."
-    ></textarea>
-
-</div>
+        </div>
 
 
 
-<!-- ========================================= -->
-<!-- PART 2: TECHNICAL -->
-<!-- ========================================= -->
+        <!-- ========================================= -->
+        <!-- PART 1: BEHAVIORAL -->
+        <!-- ========================================= -->
 
-<h2 class="section-title">
-    Part 2 — Technical Interview
-</h2>
+        <h2 class="section-title">
+            Part 1 — Behavioral Interview
+        </h2>
 
-<p>
-    Read the coding scenario and answer the three questions.
-</p>
-
-<div id="quizContainer"></div>
-
+        <p>
+            Answer each question as if you were in a real interview.
+            Try to use the STAR method: Situation, Task, Action, and Result.
+        </p>
 
 
-<!-- ========================================= -->
-<!-- SUBMIT -->
-<!-- ========================================= -->
+        <div class="interview-question">
 
-<button onclick="submitFullInterview()">
-    Submit Interview
-</button>
+            <h3>Question 1 — Basic Interview</h3>
+
+            <p id="basicQuestion"></p>
+
+            <textarea
+                id="basicAnswer"
+                rows="7"
+                placeholder="Type your answer here..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="interview-question">
+
+            <h3>Question 2 — Working With Others</h3>
+
+            <p id="teamQuestion"></p>
+
+            <textarea
+                id="teamAnswer"
+                rows="7"
+                placeholder="Type your answer here..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="interview-question">
+
+            <h3>Question 3 — Situational</h3>
+
+            <p id="situationalQuestion"></p>
+
+            <textarea
+                id="situationalAnswer"
+                rows="7"
+                placeholder="Type your answer here..."
+            ></textarea>
+
+        </div>
 
 
 
-<!-- ========================================= -->
-<!-- RESULTS -->
-<!-- ========================================= -->
+        <!-- ========================================= -->
+        <!-- PART 2: TECHNICAL -->
+        <!-- ========================================= -->
 
-<div id="interviewResult"></div>
+        <h2 class="section-title">
+            Part 2 — Technical Interview
+        </h2>
 
+        <p>
+            Read the coding scenario and answer the three questions.
+        </p>
+
+        <div id="quizContainer"></div>
+
+
+
+        <!-- ========================================= -->
+        <!-- SUBMIT -->
+        <!-- ========================================= -->
+
+        <button onclick="submitFullInterview()">
+            Submit Interview
+        </button>
+
+
+
+        <!-- ========================================= -->
+        <!-- RESULTS -->
+        <!-- ========================================= -->
+
+        <div id="interviewResult"></div>
+    </div>
+</main>
 
 
 <script src="practice.js"></script>
