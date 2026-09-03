@@ -1,131 +1,179 @@
+/* =========================================================
+   IS CAREER LAUNCHPAD
+   GLOBAL STYLESHEET
+   ========================================================= */
+
+
+/* =========================================================
+   1. COLOR PALETTE
+   ========================================================= */
+
 :root {
     --green: #00AE6B;
     --red: #F2283C;
     --blue: #277DFF;
+    --yellow: #FFC200;
     --pink: #D72E82;
     --purple: #875AFB;
     --orange: #FF7A00;
 
-    --background: #111118;
+    /* Neutral colors */
+    --background: #26263f;
+    --background-light: #1C1C26;
+
     --text: #FFFFFF;
+    --text-muted: rgba(255, 255, 255, 0.75);
+
+    /* Shared design values */
+    --radius: 25px;
+    --transition: 0.3s ease;
 }
 
 
+/* =========================================================
+   2. GLOBAL PAGE SETTINGS
+   ========================================================= */
 
-
-/* Remove default browser spacing */
 html,
 body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    min-height: 100%;
 }
 
-/* Prevent scrolling on the landing page */
 body {
-    overflow: hidden;
+    font-family: "Nunito Sans", sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    overflow-x: hidden;
 }
 
 
-/* --------------------------------
-   BACKGROUND
--------------------------------- */
+/* =========================================================
+   3. TYPOGRAPHY
+   ========================================================= */
 
-/* Interactive bubble background */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Quicksand", sans-serif;
+
+    font-weight: 700;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+}
+
+h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+h3 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+p {
+    line-height: 1.6;
+}
+
+.subtitle {
+    color: var(--text-muted);
+
+    font-size: clamp(1rem, 2vw, 1.4rem);
+}
+
+
+/* =========================================================
+   4. INTERACTIVE BUBBLE BACKGROUND
+   ========================================================= */
 
 #bubbleCanvas {
     position: fixed;
+
     top: 0;
     left: 0;
 
     width: 100vw;
     height: 100vh;
 
-    z-index: -2;
+    z-index: -1;
 
+    background: var(--background);
 
-    background: linear-gradient(
-        135deg, var(--blue)
-    );
+    pointer-events: none;
 }
 
 
-/* Keep the landing page above the canvas */
+/* =========================================================
+   5. LANDING PAGE
+   ========================================================= */
 
 .landing-page {
     position: relative;
-    z-index: 1;
-}
 
-
-/* --------------------------------
-   LANDING PAGE
--------------------------------- */
-
-.landing-page {
-    height: 100vh;
+    min-height: 100vh;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
+
+    z-index: 1;
 
     transition: opacity 0.6s ease;
 }
 
 
-/* --------------------------------
-   TEXT
--------------------------------- */
-
-.title {
-    color: white;
-
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 600;
-
-    margin-bottom: 15px;
-}
-
-
-.subtitle {
-    color: white;
-
-    font-size: clamp(1rem, 2vw, 1.4rem);
-
-    margin-bottom: 45px;
-}
-
-
-/* --------------------------------
-   BUTTONS
--------------------------------- */
+/* =========================================================
+   6. HOMEPAGE BUTTON CONTAINER
+   ========================================================= */
 
 .button-container {
     display: flex;
+
     justify-content: center;
+    align-items: center;
+
     gap: 40px;
+
     flex-wrap: wrap;
+
+    margin-top: 35px;
 }
 
 
+/* =========================================================
+   7. MAIN LAUNCH BUTTONS
+   ========================================================= */
+
 .launch-button {
     width: 340px;
+
     min-height: 180px;
 
     border: none;
+
     border-radius: 30px;
 
     padding: 30px;
 
     color: white;
+
     text-align: left;
 
     cursor: pointer;
 
     transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        filter 0.3s ease;
+        transform var(--transition),
+        box-shadow var(--transition),
+        filter var(--transition);
 }
 
 
@@ -151,7 +199,7 @@ body {
 }
 
 
-/* Hover */
+/* Button hover */
 
 .launch-button:hover {
     transform: translateY(-8px) scale(1.02);
@@ -163,127 +211,160 @@ body {
 }
 
 
-/* Click */
+/* Button click */
 
 .launch-button:active {
     transform: translateY(-3px) scale(1.01);
 }
 
 
-/* Button text */
+/* Button headings */
 
 .launch-button h2 {
     margin-bottom: 12px;
 }
 
+
+/* Button descriptions */
+
 .launch-button p {
     margin: 0;
 
-    opacity: 0.9;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 
-/* --------------------------------
-   PAGE TRANSITION
--------------------------------- */
+/* =========================================================
+   8. GENERAL BUTTONS
+   ========================================================= */
+
+.btn {
+    border-radius: 15px;
+
+    font-family: "Nunito Sans", sans-serif;
+
+    font-weight: 600;
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        filter var(--transition);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   9. STANDARD CARD
+   ========================================================= */
+
+.card {
+    border: none;
+
+    border-radius: var(--radius);
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: var(--text);
+
+    backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================================
+   10. LINKS
+   ========================================================= */
+
+a {
+    color: var(--blue);
+
+    text-decoration: none;
+
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--purple);
+}
+
+
+/* =========================================================
+   11. FORM ELEMENTS
+   ========================================================= */
+
+input,
+textarea,
+select {
+    border-radius: 12px !important;
+
+    border: 2px solid rgba(255, 255, 255, 0.15) !important;
+
+    background: rgba(255, 255, 255, 0.08) !important;
+
+    color: white !important;
+
+    font-family: "Nunito Sans", sans-serif;
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--blue) !important;
+
+    box-shadow:
+        0 0 0 3px rgba(39, 125, 255, 0.25) !important;
+
+    outline: none;
+}
+
+
+/* =========================================================
+   12. PAGE TRANSITION
+   ========================================================= */
 
 .fade-out {
     opacity: 0;
 }
 
 
-/* --------------------------------
-   POINTER EVENTS
--------------------------------- */
+/* =========================================================
+   13. RESPONSIVE DESIGN
+   ========================================================= */
 
-#bubbleCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
+@media (max-width: 768px) {
 
-    width: 100vw;
-    height: 100vh;
+    .button-container {
+        flex-direction: column;
 
-    z-index: -1;
+        gap: 20px;
+    }
 
-    background: linear-gradient(
-        135deg,
-        #182848,
-        #243b55
-    );
+    .launch-button {
+        width: min(340px, 90vw);
 
-    pointer-events: none;
-}
+        min-height: 150px;
+    }
 
-.landing-page {
-    position: relative;
-    z-index: 1;
 }
 
 
-body {
-    font-family: "Nunito Sans", sans-serif;
-    color: var(--text);
+@media (max-width: 480px) {
+
+    .launch-button {
+        padding: 25px;
+
+        min-height: 130px;
+    }
+
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: "Quicksand", sans-serif;
-}
-
-
-.launch-button {
-    width: 340px;
-    min-height: 180px;
-
-    border: none;
-    border-radius: 30px;
-
-    padding: 30px;
-
-    color: white;
-    text-align: left;
-
-    cursor: pointer;
-
-    transition: 
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.launch-button:hover {
-    transform: translateY(-8px);
-
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-}
-
-.career-button {
-    background: linear-gradient(
-        135deg,
-        var(--blue),
-        var(--purple)
-    );
-}
-
-.interview-button {
-    background: linear-gradient(
-        135deg,
-        var(--green),
-        var(--blue)
-    );
-}
-
-.launch-button h2 {
-    margin-bottom: 12px;
-}
-
-.launch-button p {
-    margin: 0;
-    opacity: 0.9;
-}
-
-
