@@ -25,7 +25,7 @@ const bubbleColors = [
 const pointer = {
     x: null,
     y: null,
-    radius: 100
+    radius: 125
 };
 
 
@@ -51,7 +51,7 @@ window.addEventListener("resize", resizeCanvas);
 
 function createBubbles() {
 
-    const numberOfBubbles = 75;
+    const numberOfBubbles = 70;
 
     for (let i = 0; i < numberOfBubbles; i++) {
 
