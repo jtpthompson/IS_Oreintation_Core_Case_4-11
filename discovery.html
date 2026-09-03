@@ -5,26 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Career Discovery</title>
     <!-- <link rel="stylesheet" href="main.css"> -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Quicksand:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Our global stylesheet -->
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-brand">IS Career Launchpad</div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="discovery.html" class="active">Discover Careers</a>
-            <a href="practice.html">Practice Interviews</a>
+
+    <!-- Interactive background -->
+    <canvas id="bubbleCanvas"></canvas>
+
+
+    <nav class="navbar  navbar-expand-lg">
+        <div class="container">
+            <a class="nav-brand" href="index.html">
+                IS Career Launchpad
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="discovery.html" class="active">Discover Careers</a>
+                <a href="practice.html">Practice Interviews</a>
+            </div>
         </div>
     </nav>
 
-    <div class="main-content">
-    <h1>Explore IS Careers</h1>
-    <span>
-        IS has so many fulfilling and rewarding career paths. With the rapid growth of technology experts are needed! Below are just a few of the many
-        options and considerations an IS Student will have, take a look and see where your strengths and interests lay.
-        <br> <br>
-    </span>
+    <main class="discovery-page">
 
-    <div id="career-container"></div>
-</div>
+        <div class="container">
 
-<script src="careers/index.js"></script>
+            <section class="discovery-intro text-center">
+
+                <h1>
+                    Explore IS Careers
+                </h1>
+                <p>
+                    IS has so many fulfilling and rewarding career paths. 
+                    With the rapid growth of technology experts are needed! 
+                    Below are just a few of the many options and considerations 
+                    an IS Student will have, take a look and see where your strengths and interests lay.
+                </p>
+            </section>
+            
+            <section
+                id="career-container"
+                class="career-container"
+            >
+            </section>
+
+        </div>
+
+    </main>
+
+    <script src="careers/index.js"></script>
+
+    <!-- Interactive background -->
+    <script src="background.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
