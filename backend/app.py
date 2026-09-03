@@ -46,6 +46,18 @@ def discovery():
 
 
 # ==========================================================
+# SERVE WEBSITE FILES
+# ==========================================================
+
+@app.route("/<path:filename>")
+def serve_file(filename):
+
+    return send_from_directory(
+        PROJECT_ROOT,
+        filename
+    )
+
+# ==========================================================
 # GRADE BEHAVIORAL INTERVIEW
 # ==========================================================
 

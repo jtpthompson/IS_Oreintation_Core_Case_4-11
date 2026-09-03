@@ -456,6 +456,9 @@ function displayTechnicalQuiz() {
 
 async function submitFullInterview() {
 
+    // -------------------------------------------------
+    // GET BEHAVIORAL ANSWERS
+    // -------------------------------------------------
 
     const basicAnswer =
         document.getElementById("basicAnswer").value;
@@ -467,8 +470,9 @@ async function submitFullInterview() {
         document.getElementById("situationalAnswer").value;
 
 
-
-    // Check behavioral questions
+    // -------------------------------------------------
+    // CHECK BEHAVIORAL QUESTIONS
+    // -------------------------------------------------
 
     if (
         basicAnswer.trim() === "" ||
@@ -483,8 +487,8 @@ async function submitFullInterview() {
                 <h2>Please Complete Your Interview</h2>
 
                 <p>
-                    Please answer all three behavioral questions
-                    before submitting.
+                    Please answer all three behavioral
+                    questions before submitting.
                 </p>
 
             </div>
@@ -492,12 +496,12 @@ async function submitFullInterview() {
         `;
 
         return;
-
     }
 
 
-
-    // Check technical questions
+    // -------------------------------------------------
+    // CHECK TECHNICAL QUESTIONS
+    // -------------------------------------------------
 
     for (
         let i = 0;
@@ -510,6 +514,7 @@ async function submitFullInterview() {
                 'input[name="technicalQ' + i + '"]:checked'
             );
 
+
         if (!selected) {
 
             document.getElementById("interviewResult").innerHTML = `
@@ -519,8 +524,8 @@ async function submitFullInterview() {
                     <h2>Please Complete Your Interview</h2>
 
                     <p>
-                        Please answer all three technical questions
-                        before submitting.
+                        Please answer all three technical
+                        questions before submitting.
                     </p>
 
                 </div>
@@ -528,11 +533,82 @@ async function submitFullInterview() {
             `;
 
             return;
-
         }
 
     }
 
+
+    // =================================================
+    // GET AI BEHAVIORAL FEEDBACK
+    // =================================================
+
+    let aiFeedback = null;
+
+
+    try {
+
+        console.log("Sending interview answers to AI...");
+
+
+        const response = await fetch(
+            "/grade-interview",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    question1: selectedBasicQuestion,
+                    answer1: basicAnswer,
+
+                    question2: selectedTeamQuestion,
+                    answer2: teamAnswer,
+
+                    question3: selectedSituationalQuestion,
+                    answer3: situationalAnswer
+
+                })
+
+            }
+        );
+
+
+        // -------------------------------------------------
+        // CHECK SERVER RESPONSE
+        // -------------------------------------------------
+
+        if (!response.ok) {
+
+            throw new Error(
+                "The AI server returned an error."
+            );
+
+        }
+
+
+        aiFeedback = await response.json();
+
+
+        console.log(
+            "AI feedback received:",
+            aiFeedback
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Could not get AI feedback:",
+            error
+        );
+
+        aiFeedback = null;
+
+    }
 
 
     // =================================================
@@ -547,7 +623,6 @@ async function submitFullInterview() {
     selectedScenario.questions.forEach(
         (question, questionIndex) => {
 
-
             const selectedAnswer =
                 document.querySelector(
                     'input[name="technicalQ' +
@@ -560,11 +635,22 @@ async function submitFullInterview() {
                 Number(selectedAnswer.value);
 
 
-            if (selectedValue === question.correct) {
+            // -----------------------------------------
+            // SCORE ANSWER
+            // -----------------------------------------
+
+            if (
+                selectedValue === question.correct
+            ) {
+
                 technicalScore++;
+
             }
 
 
+            // -----------------------------------------
+            // BUILD ANSWER REVIEW
+            // -----------------------------------------
 
             let answerChoicesHTML = "";
 
@@ -572,33 +658,39 @@ async function submitFullInterview() {
             question.options.forEach(
                 (option, optionIndex) => {
 
+                    let answerClass =
+                        "normal-answer";
 
-                    let answerClass = "normal-answer";
                     let labelText = "";
 
 
-                    // Correct answer is always green
+                    // Correct answer
 
-                    if (optionIndex === question.correct) {
+                    if (
+                        optionIndex === question.correct
+                    ) {
 
-                        answerClass = "correct-answer";
+                        answerClass =
+                            "correct-answer";
 
-                        labelText = " ✓ Correct Answer";
+                        labelText =
+                            " ✓ Correct Answer";
 
                     }
 
 
-                    // Wrong answer selected by user becomes red
+                    // Wrong answer selected by user
 
                     if (
                         optionIndex === selectedValue &&
                         selectedValue !== question.correct
                     ) {
-                    
-                        answerClass = "wrong-answer";
-                    
+
+                        answerClass =
+                            "wrong-answer";
+
                         labelText = "";
-                    
+
                     }
 
 
@@ -610,7 +702,7 @@ async function submitFullInterview() {
                     ) {
 
                         labelText =
-                            " ✓ Your Answer\ — Correct";
+                            " ✓ Your Answer — Correct";
 
                     }
 
@@ -619,7 +711,10 @@ async function submitFullInterview() {
 
                         <p class="${answerClass}">
 
-                            ${String.fromCharCode(65 + optionIndex)}.
+                            ${String.fromCharCode(
+                                65 + optionIndex
+                            )}.
+
                             ${option}
 
                             ${labelText}
@@ -629,9 +724,7 @@ async function submitFullInterview() {
                     `;
 
                 }
-
             );
-
 
 
             technicalReviewHTML += `
@@ -648,13 +741,15 @@ async function submitFullInterview() {
                         </strong>
                     </p>
 
-
                     ${answerChoicesHTML}
 
-
                     <p>
-                        <strong>Explanation:</strong>
+                        <strong>
+                            Explanation:
+                        </strong>
+
                         ${question.explanation}
+
                     </p>
 
                 </div>
@@ -662,80 +757,225 @@ async function submitFullInterview() {
             `;
 
         }
-
     );
-
 
 
     const technicalPercentage =
         Math.round(
-            (technicalScore /
-            selectedScenario.questions.length) * 100
+            (
+                technicalScore /
+                selectedScenario.questions.length
+            ) * 100
         );
 
 
+    // =================================================
+    // BUILD AI FEEDBACK HTML
+    // =================================================
 
-// =================================================
-// GET AI BEHAVIORAL FEEDBACK
-// =================================================
-
-let aiFeedback;
-
-try {
-
-    const response = await fetch("/grade-interview", {
-
-        method: "POST",
-
-        headers: {
-            "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-            question1: selectedBasicQuestion,
-            answer1: basicAnswer,
-
-            question2: selectedTeamQuestion,
-            answer2: teamAnswer,
-
-            question3: selectedSituationalQuestion,
-            answer3: situationalAnswer
-
-        })
-
-    });
+    let behavioralFeedbackHTML = "";
 
 
-    if (!response.ok) {
+    if (aiFeedback && !aiFeedback.error) {
 
-        throw new Error(
-            "AI server returned an error."
-        );
+        behavioralFeedbackHTML = `
+
+            <!-- ====================================== -->
+            <!-- QUESTION 1 AI FEEDBACK -->
+            <!-- ====================================== -->
+
+            <div class="feedback-placeholder">
+
+                <strong>
+                    AI Feedback — Score:
+                    ${aiFeedback.questions[0].score}/10
+                </strong>
+
+                <p>
+                    <strong>Strengths:</strong>
+                </p>
+
+                <ul>
+
+                    ${aiFeedback.questions[0].strengths
+                        .map(
+                            strength =>
+                                `<li>${strength}</li>`
+                        )
+                        .join("")}
+
+                </ul>
+
+                <p>
+
+                    <strong>
+                        How to Improve:
+                    </strong>
+
+                    ${aiFeedback.questions[0].improvement}
+
+                </p>
+
+            </div>
+
+
+            <!-- ====================================== -->
+            <!-- QUESTION 2 AI FEEDBACK -->
+            <!-- ====================================== -->
+
+            <div class="feedback-placeholder">
+
+                <strong>
+                    AI Feedback — Score:
+                    ${aiFeedback.questions[1].score}/10
+                </strong>
+
+                <p>
+                    <strong>Strengths:</strong>
+                </p>
+
+                <ul>
+
+                    ${aiFeedback.questions[1].strengths
+                        .map(
+                            strength =>
+                                `<li>${strength}</li>`
+                        )
+                        .join("")}
+
+                </ul>
+
+                <p>
+
+                    <strong>
+                        How to Improve:
+                    </strong>
+
+                    ${aiFeedback.questions[1].improvement}
+
+                </p>
+
+            </div>
+
+
+            <!-- ====================================== -->
+            <!-- QUESTION 3 AI FEEDBACK -->
+            <!-- ====================================== -->
+
+            <div class="feedback-placeholder">
+
+                <strong>
+                    AI Feedback — Score:
+                    ${aiFeedback.questions[2].score}/10
+                </strong>
+
+                <p>
+                    <strong>Strengths:</strong>
+                </p>
+
+                <ul>
+
+                    ${aiFeedback.questions[2].strengths
+                        .map(
+                            strength =>
+                                `<li>${strength}</li>`
+                        )
+                        .join("")}
+
+                </ul>
+
+                <p>
+
+                    <strong>
+                        How to Improve:
+                    </strong>
+
+                    ${aiFeedback.questions[2].improvement}
+
+                </p>
+
+            </div>
+
+
+            <!-- ====================================== -->
+            <!-- OVERALL AI FEEDBACK -->
+            <!-- ====================================== -->
+
+            <div class="feedback-placeholder">
+
+                <h3>
+                    Overall Behavioral Score:
+                    ${aiFeedback.overall_score}/10
+                </h3>
+
+
+                <p>
+                    <strong>
+                        Overall Strengths:
+                    </strong>
+                </p>
+
+                <ul>
+
+                    ${aiFeedback.overall_strengths
+                        .map(
+                            strength =>
+                                `<li>${strength}</li>`
+                        )
+                        .join("")}
+
+                </ul>
+
+
+                <p>
+                    <strong>
+                        Overall Improvements:
+                    </strong>
+                </p>
+
+                <ul>
+
+                    ${aiFeedback.overall_improvements
+                        .map(
+                            improvement =>
+                                `<li>${improvement}</li>`
+                        )
+                        .join("")}
+
+                </ul>
+
+            </div>
+
+        `;
+
+    } else {
+
+        behavioralFeedbackHTML = `
+
+            <div class="feedback-placeholder">
+
+                <strong>
+                    AI Feedback Unavailable
+                </strong>
+
+                <p>
+                    We could not connect to the AI
+                    interview coach. Please make sure
+                    the Flask server and Ollama are running.
+                </p>
+
+            </div>
+
+        `;
 
     }
 
-
-    aiFeedback = await response.json();
-
-
-} catch (error) {
-
-    console.error(
-        "AI feedback error:",
-        error
-    );
-
-    aiFeedback = null;
-
-}
 
     // =================================================
     // DISPLAY FULL RESULTS
     // =================================================
 
     document.getElementById("interviewResult").innerHTML = `
-
 
         <h1 class="section-title">
             Your Interview Review
@@ -747,11 +987,9 @@ try {
         </p>
 
 
-
         <!-- ====================================== -->
         <!-- BEHAVIORAL REVIEW -->
         <!-- ====================================== -->
-
 
         <div class="results-section">
 
@@ -760,6 +998,7 @@ try {
             </h2>
 
 
+            <!-- QUESTION 1 -->
 
             <div class="feedback-item">
 
@@ -773,57 +1012,81 @@ try {
                     </strong>
                 </p>
 
+
                 <p>
                     <strong>Your Response:</strong>
                 </p>
 
+
                 <div class="user-response">
+
                     ${basicAnswer}
+
                 </div>
 
-                <div class="feedback-placeholder">
 
-                    <strong>
-                        Behavioral Feedback:
-                    </strong>
+                ${
 
-                    ${
-                        aiFeedback
-                        ? `
+                    aiFeedback && !aiFeedback.error
+
+                    ? `
+
+                        <div class="feedback-placeholder">
+
+                            <strong>
+                                AI Feedback — Score:
+                                ${aiFeedback.questions[0].score}/10
+                            </strong>
+
                             <p>
                                 <strong>
-                                    Score: ${aiFeedback.questions[0].score}/10
+                                    Strengths:
                                 </strong>
                             </p>
 
-                            <p>
-                                <strong>Strengths:</strong>
-                            </p>
-
                             <ul>
+
                                 ${aiFeedback.questions[0].strengths
-                                    .map(strength => `<li>${strength}</li>`)
+                                    .map(
+                                        strength =>
+                                            `<li>${strength}</li>`
+                                    )
                                     .join("")}
+
                             </ul>
 
                             <p>
-                                <strong>How to Improve:</strong>
-                                ${aiFeedback.questions[0].improvement}
-                            </p>
-                        `
-                        : `
-                            <p>
-                                AI feedback was unavailable.
-                                Please make sure the AI server is running.
-                            </p>
-                        `
-                    }
 
-                </div>
+                                <strong>
+                                    How to Improve:
+                                </strong>
+
+                                ${aiFeedback.questions[0].improvement}
+
+                            </p>
+
+                        </div>
+
+                    `
+
+                    : `
+
+                        <div class="feedback-placeholder">
+
+                            <strong>
+                                AI Feedback Unavailable
+                            </strong>
+
+                        </div>
+
+                    `
+
+                }
 
             </div>
 
 
+            <!-- QUESTION 2 -->
 
             <div class="feedback-item">
 
@@ -831,63 +1094,88 @@ try {
                     Question 2 — Working With Others
                 </h3>
 
+
                 <p>
                     <strong>
                         ${selectedTeamQuestion}
                     </strong>
                 </p>
 
+
                 <p>
                     <strong>Your Response:</strong>
                 </p>
 
+
                 <div class="user-response">
+
                     ${teamAnswer}
+
                 </div>
 
-                <div class="feedback-placeholder">
 
-                    <strong>
-                        Behavioral Feedback:
-                    </strong>
+                ${
 
-                    ${
-                        aiFeedback
-                        ? `
+                    aiFeedback && !aiFeedback.error
+
+                    ? `
+
+                        <div class="feedback-placeholder">
+
+                            <strong>
+                                AI Feedback — Score:
+                                ${aiFeedback.questions[1].score}/10
+                            </strong>
+
                             <p>
                                 <strong>
-                                    Score: ${aiFeedback.questions[1].score}/10
+                                    Strengths:
                                 </strong>
                             </p>
 
-                            <p>
-                                <strong>Strengths:</strong>
-                            </p>
-
                             <ul>
+
                                 ${aiFeedback.questions[1].strengths
-                                    .map(strength => `<li>${strength}</li>`)
+                                    .map(
+                                        strength =>
+                                            `<li>${strength}</li>`
+                                    )
                                     .join("")}
+
                             </ul>
 
                             <p>
-                                <strong>How to Improve:</strong>
-                                ${aiFeedback.questions[1].improvement}
-                            </p>
-                        `
-                        : `
-                            <p>
-                                AI feedback was unavailable.
-                                Please make sure the AI server is running.
-                            </p>
-                        `
-                    }
 
-                </div>
+                                <strong>
+                                    How to Improve:
+                                </strong>
+
+                                ${aiFeedback.questions[1].improvement}
+
+                            </p>
+
+                        </div>
+
+                    `
+
+                    : `
+
+                        <div class="feedback-placeholder">
+
+                            <strong>
+                                AI Feedback Unavailable
+                            </strong>
+
+                        </div>
+
+                    `
+
+                }
 
             </div>
 
 
+            <!-- QUESTION 3 -->
 
             <div class="feedback-item">
 
@@ -895,109 +1183,154 @@ try {
                     Question 3 — Situational
                 </h3>
 
+
                 <p>
                     <strong>
                         ${selectedSituationalQuestion}
                     </strong>
                 </p>
 
+
                 <p>
                     <strong>Your Response:</strong>
                 </p>
 
+
                 <div class="user-response">
+
                     ${situationalAnswer}
+
                 </div>
 
-                <div class="feedback-placeholder">
 
-                    <strong>
-                        Behavioral Feedback:
-                    </strong>
+                ${
 
-                    ${
-                        aiFeedback
-                        ? `
+                    aiFeedback && !aiFeedback.error
+
+                    ? `
+
+                        <div class="feedback-placeholder">
+
+                            <strong>
+                                AI Feedback — Score:
+                                ${aiFeedback.questions[2].score}/10
+                            </strong>
+
                             <p>
                                 <strong>
-                                    Score: ${aiFeedback.questions[2].score}/10
+                                    Strengths:
                                 </strong>
                             </p>
 
-                            <p>
-                                <strong>Strengths:</strong>
-                            </p>
-
                             <ul>
+
                                 ${aiFeedback.questions[2].strengths
-                                    .map(strength => `<li>${strength}</li>`)
+                                    .map(
+                                        strength =>
+                                            `<li>${strength}</li>`
+                                    )
                                     .join("")}
+
                             </ul>
 
                             <p>
-                                <strong>How to Improve:</strong>
-                                ${aiFeedback.questions[2].improvement}
-                            </p>
-                        `
-                        : `
-                            <p>
-                                AI feedback was unavailable.
-                                Please make sure the AI server is running.
-                            </p>
-                        `
-                    }
 
-                </div>
+                                <strong>
+                                    How to Improve:
+                                </strong>
+
+                                ${aiFeedback.questions[2].improvement}
+
+                            </p>
+
+                        </div>
+
+                    `
+
+                    : `
+
+                        <div class="feedback-placeholder">
+
+                            <strong>
+                                AI Feedback Unavailable
+                            </strong>
+
+                        </div>
+
+                    `
+
+                }
 
             </div>
 
+
+            <!-- OVERALL AI FEEDBACK -->
+
             ${
-                aiFeedback
+
+                aiFeedback && !aiFeedback.error
+
                 ? `
+
                     <div class="feedback-placeholder">
 
                         <h3>
-                            Overall Behavioral Feedback
+                            Overall Behavioral Score:
+                            ${aiFeedback.overall_score}/10
                         </h3>
 
-                        <h4>
-                            Overall Score:
-                            ${aiFeedback.overall_score}/10
-                        </h4>
 
                         <p>
-                            <strong>Overall Strengths:</strong>
+                            <strong>
+                                Overall Strengths:
+                            </strong>
                         </p>
 
+
                         <ul>
+
                             ${aiFeedback.overall_strengths
-                                .map(strength => `<li>${strength}</li>`)
+                                .map(
+                                    strength =>
+                                        `<li>${strength}</li>`
+                                )
                                 .join("")}
+
                         </ul>
 
+
                         <p>
-                            <strong>Overall Improvements:</strong>
+                            <strong>
+                                Overall Improvements:
+                            </strong>
                         </p>
 
+
                         <ul>
+
                             ${aiFeedback.overall_improvements
-                                .map(improvement => `<li>${improvement}</li>`)
+                                .map(
+                                    improvement =>
+                                        `<li>${improvement}</li>`
+                                )
                                 .join("")}
+
                         </ul>
 
                     </div>
+
                 `
+
                 : ""
+
             }
 
         </div>
 
 
-
         <!-- ====================================== -->
         <!-- TECHNICAL REVIEW -->
         <!-- ====================================== -->
-
 
         <div class="results-section">
 
@@ -1026,19 +1359,21 @@ try {
             </p>
 
 
-            <pre><code>${selectedScenario.code}</code></pre>
+            <pre><code>
+${selectedScenario.code}
+            </code></pre>
 
 
             ${technicalReviewHTML}
-
 
         </div>
 
     `;
 
 
-
-    // Scroll to results
+    // =================================================
+    // SCROLL TO RESULTS
+    // =================================================
 
     document
         .getElementById("interviewResult")
