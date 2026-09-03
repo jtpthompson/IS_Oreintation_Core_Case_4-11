@@ -431,7 +431,7 @@ select:focus {
    DISCOVERY NAVIGATION
    ========================================================= */
 
-.navbar {
+.site-navbar {
     position: relative;
 
     z-index: 10;
@@ -492,7 +492,7 @@ select:focus {
 
 @media (max-width: 768px) {
 
-    .navbar .container {
+    .site-navbar .container {
         flex-direction: column;
 
         gap: 15px;
@@ -796,15 +796,20 @@ select:focus {
 }
 
 
-/* Submit button */
-.interview-content > button {
+/* =========================================================
+   INTERVIEW SUBMIT BUTTON
+   ========================================================= */
+
+.submit-button {
     display: block;
 
     margin: 45px auto 0;
-    padding: 16px 35px;
+
+    padding: 16px 40px;
 
     border: none;
-    border-radius: 15px;
+
+    border-radius: 20px;
 
     background: linear-gradient(
         135deg,
@@ -814,9 +819,13 @@ select:focus {
 
     color: white;
 
-    font-family: "Nunito Sans", sans-serif;
-    font-size: 1.05rem;
+    font-family: "Quicksand", sans-serif;
+
+    font-size: 1.1rem;
+
     font-weight: 700;
+
+    letter-spacing: 0.3px;
 
     cursor: pointer;
 
@@ -826,14 +835,21 @@ select:focus {
         filter var(--transition);
 }
 
-.interview-content > button:hover {
+
+.submit-button:hover {
     transform: translateY(-4px);
-    filter: brightness(1.08);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+
+    filter: brightness(1.1);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.25);
 }
 
-.interview-content > button:active {
+
+.submit-button:active {
     transform: translateY(-1px);
+
+    filter: brightness(1.05);
 }
 
 

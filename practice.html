@@ -32,7 +32,7 @@
 
 <canvas id="bubbleCanvas"></canvas>
 
-<nav class="navbar">
+<nav class="site-navbar">
     <div class="container">
         <a href="index.html" class="navbar-brand">
             IS Career Launchpad
@@ -60,7 +60,7 @@
         <!-- ========================================= -->
         <!-- INTRO -->
         <!-- ========================================= -->
-        <div class="interview-intro"></div>
+        <div class="interview-intro">
             <h1>IS Mock Interview</h1>
 
         
@@ -158,7 +158,11 @@
         <!-- SUBMIT -->
         <!-- ========================================= -->
 
-        <button onclick="submitFullInterview()">
+        <button 
+            type="button"
+            class="submit-button"
+            onclick="submitFullInterview()"
+        >
             Submit Interview
         </button>
 
