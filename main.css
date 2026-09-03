@@ -511,3 +511,139 @@ select:focus {
     }
 
 }
+
+
+
+/* ================================
+   CAREER DISCOVERY CARDS
+   ================================ */
+
+#career-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Individual career card */
+#career-container details {
+    background: rgba(255, 255, 255, 0.09);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 25px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+#career-container details:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Career title */
+#career-container summary {
+    position: relative;
+    padding: 25px 55px 25px 25px;
+    cursor: pointer;
+    list-style: none;
+
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+
+    color: white;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+/* Remove default browser arrow */
+#career-container summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Custom arrow */
+#career-container summary::after {
+    content: "+";
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-size: 1.8rem;
+    font-weight: 400;
+
+    transition: transform 0.3s ease;
+}
+
+/* Open state */
+#career-container details[open] summary {
+    background: rgba(39, 125, 255, 0.2);
+}
+
+#career-container details[open] summary::after {
+    content: "−";
+}
+
+/* Content inside card */
+#career-container details p,
+#career-container details ul {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+#career-container details p {
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+#career-container details ul {
+    padding-left: 20px;
+    padding-bottom: 25px;
+}
+
+#career-container details li {
+    margin-bottom: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+#career-container details strong {
+    color: white;
+}
+
+/* Spacing between sections */
+#career-container details p:first-of-type {
+    margin-top: 25px;
+}
+
+#career-container details p:last-of-type {
+    margin-bottom: 20px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    #career-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    #career-container summary {
+        padding: 22px 50px 22px 22px;
+        font-size: 1.2rem;
+    }
+
+    #career-container details p,
+    #career-container details ul {
+        margin-left: 22px;
+        margin-right: 22px;
+    }
+}
