@@ -89,6 +89,26 @@ p {
     font-size: clamp(1rem, 2vw, 1.4rem);
 }
 
+.title {
+    display: inline-block;
+
+    margin-bottom: 0;
+    padding: 18px 30px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.18),
+        rgba(255, 255, 255, 0.08)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 26px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        0 18px 35px rgba(11, 16, 30, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
 
 /* =========================================================
    4. INTERACTIVE BUBBLE BACKGROUND
