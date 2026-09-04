@@ -233,6 +233,8 @@ function updateBubble(bubble) {
 }
 
 
+let bubblesEnabled = true;
+
 // ----------------------------------------
 // ANIMATION LOOP
 // ----------------------------------------
@@ -247,19 +249,18 @@ function animate() {
         canvas.height
     );
 
+    // Only update and draw bubbles when enabled
+    if (bubblesEnabled) {
 
-    // Update and draw every bubble
-    bubbles.forEach(function(bubble) {
+        bubbles.forEach(function(bubble) {
+            updateBubble(bubble);
+            drawBubble(bubble);
+        });
 
-        updateBubble(bubble);
-        drawBubble(bubble);
-
-    });
-
+    }
 
     // Continue animation
     requestAnimationFrame(animate);
-
 }
 
 
@@ -324,3 +325,44 @@ window.addEventListener("pointerup", function(event) {
     }
 
 });
+
+
+// ----------------------------------------
+// BUBBLE TOGGLE
+// ----------------------------------------
+
+const bubbleToggle =
+    document.getElementById("bubbleToggle");
+
+if (bubbleToggle) {
+
+    bubbleToggle.addEventListener(
+        "click",
+        function() {
+
+            bubblesEnabled = !bubblesEnabled;
+
+            if (bubblesEnabled) {
+
+                bubbleToggle.textContent =
+                    "Bubbles: ON";
+
+            } else {
+
+                bubbleToggle.textContent =
+                    "Bubbles: OFF";
+
+                // Immediately clear the bubbles
+                ctx.clearRect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+            }
+
+        }
+    );
+
+}

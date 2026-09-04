@@ -1252,3 +1252,43 @@ select:focus {
     transform: translateY(-1px);
 }
 
+
+/* =========================================================
+   BUBBLE TOGGLE
+   ========================================================= */
+
+.bubble-toggle {
+    position: fixed;
+
+    bottom: 20px;
+    right: 20px;
+
+    z-index: 1000;
+
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 20px;
+
+    background: rgba(38, 38, 63, 0.85);
+
+    color: white;
+
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        transform var(--transition),
+        background var(--transition);
+}
+
+.bubble-toggle:hover {
+    transform: translateY(-2px);
+
+    background: rgba(38, 38, 63, 1);
+}
