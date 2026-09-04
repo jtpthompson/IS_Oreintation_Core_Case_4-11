@@ -2105,76 +2105,91 @@ function displayTechnicalQuestions() {
 }
 
 
-// =====================================================
-// SUBMIT
-// =====================================================
+async function submitInterview() {
 
-function submitInterview() {
+    const behavioralAnswers = [];
 
-    const behavioralAnswers =
-        [];
+    for (let i = 0; i < 3; i++) {
 
+        const answer = document.getElementById(
+            "behavioralAnswer" + i
+        ).value;
 
-    for (
-        let i = 0;
-        i < 3;
-        i++
-    ) {
-
-        const answer =
-            document.getElementById(
-                "behavioralAnswer" + i
-            ).value;
-
-
-        if (
-            answer.trim() === ""
-        ) {
-
+        if (answer.trim() === "") {
             showError(
                 "Please answer all three behavioral questions."
             );
-
             return;
         }
 
-
-        behavioralAnswers.push(
-            answer
-        );
+        behavioralAnswers.push(answer);
     }
 
+    for (let i = 0; i < 3; i++) {
 
-    for (
-        let i = 0;
-        i < 3;
-        i++
-    ) {
-
-        const answer =
-            document.querySelector(
-                'input[name="technicalQ' +
-                i +
-                '"]:checked'
-            );
-
+        const answer = document.querySelector(
+            'input[name="technicalQ' + i + '"]:checked'
+        );
 
         if (!answer) {
-
             showError(
                 "Please answer all three role-specific questions."
             );
-
             return;
         }
     }
 
+    // Show a temporary message while Ollama grades the answers
+    document.getElementById("errorMessage").innerHTML = `
+        <div class="question-box">
+            <strong>Generating your AI interview feedback...</strong>
+            <p>Please wait a moment.</p>
+        </div>
+    `;
 
-    buildResults(
-        behavioralAnswers
-    );
+    try {
+
+        const response = await fetch("/grade-interview", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question1: selectedBehavioralQuestions[0],
+                answer1: behavioralAnswers[0],
+
+                question2: selectedBehavioralQuestions[1],
+                answer2: behavioralAnswers[1],
+
+                question3: selectedBehavioralQuestions[2],
+                answer3: behavioralAnswers[2]
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error("AI grading request failed.");
+        }
+
+        const aiFeedback = await response.json();
+
+        if (aiFeedback.error) {
+            throw new Error(aiFeedback.error);
+        }
+
+        buildResults(
+            behavioralAnswers,
+            aiFeedback
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        showError(
+            "We could not generate AI feedback. Make sure Ollama and the Flask backend are running."
+        );
+    }
 }
-
 
 // =====================================================
 // ERROR
@@ -2203,7 +2218,7 @@ function showError(message) {
 // =====================================================
 
 function buildResults(
-    behavioralAnswers
+    behavioralAnswers, aiFeedback
 ) {
 
     let score = 0;
@@ -2384,15 +2399,29 @@ function buildResults(
                     </div>
 
                     <div class="feedback-placeholder">
-
                         <strong>
-                            Behavioral Feedback:
+                            AI Behavioral Feedback:
                         </strong>
 
                         <p>
-                            Feedback will appear here.
+                            <strong>Score:</strong>
+                            ${aiFeedback.questions[index].score}/10
                         </p>
 
+                        <p>
+                            <strong>Strengths:</strong>
+                        </p>
+
+                        <ul>
+                            ${aiFeedback.questions[index].strengths
+                                .map(strength => `<li>${strength}</li>`)
+                                .join("")}
+                        </ul>
+
+                        <p>
+                            <strong>Improvement:</strong>
+                            ${aiFeedback.questions[index].improvement}
+                        </p>
                     </div>
 
                 </div>
