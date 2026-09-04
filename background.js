@@ -16,7 +16,6 @@ const bubbleColors = [
     "#00AE6B",
     "#F2283C",
     "#277DFF",
-    "#FFC200",
     "#D72E82",
     "#875AFB",
     "#FF7A00"
@@ -26,7 +25,7 @@ const bubbleColors = [
 const pointer = {
     x: null,
     y: null,
-    radius: 150
+    radius: 125
 };
 
 
@@ -52,7 +51,7 @@ window.addEventListener("resize", resizeCanvas);
 
 function createBubbles() {
 
-    const numberOfBubbles = 50;
+    const numberOfBubbles = 70;
 
     for (let i = 0; i < numberOfBubbles; i++) {
 
@@ -94,29 +93,31 @@ createBubbles();
 function drawBubble(bubble) {
 
     const gradient = ctx.createRadialGradient(
-    bubble.x - bubble.radius * 0.3,
-    bubble.y - bubble.radius * 0.3,
-    1,
-    bubble.x,
-    bubble.y,
-    bubble.radius
+        bubble.x - bubble.radius * 0.35,
+        bubble.y - bubble.radius * 0.35,
+        1,
+        bubble.x,
+        bubble.y,
+        bubble.radius
     );
 
-    gradient.addColorStop(
-        0,
-        "rgba(255, 255, 255, 0.8)"
-    );
+    // // Soft highlight
+    // gradient.addColorStop(
+    //     0,
+    //     "rgba(255, 255, 255, 0.45)"
+    // );
 
+    // Main bubble color
     gradient.addColorStop(
         0.25,
         bubble.color
     );
 
+    // Keep the color strong all the way to the edge
     gradient.addColorStop(
         1,
-        "rgba(255, 255, 255, 0.05)"
+        bubble.color
     );
-
 
     ctx.beginPath();
 
@@ -130,8 +131,11 @@ function drawBubble(bubble) {
 
     ctx.fillStyle = gradient;
 
+    ctx.globalAlpha = 0.85;
+
     ctx.fill();
 
+    ctx.globalAlpha = 1;
 }
 
 

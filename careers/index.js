@@ -1,57 +1,93 @@
 const careerData = [
   {
     role: "Data Analyst",
-    summary: "Data Analysts act as the critical link between raw information and strategic business decisions. They take vast amounts of complex data and translate it into clear, actionable insights that help organizations optimize operations, target new markets, and solve complex problems.",
-    dayToDay: "A typical day involves meeting with stakeholders to understand their core business questions, followed by writing SQL queries to extract the necessary information from relational databases. You will spend significant time cleaning messy data, running statistical analyses using Python or Excel, and building interactive dashboards in Tableau to present your findings to non-technical leadership.",
-    skills: "SQL, Python, Tableau, Excel.",
-    expectations: "Ability to write complex SQL queries (joins, subqueries), clean inconsistent data, and confidently present findings to business leaders.",
-    salary: "$65,000 - $85,000",
-    candidateTraits: "Detail-oriented, naturally curious, and strongly focused on business outcomes."
+    summary: "Data Analysts turn business questions into trustworthy, useful insights. They collect, clean, and analyze data, then explain what the results mean so teams can make better decisions. The role may support areas such as marketing, finance, operations, product, or supply chain.",
+    dayToDay: "A typical day can include clarifying a stakeholder's question, querying a database, checking data quality, calculating metrics, and building or maintaining a dashboard. Analysts also document assumptions, share findings with non-technical teammates, and recommend next steps.",
+    skills: "SQL, Excel, a visualization tool such as Tableau or Power BI, basic statistics, and often Python or R.",
+    expectations: "Be able to write joins and aggregations in SQL, validate results, explain a chart clearly, and recognize that correlation does not automatically prove causation.",
+    salary: "Estimated U.S. entry-level base: $55,000-$80,000; growth commonly leads to senior analyst, analytics engineer, or analytics manager roles.",
+    candidateTraits: "Detail-oriented, curious, comfortable asking clarifying questions, and focused on connecting analysis to a business decision.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Analytics dashboard on a computer screen",
+    sources: [
+      { label: "O*NET: Business Intelligence Analysts (tasks and skills)", url: "https://www.onetonline.org/link/summary/15-2051.01" },
+      { label: "BLS: Data Scientists (wages and outlook reference)", url: "https://www.bls.gov/ooh/math/data-scientists.htm" }
+    ]
   },
-{
+  {
     role: "Business Analyst",
-    summary: "Business Analysts act as the essential translators between business stakeholders and technical development teams. They identify organizational needs, analyze current workflows, and design technological solutions that improve efficiency and solve specific operational problems.",
-    dayToDay: "A typical day involves facilitating meetings to gather requirements from business users and translating those needs into detailed technical specifications or user stories. You will spend time mapping out processes using tools like Visio, managing project backlogs in Jira, and collaborating closely with software developers to ensure the final product meets the original business objectives without exceeding scope.",
-    skills: "Visio, Agile/Scrum, Jira, basic SQL.",
-    expectations: "Ability to write clear user stories, map out business processes, and communicate technical constraints to non-technical audiences.",
-    salary: "$65,000 - $75,000",
-    candidateTraits: "Strong communicator, active listener, highly organized, and diplomatic."
+    summary: "Business Analysts help an organization define problems, improve processes, and select or build useful technology. They connect stakeholders with delivery teams by documenting needs, clarifying trade-offs, and checking that a solution addresses the original business problem.",
+    dayToDay: "A typical day can include interviewing users, observing a workflow, mapping the current and future process, writing requirements or user stories, and helping prioritize a backlog. Analysts may support testing, clarify questions for developers, and track whether the delivered change meets acceptance criteria.",
+    skills: "Requirements elicitation, process mapping, user stories and acceptance criteria, Excel or basic SQL, Jira or a similar work-management tool, and presentation skills.",
+    expectations: "Be able to ask effective follow-up questions, separate needs from proposed solutions, write testable requirements, and communicate scope and constraints clearly.",
+    salary: "Estimated U.S. entry-level base: $55,000-$80,000; growth commonly leads to senior business analyst, product owner, or project manager roles.",
+    candidateTraits: "Strong listener and communicator, organized, analytical, collaborative, and comfortable resolving ambiguity.",
+    image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Team collaborating around a table",
+    sources: [
+      { label: "O*NET: Management Analysts (tasks and skills)", url: "https://www.onetonline.org/link/summary/13-1111.00" },
+      { label: "BLS: Management Analysts (wages and outlook)", url: "https://www.bls.gov/ooh/business-and-financial/management-analysts.htm" }
+    ]
   },
-{
+  {
     role: "Software Developer",
-    summary: "Software Developers are the builders of the digital world, designing and creating the applications, platforms, and systems that power modern organizations. They transform requirements into functional, scalable code and ensure that software architecture remains secure, efficient, and maintainable.",
-    dayToDay: "A typical day involves writing and testing code for new features, debugging issues within existing applications, and participating in daily agile stand-up meetings. You will frequently review code written by peers, collaborate with business analysts to understand technical requirements, and use version control systems like Git to safely merge your contributions into the main codebase.",
-    skills: "Python, Java, Git, HTML/CSS/JS.",
-    expectations: "Understanding of object-oriented programming principles, basic version control, and the ability to write clean, documented code.",
-    salary: "$70,000 - $90,000",
-    candidateTraits: "Persistent problem solver, highly receptive to constructive feedback, and a continuous learner."
+    summary: "Software Developers design, build, test, and maintain applications and services. They work with product, design, and analyst teammates to turn user needs into reliable software, while considering security, performance, accessibility, and maintainability.",
+    dayToDay: "A typical day can include implementing a small feature, debugging a defect, writing automated tests, reviewing a pull request, and discussing work in a team planning or stand-up meeting. Developers use Git and a shared development workflow to collaborate safely.",
+    skills: "One programming language, data structures and basic algorithms, Git, SQL or APIs, automated testing, and familiarity with HTML/CSS/JavaScript when working on the web.",
+    expectations: "Be able to explain your code, use a debugger, break a problem into smaller steps, write readable tests, and describe a project you built or contributed to.",
+    salary: "Estimated U.S. entry-level base: $65,000-$95,000; growth commonly leads to mid-level and senior developer, technical lead, or engineering manager roles.",
+    candidateTraits: "Persistent problem solver, clear communicator, careful tester, receptive to code review, and committed to continuous learning.",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Code editor displayed on a laptop",
+    sources: [
+      { label: "O*NET: Software Developers (tasks and skills)", url: "https://www.onetonline.org/link/summary/15-1252.00" },
+      { label: "BLS: Software Developers (wages and outlook)", url: "https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm" }
+    ]
   },
-{
+  {
     role: "Cybersecurity Analyst",
-    summary: "Cybersecurity Analysts are the frontline defenders of an organization's digital infrastructure. They protect sensitive data and systems from cyber threats by continuously monitoring networks, anticipating vulnerabilities, and implementing robust security measures to thwart potential attacks.",
-    dayToDay: "A typical day involves actively monitoring network traffic using SIEM tools to identify unusual activity or potential breaches. You will spend time investigating automated security alerts, patching system vulnerabilities, assisting with penetration testing, and educating employees on security best practices to prevent phishing or social engineering attacks.",
-    skills: "SIEM tools, Wireshark, TCP/IP, Python.",
-    expectations: "Basic understanding of network architecture, common system vulnerabilities, and fundamental incident response procedures.",
-    salary: "$70,000 - $85,000",
-    candidateTraits: "High ethical standards, calm under pressure, highly analytical, and vigilant."
+    summary: "Cybersecurity Analysts help protect systems, accounts, and data by monitoring for threats, investigating suspicious activity, reducing vulnerabilities, and improving security processes. The exact focus varies: some teams emphasize security operations, while others focus on governance, risk, compliance, or vulnerability management.",
+    dayToDay: "A typical day can include triaging SIEM alerts, reviewing logs, investigating phishing reports, documenting incidents, checking vulnerability scans, and helping apply security controls. Entry-level analysts usually work within an incident-response process and escalate serious events rather than independently leading a breach response.",
+    skills: "Networking fundamentals (TCP/IP, DNS, and HTTP), operating-system basics, log analysis, a SIEM platform, vulnerability concepts, Wireshark, and basic scripting such as Python or PowerShell.",
+    expectations: "Be able to explain common attack patterns, preserve evidence, document an investigation, distinguish an alert from a confirmed incident, and follow authorization and data-handling rules.",
+    salary: "Estimated U.S. entry-level base: $60,000-$90,000; growth commonly leads to senior analyst, incident responder, security engineer, or security manager roles.",
+    candidateTraits: "Ethical, methodical, curious, calm under pressure, attentive to detail, and willing to keep learning as threats change.",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Cybersecurity lock icon on a laptop",
+    sources: [
+      { label: "O*NET: Information Security Analysts (tasks and skills)", url: "https://www.onetonline.org/link/summary/15-1212.00" },
+      { label: "BLS: Information Security Analysts (wages and outlook)", url: "https://www.bls.gov/ooh/computer-and-information-technology/information-security-analysts.htm" }
+    ]
   },
-{
+  {
     role: "Product Manager",
-    summary: "Product Managers are the visionary leaders behind a specific software application or digital service. They sit at the intersection of business strategy, technology, and user experience, guiding a product from its initial concept all the way through development and market launch.",
-    dayToDay: "A typical day involves analyzing user feedback and market trends to define the product vision, then translating that vision into a prioritized backlog of features. You will spend significant time leading cross-functional meetings, negotiating timelines with software developers, collaborating with UI/UX designers, and presenting product roadmaps to company stakeholders.",
-    skills: "Roadmapping tools (Jira, Productboard), Agile methodology, basic data analysis, UI/UX principles.",
-    expectations: "Ability to balance user needs with business goals and technical feasibility, while communicating effectively across different departments.",
-    salary: "$80,000 - $100,000",
-    candidateTraits: "Empathetic to users, highly decisive, strategic, and possessing strong leadership skills."
+    summary: "Product Managers help teams decide which problems to solve, for whom, and why. They combine customer research, business goals, data, and technical constraints to set priorities and guide a product from discovery through delivery. They are accountable for decisions and outcomes, but do not manage every function involved.",
+    dayToDay: "A typical day can include interviewing users, reviewing product metrics, writing problem statements, refining a backlog, aligning designers and engineers, and communicating priorities to stakeholders. Product managers also define success measures and learn from what happens after a feature ships.",
+    skills: "Customer discovery, prioritization, roadmap communication, experimentation and basic data analysis, Agile practices, writing, and enough technical fluency to discuss APIs, systems, and trade-offs.",
+    expectations: "Be able to frame a user problem, compare options using evidence, define a measurable outcome, and explain a prioritization decision to both technical and non-technical audiences.",
+    salary: "Estimated U.S. entry-level base: $65,000-$95,000; growth commonly leads to product manager, senior product manager, group product manager, or product leadership roles.",
+    candidateTraits: "Empathetic, decisive without being rigid, evidence-driven, organized, persuasive, and comfortable owning outcomes amid uncertainty.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Team planning product work with sticky notes",
+    sources: [
+      { label: "O*NET: Product Managers (tasks and skills)", url: "https://www.onetonline.org/link/summary/13-1082.00" },
+      { label: "BLS: Project Management Specialists (wages and outlook reference)", url: "https://www.bls.gov/ooh/business-and-financial/project-management-specialists.htm" }
+    ]
   },
-{
+  {
     role: "Technology Consultant",
-    summary: "Technology Consultants are external experts hired by organizations to solve complex business challenges through the strategic implementation of new systems. They evaluate a company's current technological landscape and recommend, design, or implement modern platforms to drive efficiency and growth.",
-    dayToDay: "A typical day involves meeting with client stakeholders to assess their current workflows and pain points. You will spend time configuring enterprise software (like ERPs or CRMs), analyzing system requirements, building comprehensive presentation decks, and delivering strategic recommendations directly to a client's executive leadership team.",
-    skills: "ERP systems, Cloud platforms, presentation software, project management.",
-    expectations: "Willingness to travel, ability to rapidly learn new industries, and strong client-facing communication skills.",
-    salary: "$75,000 - $95,000",
-    candidateTraits: "Highly adaptable, maintains a professional demeanor, strategic thinker, and persuasive."
+    summary: "Technology Consultants help clients improve processes, implement systems, manage technology change, or solve a defined technical problem. Depending on the firm, the work may focus on ERP or CRM implementation, data and cloud projects, cybersecurity, or IT strategy.",
+    dayToDay: "A typical day can include interviewing client stakeholders, documenting current processes, configuring or testing a system, analyzing requirements, preparing a recommendation, and tracking implementation risks. Consultants often work across several clients or projects and must keep clear documentation.",
+    skills: "Requirements and process analysis, Excel or basic data work, an ERP/CRM or cloud platform, presentation and documentation, project methods, and the ability to learn a client's industry quickly.",
+    expectations: "Be ready to explain a recommendation, learn unfamiliar tools, collaborate with a client, manage competing priorities, and distinguish a confirmed requirement from an assumption.",
+    salary: "Estimated U.S. entry-level base: $60,000-$90,000; growth commonly leads to consultant, senior consultant, manager, or a client-side systems/product role. Travel varies by employer and project.",
+    candidateTraits: "Adaptable, dependable, client-focused, analytical, professional, and comfortable presenting and receiving feedback.",
+    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Consultants discussing a project in an office",
+    sources: [
+      { label: "O*NET: Management Analysts (tasks and skills)", url: "https://www.onetonline.org/link/summary/13-1111.00" },
+      { label: "BLS: Management Analysts (wages and outlook)", url: "https://www.bls.gov/ooh/business-and-financial/management-analysts.htm" }
+    ]
   }
 ];
 
@@ -61,14 +97,19 @@ careerData.forEach(career => {
     const details = document.createElement('details');
     details.innerHTML = `
         <summary>${career.role}</summary>
-        <p><strong>Overview:</strong> ${career.summary}</p>
-        <p><strong>Day-to-day:</strong> ${career.dayToDay}</p>
+        <img class="career-image" src="${career.image}" alt="${career.imageAlt}" loading="lazy">
+        <p><strong>Overview:</strong> ${career.summary} <a class="claim-source" href="${career.sources[0].url}" target="_blank" rel="noopener noreferrer">[source]</a></p>
+        <p><strong>Day-to-day:</strong> ${career.dayToDay} <a class="claim-source" href="${career.sources[0].url}" target="_blank" rel="noopener noreferrer">[source]</a></p>
         <ul>
-            <li><strong>Technical skills:</strong> ${career.skills}</li>
-            <li><strong>Entry-level expectations:</strong> ${career.expectations}</li>
-            <li><strong>Salary & growth:</strong> ${career.salary}</li>
-            <li><strong>Strong candidate traits:</strong> ${career.candidateTraits}</li>
+            <li><strong>Technical skills:</strong> ${career.skills} <a class="claim-source" href="${career.sources[0].url}" target="_blank" rel="noopener noreferrer">[source]</a></li>
+            <li><strong>Entry-level expectations:</strong> ${career.expectations} <a class="claim-source" href="${career.sources[0].url}" target="_blank" rel="noopener noreferrer">[source]</a></li>
+            <li><strong>Salary & growth:</strong> ${career.salary} <a class="claim-source" href="${career.sources[1].url}" target="_blank" rel="noopener noreferrer">[source]</a></li>
+            <li><strong>Strong candidate traits:</strong> ${career.candidateTraits} <a class="claim-source" href="${career.sources[0].url}" target="_blank" rel="noopener noreferrer">[source]</a></li>
         </ul>
+        <div class="career-sources">
+            <strong>Sources:</strong>
+            ${career.sources.map(source => `<a href="${source.url}" target="_blank" rel="noopener noreferrer">${source.label}</a>`).join(' · ')}
+        </div>
     `;
     container.appendChild(details);
 });

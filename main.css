@@ -1,3 +1,13 @@
+/* =========================================================
+   IS CAREER LAUNCHPAD
+   GLOBAL STYLESHEET
+   ========================================================= */
+
+
+/* =========================================================
+   1. COLOR PALETTE
+   ========================================================= */
+
 :root {
     --green: #00AE6B;
     --red: #F2283C;
@@ -7,194 +17,44 @@
     --purple: #875AFB;
     --orange: #FF7A00;
 
-    --background: #111118;
+    /* Neutral colors */
+    --background: #26263f;
+    --background-light: #1C1C26;
+
     --text: #FFFFFF;
+    --text-muted: rgba(255, 255, 255, 0.75);
+
+    /* Shared design values */
+    --radius: 25px;
+    --transition: 0.3s ease;
 }
 
 
+/* =========================================================
+   2. GLOBAL PAGE SETTINGS
+   ========================================================= */
 
-
-/* Remove default browser spacing */
 html,
 body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    min-height: 100%;
 }
-
-/* Prevent scrolling on the landing page */
-body {
-    overflow: hidden;
-}
-
-
-/* --------------------------------
-   BACKGROUND
--------------------------------- */
-
-/* Interactive bubble background */
-
-#bubbleCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    z-index: -2;
-
-
-    background: linear-gradient(
-        135deg, var(--blue)
-    );
-}
-
-
-/* Keep the landing page above the canvas */
-
-.landing-page {
-    position: relative;
-    z-index: 1;
-}
-
-
-/* --------------------------------
-   LANDING PAGE
--------------------------------- */
-
-.landing-page {
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: opacity 0.6s ease;
-}
-
-
-/* --------------------------------
-   TEXT
--------------------------------- */
-
-.title {
-    color: white;
-
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 600;
-
-    margin-bottom: 15px;
-}
-
-
-.subtitle {
-    color: white;
-
-    font-size: clamp(1rem, 2vw, 1.4rem);
-
-    margin-bottom: 45px;
-}
-
-
-/* --------------------------------
-   BUTTONS
--------------------------------- */
-
-.button-container {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 25px;
-
-    flex-wrap: wrap;
-}
-
-
-.launch-button {
-    border: none;
-
-    padding: 18px 35px;
-
-    min-width: 220px;
-
-    border-radius: 12px;
-
-    background: rgba(220, 235, 230, 0.9);
-
-    color: #263b36;
-
-    font-size: 1.05rem;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-
-/* Button hover */
-.launch-button:hover {
-    transform: translateY(-4px);
-
-    background: white;
-
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-
-
-/* Button click */
-.launch-button:active {
-    transform: translateY(-1px);
-}
-
-
-/* --------------------------------
-   PAGE TRANSITION
--------------------------------- */
-
-.fade-out {
-    opacity: 0;
-}
-
-
-/* --------------------------------
-   POINTER EVENTS
--------------------------------- */
-
-#bubbleCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    z-index: -1;
-
-    background: linear-gradient(
-        135deg,
-        #182848,
-        #243b55
-    );
-
-    pointer-events: none;
-}
-
-.landing-page {
-    position: relative;
-    z-index: 1;
-}
-
 
 body {
     font-family: "Nunito Sans", sans-serif;
+
+    background: var(--background);
+
     color: var(--text);
+
+    overflow-x: hidden;
 }
+
+
+/* =========================================================
+   3. TYPOGRAPHY
+   ========================================================= */
 
 h1,
 h2,
@@ -203,33 +63,141 @@ h4,
 h5,
 h6 {
     font-family: "Quicksand", sans-serif;
+
+    font-weight: 700;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+}
+
+h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+h3 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+p {
+    line-height: 1.6;
+}
+
+.subtitle {
+    color: var(--text-muted);
+
+    font-size: clamp(1rem, 2vw, 1.4rem);
+}
+
+.title {
+    display: inline-block;
+
+    margin-bottom: 0;
+    padding: 18px 30px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.18),
+        rgba(255, 255, 255, 0.08)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 26px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        0 18px 35px rgba(11, 16, 30, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 
+/* =========================================================
+   4. INTERACTIVE BUBBLE BACKGROUND
+   ========================================================= */
+
+#bubbleCanvas {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    z-index: -1;
+
+    background: var(--background);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   5. LANDING PAGE
+   ========================================================= */
+
+.landing-page {
+    position: relative;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1;
+
+    transition: opacity 0.6s ease;
+}
+
+
+/* =========================================================
+   6. HOMEPAGE BUTTON CONTAINER
+   ========================================================= */
+
+.button-container {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 40px;
+
+    flex-wrap: wrap;
+
+    margin-top: 35px;
+}
+
+
+/* =========================================================
+   7. MAIN LAUNCH BUTTONS
+   ========================================================= */
+
 .launch-button {
     width: 340px;
+
     min-height: 180px;
 
     border: none;
+
     border-radius: 30px;
 
     padding: 30px;
 
     color: white;
+
     text-align: left;
 
     cursor: pointer;
 
-    transition: 
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        filter var(--transition);
 }
 
-.launch-button:hover {
-    transform: translateY(-8px);
 
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-}
+/* Career Exploration */
 
 .career-button {
     background: linear-gradient(
@@ -239,6 +207,9 @@ h6 {
     );
 }
 
+
+/* Interview Practice */
+
 .interview-button {
     background: linear-gradient(
         135deg,
@@ -247,11 +218,1037 @@ h6 {
     );
 }
 
+
+/* Button hover */
+
+.launch-button:hover {
+    transform: translateY(-8px) scale(1.02);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.3);
+
+    filter: brightness(1.1);
+}
+
+
+/* Button click */
+
+.launch-button:active {
+    transform: translateY(-3px) scale(1.01);
+}
+
+
+/* Button headings */
+
 .launch-button h2 {
     margin-bottom: 12px;
 }
 
+
+/* Button descriptions */
+
 .launch-button p {
     margin: 0;
-    opacity: 0.9;
+
+    color: rgba(255, 255, 255, 0.9);
 }
+
+
+/* =========================================================
+   8. GENERAL BUTTONS
+   ========================================================= */
+
+.btn {
+    border-radius: 15px;
+
+    font-family: "Nunito Sans", sans-serif;
+
+    font-weight: 600;
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        filter var(--transition);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   9. STANDARD CARD
+   ========================================================= */
+
+.card {
+    border: none;
+
+    border-radius: var(--radius);
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: var(--text);
+
+    backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================================
+   10. LINKS
+   ========================================================= */
+
+a {
+    color: var(--blue);
+
+    text-decoration: none;
+
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--purple);
+}
+
+
+/* =========================================================
+   11. FORM ELEMENTS
+   ========================================================= */
+
+input,
+textarea,
+select {
+    border-radius: 12px !important;
+
+    border: 2px solid rgba(255, 255, 255, 0.15) !important;
+
+    background: rgba(255, 255, 255, 0.08) !important;
+
+    color: white !important;
+
+    font-family: "Nunito Sans", sans-serif;
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--blue) !important;
+
+    box-shadow:
+        0 0 0 3px rgba(39, 125, 255, 0.25) !important;
+
+    outline: none;
+}
+
+
+/* =========================================================
+   12. PAGE TRANSITION
+   ========================================================= */
+
+.fade-out {
+    opacity: 0;
+}
+
+
+/* =========================================================
+   13. RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .button-container {
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    .launch-button {
+        width: min(340px, 90vw);
+
+        min-height: 150px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .launch-button {
+        padding: 25px;
+
+        min-height: 130px;
+    }
+
+}
+
+
+
+/* =========================================================
+   DISCOVERY PAGE
+   ========================================================= */
+
+.discovery-page {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding-top: 80px;
+    padding-bottom: 80px;
+
+    z-index: 1;
+}
+
+
+/* Page introduction */
+
+.discovery-intro {
+    max-width: 850px;
+
+    margin: 0 auto 60px;
+}
+
+.discovery-intro h1 {
+    margin-bottom: 25px;
+}
+
+.discovery-intro p {
+    max-width: 750px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    color: var(--text-muted);
+
+    font-size: 1.1rem;
+}
+
+
+/* Career container */
+
+.career-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 30px;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   DISCOVERY NAVIGATION
+   ========================================================= */
+
+.site-navbar {
+    position: relative;
+
+    z-index: 10;
+
+    padding: 20px 0;
+
+    background: rgba(17, 17, 24, 0.65);
+
+    backdrop-filter: blur(12px);
+}
+
+.navbar-brand {
+    font-family: "Quicksand", sans-serif;
+
+    font-size: 1.4rem;
+
+    font-weight: 700;
+
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+.nav-links a {
+    color: rgba(255, 255, 255, 0.75);
+
+    font-weight: 600;
+
+    transition:
+        color var(--transition),
+        transform var(--transition);
+}
+
+.nav-links a:hover {
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+.nav-links a.active {
+    color: white;
+}
+
+
+/* =========================================================
+   RESPONSIVE DISCOVERY NAVIGATION
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .site-navbar .container {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 15px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .discovery-page {
+        padding-top: 50px;
+    }
+
+}
+
+
+
+/* ================================
+   CAREER DISCOVERY CARDS
+   ================================ */
+
+#career-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Individual career card */
+#career-container details {
+    background: rgba(255, 255, 255, 0.09);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 25px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+#career-container details:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Career title */
+#career-container summary {
+    position: relative;
+    padding: 25px 55px 25px 25px;
+    cursor: pointer;
+    list-style: none;
+
+    font-family: "Quicksand", sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+
+    color: white;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+/* Remove default browser arrow */
+#career-container summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Custom arrow */
+#career-container summary::after {
+    content: "+";
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-size: 1.8rem;
+    font-weight: 400;
+
+    transition: transform 0.3s ease;
+}
+
+/* Open state */
+#career-container details[open] summary {
+    background: rgba(39, 125, 255, 0.2);
+}
+
+#career-container details[open] summary::after {
+    content: "−";
+}
+
+/* Content inside card */
+#career-container details p,
+#career-container details ul {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+#career-container details p {
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+#career-container details ul {
+    padding-left: 20px;
+    padding-bottom: 25px;
+}
+
+#career-container details li {
+    margin-bottom: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+#career-container details strong {
+    color: white;
+}
+
+/* Spacing between sections */
+#career-container details p:first-of-type {
+    margin-top: 25px;
+}
+
+#career-container details p:last-of-type {
+    margin-bottom: 20px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    #career-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    #career-container summary {
+        padding: 22px 50px 22px 22px;
+        font-size: 1.2rem;
+    }
+
+    #career-container details p,
+    #career-container details ul {
+        margin-left: 22px;
+        margin-right: 22px;
+    }
+}
+
+
+/* =========================================
+   INTERVIEW PRACTICE PAGE
+   ========================================= */
+
+.interview-page {
+    position: relative;
+    min-height: 100vh;
+    padding: 70px 20px 90px;
+    z-index: 1;
+}
+
+.interview-content {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+/* Page introduction */
+.interview-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.interview-intro h1 {
+    margin-bottom: 20px;
+}
+
+.interview-intro p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin: 8px 0;
+}
+
+
+/* Section headings */
+.section-title {
+    margin-top: 60px;
+    margin-bottom: 15px;
+}
+
+.interview-content > p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+
+/* Individual questions */
+.interview-question {
+    margin-bottom: 30px;
+    padding: 30px;
+
+    background: rgba(255, 255, 255, 0.09);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius);
+
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.interview-question:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Question titles */
+.interview-question h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: white;
+}
+
+
+/* Question text */
+.interview-question p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+
+/* Answer boxes */
+.interview-question textarea {
+    width: 100%;
+    min-height: 160px;
+
+    box-sizing: border-box;
+    resize: vertical;
+
+    padding: 16px;
+
+    border-radius: 15px !important;
+    border: 2px solid rgba(255, 255, 255, 0.15) !important;
+
+    background: rgba(0, 0, 0, 0.18) !important;
+    color: white !important;
+
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+.interview-question textarea::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.interview-question textarea:focus {
+    border-color: var(--blue) !important;
+    box-shadow: 0 0 0 3px rgba(39, 125, 255, 0.25) !important;
+    outline: none;
+}
+
+
+/* Technical quiz container */
+#quizContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+
+/* Any quiz cards generated by practice.js */
+#quizContainer > div {
+    padding: 30px;
+
+    background: rgba(255, 255, 255, 0.09);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius);
+
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   INTERVIEW SUBMIT BUTTON
+   ========================================================= */
+
+.submit-button {
+    display: block;
+
+    margin: 45px auto 0;
+
+    padding: 16px 40px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        135deg,
+        var(--green),
+        var(--blue)
+    );
+
+    color: white;
+
+    font-family: "Quicksand", sans-serif;
+
+    font-size: 1.1rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        filter var(--transition);
+}
+
+
+.submit-button:hover {
+    transform: translateY(-4px);
+
+    filter: brightness(1.1);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+
+.submit-button:active {
+    transform: translateY(-1px);
+
+    filter: brightness(1.05);
+}
+
+
+/* Results */
+#interviewResult {
+    max-width: 850px;
+    margin: 45px auto 0;
+
+    padding: 30px;
+
+    border-radius: var(--radius);
+
+    background: rgba(255, 255, 255, 0.10);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+
+    backdrop-filter: blur(12px);
+
+    color: white;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .interview-page {
+        padding: 50px 15px 70px;
+    }
+
+    .interview-intro {
+        margin-bottom: 45px;
+    }
+
+    .section-title {
+        margin-top: 45px;
+    }
+
+    .interview-question {
+        padding: 22px;
+    }
+
+    #quizContainer > div {
+        padding: 22px;
+    }
+
+    .interview-content > button {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+
+/* =========================================
+   TECHNICAL QUIZ
+   ========================================= */
+
+#quizContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+#quizContainer .question {
+    padding: 30px;
+
+    background: rgba(255, 255, 255, 0.09);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius);
+
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+#quizContainer .question:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+#quizContainer .question h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+/* Code scenario */
+
+#quizContainer pre {
+    margin: 20px 0 0;
+    padding: 20px;
+
+    overflow-x: auto;
+
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 15px;
+
+    font-family: monospace;
+    line-height: 1.6;
+}
+
+#quizContainer code {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Question text */
+
+#quizContainer .question p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Answer choices */
+
+#quizContainer .question label {
+    display: block;
+
+    margin-top: 12px;
+    padding: 14px 16px;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    color: var(--text-muted);
+
+    transition:
+        background var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+#quizContainer .question label:hover {
+    background: rgba(39, 125, 255, 0.12);
+    border-color: rgba(39, 125, 255, 0.4);
+    transform: translateX(4px);
+}
+
+#quizContainer .question input[type="radio"] {
+    margin-right: 10px;
+    accent-color: var(--blue);
+}
+
+
+/* =========================================
+   INTERVIEW RESULTS
+   ========================================= */
+
+#interviewResult {
+    max-width: 950px;
+    margin: 60px auto 0;
+    padding: 0;
+}
+
+/* Results heading */
+
+#interviewResult > .section-title {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#interviewResult > p {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 45px;
+}
+
+/* Major result sections */
+
+#interviewResult .results-section {
+    margin-bottom: 40px;
+    padding: 30px;
+
+    background: rgba(255, 255, 255, 0.09);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius);
+
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+#interviewResult .results-section > h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+/* Individual feedback cards */
+
+#interviewResult .feedback-item {
+    margin-top: 25px;
+    padding: 25px;
+
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+}
+
+#interviewResult .feedback-item h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+#interviewResult .feedback-item p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+#interviewResult .feedback-item strong {
+    color: white;
+}
+
+/* Candidate's response */
+
+#interviewResult .user-response {
+    margin: 12px 0 20px;
+    padding: 18px;
+
+    background: rgba(255, 255, 255, 0.06);
+    border-left: 4px solid var(--blue);
+    border-radius: 10px;
+
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+}
+
+/* AI feedback */
+
+#interviewResult .feedback-placeholder {
+    margin-top: 20px;
+    padding: 22px;
+
+    background: rgba(39, 125, 255, 0.10);
+    border: 1px solid rgba(39, 125, 255, 0.25);
+    border-radius: 15px;
+}
+
+#interviewResult .feedback-placeholder strong {
+    color: white;
+}
+
+#interviewResult .feedback-placeholder p {
+    margin-bottom: 10px;
+}
+
+#interviewResult .feedback-placeholder ul {
+    padding-left: 22px;
+    color: var(--text-muted);
+}
+
+#interviewResult .feedback-placeholder li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Technical score */
+
+#interviewResult .results-section > h3 {
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+/* Technical answer review */
+
+#interviewResult .normal-answer,
+#interviewResult .correct-answer,
+#interviewResult .wrong-answer {
+    margin: 8px 0;
+    padding: 12px 15px;
+    border-radius: 10px;
+    line-height: 1.5;
+}
+
+#interviewResult .normal-answer {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+}
+
+#interviewResult .correct-answer {
+    background: rgba(0, 174, 107, 0.15);
+    border: 1px solid rgba(0, 174, 107, 0.35);
+    color: white;
+}
+
+#interviewResult .wrong-answer {
+    background: rgba(242, 40, 60, 0.15);
+    border: 1px solid rgba(242, 40, 60, 0.35);
+    color: white;
+}
+
+/* Technical code in results */
+
+#interviewResult pre {
+    margin: 20px 0 30px;
+    padding: 20px;
+
+    overflow-x: auto;
+
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 15px;
+
+    line-height: 1.6;
+}
+
+#interviewResult code {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    #interviewResult {
+        margin-top: 45px;
+    }
+
+    #interviewResult .results-section {
+        padding: 22px;
+    }
+
+    #interviewResult .feedback-item {
+        padding: 20px;
+    }
+
+    #interviewResult .feedback-placeholder {
+        padding: 18px;
+    }
+}
+
+/* =========================================
+   INTERVIEW SUBMIT BUTTON
+   ========================================= */
+
+.interview-content > button {
+    display: block;
+    margin: 45px auto 0;
+    padding: 17px 38px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        var(--green),
+        var(--blue)
+    );
+
+    color: white;
+
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        filter var(--transition);
+}
+
+.interview-content > button:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.08);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.interview-content > button:active {
+    transform: translateY(-1px);
+}
+
