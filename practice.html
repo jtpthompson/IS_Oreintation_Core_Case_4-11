@@ -97,6 +97,13 @@
             cursor: pointer;
         }
 
+        .interview-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
         .results-section {
             margin-top: 35px;
             padding: 25px;
@@ -145,6 +152,10 @@
             .role-grid {
                 grid-template-columns: 1fr;
             }
+
+            .interview-buttons {
+                gap: 15px;
+            }
         }
     </style>
 </head>
@@ -160,29 +171,43 @@
         </div>
 
         <div class="role-grid">
-            <button class="role-button" onclick="startInterview('dataAnalyst')">
+
+            <button
+                class="role-button"
+                onclick="startInterview('dataAnalyst')">
                 Data Analyst
             </button>
 
-            <button class="role-button" onclick="startInterview('businessAnalyst')">
+            <button
+                class="role-button"
+                onclick="startInterview('businessAnalyst')">
                 Business Analyst
             </button>
 
-            <button class="role-button" onclick="startInterview('softwareDeveloper')">
+            <button
+                class="role-button"
+                onclick="startInterview('softwareDeveloper')">
                 Software Developer
             </button>
 
-            <button class="role-button" onclick="startInterview('cybersecurityAnalyst')">
+            <button
+                class="role-button"
+                onclick="startInterview('cybersecurityAnalyst')">
                 Cybersecurity Analyst
             </button>
 
-            <button class="role-button" onclick="startInterview('productManager')">
+            <button
+                class="role-button"
+                onclick="startInterview('productManager')">
                 Product Manager
             </button>
 
-            <button class="role-button" onclick="startInterview('technologyConsultant')">
+            <button
+                class="role-button"
+                onclick="startInterview('technologyConsultant')">
                 Technology Consultant
             </button>
+
         </div>
     </div>
 
@@ -196,19 +221,38 @@
             questions and the final three are based on a role-specific scenario.
         </p>
 
-        <h2 class="section-title">Part 1 — Behavioral Interview</h2>
+        <h2 class="section-title">
+            Part 1 — Behavioral Interview
+        </h2>
 
         <div id="behavioralContainer"></div>
 
-        <h2 class="section-title">Part 2 — Role-Specific Interview</h2>
+        <h2 class="section-title">
+            Part 2 — Role-Specific Interview
+        </h2>
 
         <div id="technicalContainer"></div>
 
-        <button class="submit-button" onclick="submitInterview()">
-            Submit Interview
-        </button>
+
+        <div class="interview-buttons">
+
+            <button
+                class="submit-button"
+                onclick="goBackToRoles()">
+                ← Back
+            </button>
+
+            <button
+                class="submit-button"
+                onclick="submitInterview()">
+                Submit Interview
+            </button>
+
+        </div>
+
 
         <div id="errorMessage"></div>
+
     </div>
 
 
@@ -305,8 +349,10 @@ HAVING SUM(amount) > 1000;
                         explanation:
                             "GROUP BY groups rows that share the same customer_id so aggregate functions can be applied to each group."
                     }
+
                 ]
             },
+
 
             {
                 title: "Joining Customer Data",
@@ -373,8 +419,10 @@ ON customers.customer_id = orders.customer_id;
                         explanation:
                             "INNER JOIN returns only rows that have matching values in both tables."
                     }
+
                 ]
             },
+
 
             {
                 title: "Cleaning a Dataset",
@@ -444,8 +492,10 @@ Customer_ID | Age | State | Revenue
                         explanation:
                             "Analysts should understand why duplication occurred before removing records to avoid deleting legitimate information."
                     }
+
                 ]
             }
+
         ]
     },
 
@@ -537,8 +587,10 @@ Known information:
                         explanation:
                             "A requirement defines what the business or user needs. The technology used to satisfy it is a solution decision."
                     }
+
                 ]
             },
+
 
             {
                 title: "Process Improvement",
@@ -607,8 +659,10 @@ Known information:
                         explanation:
                             "Processing time directly measures whether the redesigned process improved efficiency."
                     }
+
                 ]
             },
+
 
             {
                 title: "Conflicting Stakeholders",
@@ -679,8 +733,10 @@ Project deadline:
                         explanation:
                             "Clear requirements and acceptance criteria help ensure the project team understands what must be delivered."
                     }
+
                 ]
             }
+
         ]
     },
 
@@ -773,8 +829,10 @@ def find_largest(numbers):
                         explanation:
                             "The loop examines each value and updates largest when it finds a greater one."
                     }
+
                 ]
             },
+
 
             {
                 title: "List and Dictionary Logic",
@@ -846,8 +904,10 @@ for name, score in students.items():
                         explanation:
                             "<= means less than or equal to."
                     }
+
                 ]
             },
+
 
             {
                 title: "Function Behavior",
@@ -918,8 +978,10 @@ def remove_duplicates(items):
                         explanation:
                             "The function builds a new list while only adding values that have not been seen."
                     }
+
                 ]
             }
+
         ]
     },
 
@@ -1014,8 +1076,10 @@ Enter your username and password to restore access.
                         explanation:
                             "MFA requires an additional authentication factor, making a stolen password alone less useful."
                     }
+
                 ]
             },
+
 
             {
                 title: "Suspicious Login Activity",
@@ -1082,8 +1146,10 @@ Enter your username and password to restore access.
                         explanation:
                             "Compromised accounts should be contained and handled according to the organization's incident-response procedures."
                     }
+
                 ]
             },
+
 
             {
                 title: "Security Fundamentals",
@@ -1151,8 +1217,10 @@ Security goals:
                         explanation:
                             "Availability means ensuring systems and information are accessible when authorized users need them."
                     }
+
                 ]
             }
+
         ]
     },
 
@@ -1251,8 +1319,10 @@ Engineering effort: 6 weeks
                         explanation:
                             "Product managers need to weigh customer and business value against technical constraints and risk."
                     }
+
                 ]
             },
+
 
             {
                 title: "Measuring Feature Success",
@@ -1322,8 +1392,10 @@ After redesign:
                         explanation:
                             "9,000 completed signups divided by 12,000 starts equals 75%."
                     }
+
                 ]
             },
+
 
             {
                 title: "Customer Feedback",
@@ -1393,8 +1465,10 @@ After redesign:
                         explanation:
                             "Understanding the actual user problem should come before choosing a specific solution."
                     }
+
                 ]
             }
+
         ]
     },
 
@@ -1488,8 +1562,10 @@ Current process:
                         explanation:
                             "Consulting recommendations should be based on the client's needs, constraints, objectives, and implementation considerations."
                     }
+
                 ]
             },
+
 
             {
                 title: "Technology Investment Case",
@@ -1562,8 +1638,10 @@ Reduce manual work by 60%
                         explanation:
                             "A strong recommendation considers qualitative factors and implementation risks in addition to financial impact."
                     }
+
                 ]
             },
+
 
             {
                 title: "Client Problem Diagnosis",
@@ -1631,10 +1709,13 @@ Recent changes:
                         explanation:
                             "Consulting case interviews commonly expect a clear conclusion backed by analysis, along with risks and next steps."
                     }
+
                 ]
             }
+
         ]
     }
+
 };
 
 
@@ -1643,7 +1724,9 @@ Recent changes:
 // =====================================================
 
 let selectedRole;
+
 let selectedBehavioralQuestions = [];
+
 let selectedScenario;
 
 
@@ -1667,25 +1750,50 @@ function randomItems(array, number) {
 
 function startInterview(roleKey) {
 
-    selectedRole = interviewBanks[roleKey];
+    selectedRole =
+        interviewBanks[roleKey];
 
     selectedBehavioralQuestions =
-        randomItems(selectedRole.behavioral, 3);
+        randomItems(
+            selectedRole.behavioral,
+            3
+        );
 
     selectedScenario =
         selectedRole.scenarios[
-            Math.floor(Math.random() * selectedRole.scenarios.length)
+            Math.floor(
+                Math.random() *
+                selectedRole.scenarios.length
+            )
         ];
 
-    document.getElementById("roleSelection").style.display = "none";
-    document.getElementById("resultsArea").style.display = "none";
-    document.getElementById("interviewArea").style.display = "block";
 
-    document.getElementById("roleTitle").textContent =
-        selectedRole.title + " Mock Interview";
+    document.getElementById(
+        "roleSelection"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "resultsArea"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "interviewArea"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "roleTitle"
+    ).textContent =
+        selectedRole.title +
+        " Mock Interview";
+
 
     displayBehavioralQuestions();
+
     displayTechnicalQuestions();
+
 
     window.scrollTo({
         top: 0,
@@ -1701,89 +1809,135 @@ function startInterview(roleKey) {
 function displayBehavioralQuestions() {
 
     const container =
-        document.getElementById("behavioralContainer");
+        document.getElementById(
+            "behavioralContainer"
+        );
+
 
     let html = "";
 
-    selectedBehavioralQuestions.forEach((question, index) => {
 
-        html += `
-            <div class="question-box">
+    selectedBehavioralQuestions.forEach(
+        (question, index) => {
 
-                <h3>Question ${index + 1}</h3>
+            html += `
+                <div class="question-box">
 
-                <p>
-                    <strong>${question}</strong>
-                </p>
+                    <h3>
+                        Question ${index + 1}
+                    </h3>
 
-                <textarea
-                    id="behavioralAnswer${index}"
-                    placeholder="Type your answer here..."
-                ></textarea>
+                    <p>
+                        <strong>
+                            ${question}
+                        </strong>
+                    </p>
 
-            </div>
-        `;
-    });
+                    <textarea
+                        id="behavioralAnswer${index}"
+                        placeholder="Type your answer here..."
+                    ></textarea>
 
-    container.innerHTML = html;
+                </div>
+            `;
+
+        }
+    );
+
+
+    container.innerHTML =
+        html;
 }
 
 
 // =====================================================
-// TECHNICAL / ROLE-SPECIFIC QUESTIONS
+// ROLE-SPECIFIC QUESTIONS
 // =====================================================
 
 function displayTechnicalQuestions() {
 
     const container =
-        document.getElementById("technicalContainer");
+        document.getElementById(
+            "technicalContainer"
+        );
+
 
     let html = `
+
         <div class="question-box">
 
-            <h3>${selectedScenario.title}</h3>
+            <h3>
+                ${selectedScenario.title}
+            </h3>
 
-            <p>${selectedScenario.prompt}</p>
+            <p>
+                ${selectedScenario.prompt}
+            </p>
 
             <pre><code>${selectedScenario.code}</code></pre>
 
         </div>
+
     `;
 
-    selectedScenario.questions.forEach((question, questionIndex) => {
 
-        html += `
-            <div class="question-box">
-
-                <h3>Question ${questionIndex + 4}</h3>
-
-                <p>
-                    <strong>${question.question}</strong>
-                </p>
-        `;
-
-        question.options.forEach((option, optionIndex) => {
+    selectedScenario.questions.forEach(
+        (question, questionIndex) => {
 
             html += `
-                <label>
 
-                    <input
-                        type="radio"
-                        name="technicalQ${questionIndex}"
-                        value="${optionIndex}"
-                    >
+                <div class="question-box">
 
-                    ${String.fromCharCode(65 + optionIndex)}.
-                    ${option}
+                    <h3>
+                        Question ${questionIndex + 4}
+                    </h3>
 
-                </label>
+                    <p>
+                        <strong>
+                            ${question.question}
+                        </strong>
+                    </p>
+
             `;
-        });
 
-        html += `</div>`;
-    });
 
-    container.innerHTML = html;
+            question.options.forEach(
+                (option, optionIndex) => {
+
+                    html += `
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="technicalQ${questionIndex}"
+                                value="${optionIndex}"
+                            >
+
+                            ${String.fromCharCode(
+                                65 + optionIndex
+                            )}.
+
+                            ${option}
+
+                        </label>
+
+                    `;
+
+                }
+            );
+
+
+            html += `
+                </div>
+            `;
+
+        }
+    );
+
+
+    container.innerHTML =
+        html;
 }
 
 
@@ -1793,16 +1947,25 @@ function displayTechnicalQuestions() {
 
 function submitInterview() {
 
-    const behavioralAnswers = [];
+    const behavioralAnswers =
+        [];
 
-    for (let i = 0; i < 3; i++) {
+
+    for (
+        let i = 0;
+        i < 3;
+        i++
+    ) {
 
         const answer =
             document.getElementById(
                 "behavioralAnswer" + i
             ).value;
 
-        if (answer.trim() === "") {
+
+        if (
+            answer.trim() === ""
+        ) {
 
             showError(
                 "Please answer all three behavioral questions."
@@ -1811,16 +1974,26 @@ function submitInterview() {
             return;
         }
 
-        behavioralAnswers.push(answer);
+
+        behavioralAnswers.push(
+            answer
+        );
     }
 
 
-    for (let i = 0; i < 3; i++) {
+    for (
+        let i = 0;
+        i < 3;
+        i++
+    ) {
 
         const answer =
             document.querySelector(
-                'input[name="technicalQ' + i + '"]:checked'
+                'input[name="technicalQ' +
+                i +
+                '"]:checked'
             );
+
 
         if (!answer) {
 
@@ -1832,7 +2005,10 @@ function submitInterview() {
         }
     }
 
-    buildResults(behavioralAnswers);
+
+    buildResults(
+        behavioralAnswers
+    );
 }
 
 
@@ -1842,10 +2018,18 @@ function submitInterview() {
 
 function showError(message) {
 
-    document.getElementById("errorMessage").innerHTML = `
+    document.getElementById(
+        "errorMessage"
+    ).innerHTML = `
+
         <div class="question-box">
-            <strong>${message}</strong>
+
+            <strong>
+                ${message}
+            </strong>
+
         </div>
+
     `;
 }
 
@@ -1854,14 +2038,21 @@ function showError(message) {
 // RESULTS
 // =====================================================
 
-function buildResults(behavioralAnswers) {
+function buildResults(
+    behavioralAnswers
+) {
 
     let score = 0;
-    let technicalReviewHTML = "";
+
+    let technicalReviewHTML =
+        "";
 
 
     selectedScenario.questions.forEach(
-        (question, questionIndex) => {
+        (
+            question,
+            questionIndex
+        ) => {
 
             const selectedAnswer =
                 document.querySelector(
@@ -1870,41 +2061,69 @@ function buildResults(behavioralAnswers) {
                     '"]:checked'
                 );
 
+
             const selectedValue =
-                Number(selectedAnswer.value);
+                Number(
+                    selectedAnswer.value
+                );
 
 
-            if (selectedValue === question.correct) {
+            if (
+                selectedValue ===
+                question.correct
+            ) {
+
                 score++;
             }
 
 
-            let choicesHTML = "";
+            let choicesHTML =
+                "";
 
 
             question.options.forEach(
-                (option, optionIndex) => {
+                (
+                    option,
+                    optionIndex
+                ) => {
 
-                    let answerClass = "";
-                    let answerLabel = "";
+                    let answerClass =
+                        "";
 
-                    if (optionIndex === question.correct) {
+                    let answerLabel =
+                        "";
 
-                        answerClass = "correct-answer";
-                        answerLabel = " ✓ Correct Answer";
-                    }
 
                     if (
-                        optionIndex === selectedValue &&
-                        selectedValue !== question.correct
+                        optionIndex ===
+                        question.correct
                     ) {
 
-                        answerClass = "wrong-answer";
+                        answerClass =
+                            "correct-answer";
+
+                        answerLabel =
+                            " ✓ Correct Answer";
                     }
 
+
                     if (
-                        optionIndex === selectedValue &&
-                        selectedValue === question.correct
+                        optionIndex ===
+                        selectedValue &&
+                        selectedValue !==
+                        question.correct
+                    ) {
+
+                        answerClass =
+                            "wrong-answer";
+                    }
+
+
+                    if (
+                        optionIndex ===
+                        selectedValue &&
+                        selectedValue ===
+                        question.correct
                     ) {
 
                         answerLabel =
@@ -1913,16 +2132,27 @@ function buildResults(behavioralAnswers) {
 
 
                     choicesHTML += `
+
                         <p class="${answerClass}">
-                            ${String.fromCharCode(65 + optionIndex)}.
+
+                            ${String.fromCharCode(
+                                65 + optionIndex
+                            )}.
+
                             ${option}
+
                             ${answerLabel}
+
                         </p>
+
                     `;
-                });
+
+                }
+            );
 
 
             technicalReviewHTML += `
+
                 <div class="feedback-item">
 
                     <h3>
@@ -1938,22 +2168,33 @@ function buildResults(behavioralAnswers) {
                     ${choicesHTML}
 
                     <p>
-                        <strong>Explanation:</strong>
+                        <strong>
+                            Explanation:
+                        </strong>
+
                         ${question.explanation}
                     </p>
 
                 </div>
+
             `;
-        });
+
+        }
+    );
 
 
-    let behavioralReviewHTML = "";
+    let behavioralReviewHTML =
+        "";
 
 
     selectedBehavioralQuestions.forEach(
-        (question, index) => {
+        (
+            question,
+            index
+        ) => {
 
             behavioralReviewHTML += `
+
                 <div class="feedback-item">
 
                     <h3>
@@ -1961,15 +2202,21 @@ function buildResults(behavioralAnswers) {
                     </h3>
 
                     <p>
-                        <strong>${question}</strong>
+                        <strong>
+                            ${question}
+                        </strong>
                     </p>
 
                     <p>
-                        <strong>Your Response:</strong>
+                        <strong>
+                            Your Response:
+                        </strong>
                     </p>
 
                     <div class="user-response">
+
                         ${behavioralAnswers[index]}
+
                     </div>
 
                     <div class="feedback-placeholder">
@@ -1985,32 +2232,46 @@ function buildResults(behavioralAnswers) {
                     </div>
 
                 </div>
+
             `;
-        });
+
+        }
+    );
 
 
     const percentage =
-        Math.round(score / 3 * 100);
+        Math.round(
+            score / 3 * 100
+        );
 
 
-    document.getElementById("interviewArea").style.display =
+    document.getElementById(
+        "interviewArea"
+    ).style.display =
         "none";
 
-    document.getElementById("resultsArea").style.display =
+
+    document.getElementById(
+        "resultsArea"
+    ).style.display =
         "block";
 
 
-    document.getElementById("resultsArea").innerHTML = `
+    document.getElementById(
+        "resultsArea"
+    ).innerHTML = `
 
         <h1>
-            ${selectedRole.title} Interview Review
+            ${selectedRole.title}
+            Interview Review
         </h1>
 
 
         <div class="results-section">
 
             <h2>
-                Part 1 — Behavioral Review
+                Part 1 —
+                Behavioral Review
             </h2>
 
             ${behavioralReviewHTML}
@@ -2021,22 +2282,30 @@ function buildResults(behavioralAnswers) {
         <div class="results-section">
 
             <h2>
-                Part 2 — Role-Specific Review
+                Part 2 —
+                Role-Specific Review
             </h2>
 
+
             <h3>
-                Score: ${score}/3 (${percentage}%)
+                Score:
+                ${score}/3
+                (${percentage}%)
             </h3>
+
 
             <h3>
                 ${selectedScenario.title}
             </h3>
 
+
             <p>
                 ${selectedScenario.prompt}
             </p>
 
+
             <pre><code>${selectedScenario.code}</code></pre>
+
 
             ${technicalReviewHTML}
 
@@ -2050,6 +2319,7 @@ function buildResults(behavioralAnswers) {
             Choose Another Role
 
         </button>
+
     `;
 
 
@@ -2061,21 +2331,71 @@ function buildResults(behavioralAnswers) {
 
 
 // =====================================================
-// RESTART
+// CHOOSE ANOTHER ROLE
 // =====================================================
 
 function chooseAnotherRole() {
 
-    document.getElementById("resultsArea").style.display =
+    document.getElementById(
+        "resultsArea"
+    ).style.display =
         "none";
 
-    document.getElementById("interviewArea").style.display =
+
+    document.getElementById(
+        "interviewArea"
+    ).style.display =
         "none";
 
-    document.getElementById("roleSelection").style.display =
+
+    document.getElementById(
+        "roleSelection"
+    ).style.display =
         "block";
 
-    document.getElementById("errorMessage").innerHTML = "";
+
+    document.getElementById(
+        "errorMessage"
+    ).innerHTML =
+        "";
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+// =====================================================
+// BACK BUTTON
+// =====================================================
+
+function goBackToRoles() {
+
+    document.getElementById(
+        "interviewArea"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "resultsArea"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "roleSelection"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "errorMessage"
+    ).innerHTML =
+        "";
+
 
     window.scrollTo({
         top: 0,
@@ -2086,4 +2406,5 @@ function chooseAnotherRole() {
 </script>
 
 </body>
+
 </html>
