@@ -22,20 +22,44 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            background-color: #19324F;  
-            color: #17212B;
+            color: #f5f8ff;
         }
 
         .page-box {
-            max-width: 1000px;
-            margin: 40px auto;
-            background-color: #F7F3EA;
-            padding: 35px;
-            border-radius: 16px;
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 45px auto 80px;
+            padding: clamp(24px, 5vw, 50px);
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.18),
+                rgba(255, 255, 255, 0.08)
+            );
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 30px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                0 22px 45px rgba(11, 16, 30, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
+
         .intro {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
+        }
+
+        .intro h1,
+        #roleTitle,
+        #resultsArea > h1 {
+            color: #f5f8ff;
+            text-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .intro p,
+        #interviewArea > p {
+            color: rgba(244, 247, 255, 0.88);
         }
 
         .role-grid {
@@ -46,30 +70,95 @@
         }
 
         .role-button {
-            background-color: white;
-            border: 2px solid #19324F;
-            border-radius: 12px;
+            min-height: 110px;
             padding: 25px 15px;
+            background: linear-gradient(
+                135deg,
+                rgba(66, 135, 245, 0.25),
+                rgba(137, 88, 255, 0.18)
+            );
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 22px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                0 14px 28px rgba(11, 16, 30, 0.28);
+            color: #f7f9ff;
+            font-family: 'Quicksand', sans-serif;
             font-size: 19px;
             font-weight: bold;
             cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
         }
 
         .role-button:hover {
-            background-color: #E7B84B;
+            transform: translateY(-5px);
+            filter: brightness(1.12);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 20px 35px rgba(11, 16, 30, 0.4);
+        }
+
+        .role-button:nth-child(3n + 2) {
+            background: linear-gradient(
+                135deg,
+                rgba(47, 196, 153, 0.2),
+                rgba(40, 116, 255, 0.2)
+            );
+        }
+
+        .role-button:nth-child(3n + 3) {
+            background: linear-gradient(
+                135deg,
+                rgba(245, 124, 56, 0.2),
+                rgba(214, 60, 119, 0.18)
+            );
         }
 
         .section-title {
             margin-top: 45px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ccc;
+            padding: 15px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 18px;
+            background: rgba(11, 18, 31, 0.2);
+            color: #f7f9ff;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
         }
 
         .question-box {
-            background-color: white;
             margin-top: 20px;
             padding: 20px;
-            border-radius: 10px;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.15),
+                rgba(255, 255, 255, 0.07)
+            );
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 22px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 14px 28px rgba(11, 16, 30, 0.28);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #f5f8ff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .question-box:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                0 18px 34px rgba(11, 16, 30, 0.35);
+        }
+
+        .question-box h3,
+        .question-box strong {
+            color: #ffffff;
+        }
+
+        .question-box p {
+            color: rgba(245, 247, 255, 0.92);
         }
 
         textarea {
@@ -78,13 +167,29 @@
             padding: 12px;
             min-height: 140px;
             font-size: 15px;
+            color: #ffffff;
+            background: rgba(8, 12, 20, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            resize: vertical;
+        }
+
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: rgba(120, 188, 255, 0.9);
+            box-shadow: 0 0 0 3px rgba(39, 125, 255, 0.25);
         }
 
         pre {
-            background-color: #20252B;
-            color: white;
+            background: rgba(8, 12, 20, 0.42);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            color: rgba(255, 255, 255, 0.92);
             padding: 20px;
-            border-radius: 8px;
             overflow-x: auto;
             white-space: pre-wrap;
         }
@@ -92,19 +197,40 @@
         label {
             display: block;
             margin: 12px 0;
+            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: rgba(245, 247, 255, 0.92);
             cursor: pointer;
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        label:hover {
+            background: rgba(39, 125, 255, 0.14);
+            border-color: rgba(120, 188, 255, 0.55);
+            transform: translateX(4px);
         }
 
         .submit-button,
         .restart-button {
             margin-top: 30px;
             padding: 14px 28px;
-            background-color: #E7B84B;
+            background: linear-gradient(135deg, #00ae6b, #277dff);
             border: none;
-            border-radius: 8px;
+            border-radius: 16px;
+            color: #ffffff;
+            box-shadow: 0 10px 24px rgba(11, 16, 30, 0.28);
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+        }
+
+        .submit-button:hover,
+        .restart-button:hover {
+            transform: translateY(-4px);
+            filter: brightness(1.1);
+            box-shadow: 0 16px 30px rgba(11, 16, 30, 0.4);
         }
 
         .interview-buttons {
@@ -117,22 +243,34 @@
         .results-section {
             margin-top: 35px;
             padding: 25px;
-            background-color: white;
-            border-radius: 10px;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.16),
+                rgba(255, 255, 255, 0.07)
+            );
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 22px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 16px 32px rgba(11, 16, 30, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .feedback-item {
             margin-top: 20px;
             padding: 20px;
-            background-color: #f5f5f5;
-            border-radius: 8px;
+            background: rgba(8, 12, 20, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 16px;
         }
 
         .user-response {
             padding: 15px;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            background: rgba(8, 12, 20, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.9);
             white-space: pre-wrap;
         }
 
@@ -149,8 +287,10 @@
         .feedback-placeholder {
             margin-top: 15px;
             padding: 15px;
-            border: 1px dashed #999;
-            border-radius: 8px;
+            background: rgba(39, 125, 255, 0.12);
+            border: 1px solid rgba(120, 188, 255, 0.35);
+            border-radius: 14px;
+            color: rgba(245, 247, 255, 0.92);
         }
 
         #interviewArea,
